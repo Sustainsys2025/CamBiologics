@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PREDICT-mAb - CamBioLogics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #0f1419;
+            --rich-blue: #1a3a52;
+            --teal-accent: #2c5f6f;
+            --copper: #b87333;
+            --gold: #d4af37;
+            --soft-cream: #f5f1ed;
+            --ivory: #fafaf8;
+            --midnight: #0a0e14;
+            --sage: #8b9d83;
+            --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
+            --gradient-accent: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #b87333 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--rich-blue);
+            background: var(--ivory);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .molecular-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--rich-blue) 3px, transparent 3px),
+                radial-gradient(circle at 80% 80%, var(--teal-accent) 2px, transparent 2px),
+                radial-gradient(circle at 40% 20%, var(--copper) 2px, transparent 2px);
+            background-size: 120px 80px, 180px 120px, 100px 70px;
+            animation: molecularFloat 80s linear infinite;
+        }
+
+        @keyframes molecularFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-30px, -30px) rotate(360deg); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 248, 0.97);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(26, 58, 82, 0.1);
+            animation: slideDown 0.8s ease-out;
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-blue);
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            background: rgba(250, 250, 248, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 320px;
+            box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 0;
+            margin-top: 1rem;
+            animation: fadeInUp 0.4s ease;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--rich-blue);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover, .dropdown-content a.active {
+            background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, transparent 100%);
+            padding-left: 2.5rem;
+            color: var(--copper);
+        }
+
+        .hero {
+            margin-top: 100px;
+            padding: 6rem 4rem 5rem;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--soft-cream) 100%);
+        }
+
+        .hero-content {
+            animation: fadeIn 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--copper);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--rich-blue);
+            opacity: 0.95;
+        }
+
+        .hero-description strong {
+            color: var(--copper);
+            font-weight: 600;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            animation: fadeIn 1.2s ease-out 0.6s both;
+        }
+
+        .accent-shape {
+            position: absolute;
+            right: 8%;
+            top: 25%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(184, 115, 51, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            animation: pulse-accent 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse-accent {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 0.5; }
+        }
+
+        .features-section {
+            padding: 7rem 4rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, transparent 0%, rgba(184, 115, 51, 0.04) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .content-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--copper);
+            margin-bottom: 5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 8px 30px rgba(26, 58, 82, 0.1);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(26, 58, 82, 0.15);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--teal-accent);
+            opacity: 0.9;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, rgba(184, 115, 51, 0.15) 0%, rgba(184, 115, 51, 0.05) 100%);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--copper);
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-right: 0.6rem;
+            border: 1px solid rgba(184, 115, 51, 0.25);
+            letter-spacing: 0.5px;
+        }
+
+        footer {
+            background: var(--midnight);
+            color: var(--soft-cream);
+            padding: 4rem 4rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-accent);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--soft-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            .hero {
+                padding: 4rem 2rem 3rem;
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+
+            .features-section {
+                padding: 5rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2.3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="molecular-bg"></div>
+
+    <nav>
+        <div class="logo">CamBioLogics</div>
+        <ul class="nav-links">
+            <li><a href="cambiologics-biotech-website.html">Home</a></li>
+            <li><a href="cambiologics-about-us.html">About Us</a></li>
+            <li class="dropdown">
+                <a href="cambiologics-platforms.html" class="active">Platforms ▾</a>
+                <div class="dropdown-content">
+                    <a href="#" class="active">PREDICT-mAb</a>
+                    <a href="cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
+                    <a href="cambiologics-genspy.html">GenSpy - Revealing hidden genetic causes</a>
+                </div>
+            </li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="accent-shape"></div>
+        <div class="hero-content">
+            <h1>PREDICT-mAb</h1>
+            <p class="hero-subtitle">AI-Driven Monoclonal Antibody Optimization Platform</p>
+            <div class="hero-description">
+                <p style="margin-bottom: 1.5rem;">
+                    PREDICT-mAb represents a <strong>paradigm shift in antibody engineering</strong>, leveraging cutting-edge artificial intelligence to navigate the astronomical sequence space of therapeutic antibodies. Traditional antibody development is plagued by high failure rates and prohibitive costs—our platform transforms this landscape by computationally predicting optimal candidates before lab synthesis.
+                </p>
+                <p>
+                    By integrating deep learning architectures with <strong>structural biology insights and immunological principles</strong>, PREDICT-mAb predicts critical therapeutic properties: binding affinity, developability, immunogenicity risk, and manufacturing stability. This comprehensive optimization dramatically accelerates discovery timelines while reducing the experimental burden on researchers.
+                </p>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <svg style="width: 100%; height: 100%;" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <!-- Large antibody Y-shape -->
+                <path d="M 250 100 L 250 180 M 250 180 L 180 300 M 250 180 L 320 300" 
+                      stroke="var(--rich-blue)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <circle cx="250" cy="100" r="25" fill="var(--teal-accent)" opacity="0.8"/>
+                <circle cx="180" cy="300" r="25" fill="var(--copper)" opacity="0.8"/>
+                <circle cx="320" cy="300" r="25" fill="var(--copper)" opacity="0.8"/>
+                <circle cx="250" cy="180" r="18" fill="var(--gold)" opacity="0.7"/>
+                
+                <!-- AI neural network overlay -->
+                <circle cx="120" cy="150" r="12" fill="var(--teal-accent)" opacity="0.6"/>
+                <circle cx="380" cy="150" r="12" fill="var(--teal-accent)" opacity="0.6"/>
+                <circle cx="120" cy="250" r="10" fill="var(--gold)" opacity="0.6"/>
+                <circle cx="380" cy="250" r="10" fill="var(--gold)" opacity="0.6"/>
+                
+                <line x1="120" y1="150" x2="180" y2="300" stroke="var(--teal-accent)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
+                <line x1="380" y1="150" x2="320" y2="300" stroke="var(--teal-accent)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
+                
+                <!-- Data points -->
+                <circle cx="250" cy="350" r="8" fill="var(--copper)" opacity="0.7"/>
+                <circle cx="200" cy="380" r="6" fill="var(--gold)" opacity="0.7"/>
+                <circle cx="300" cy="380" r="6" fill="var(--gold)" opacity="0.7"/>
+                
+                <!-- Prediction arrows -->
+                <path d="M 100 100 L 180 140" stroke="var(--gold)" stroke-width="3" opacity="0.5" marker-end="url(#arrowhead)"/>
+                <path d="M 400 100 L 320 140" stroke="var(--gold)" stroke-width="3" opacity="0.5" marker-end="url(#arrowhead)"/>
+                
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                        <polygon points="0 0, 10 3, 0 6" fill="var(--gold)" opacity="0.5"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="content-container">
+            <h2 class="section-title">Platform Capabilities</h2>
+            <p class="section-subtitle">Advanced AI-Powered Features</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="35" cy="35" r="28" fill="none" stroke="var(--teal-accent)" stroke-width="3"/>
+                        <path d="M 35 10 L 35 35 L 55 35" stroke="var(--copper)" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="35" cy="35" r="4" fill="var(--gold)"/>
+                    </svg>
+                    <h3 class="feature-title">Rapid Prediction</h3>
+                    <p class="feature-description">
+                        Screen millions of antibody variants in silico within hours, identifying optimal candidates 100x faster than traditional methods while maintaining experimental accuracy.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Machine Learning</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="15" y="15" width="40" height="40" rx="5" fill="none" stroke="var(--rich-blue)" stroke-width="3"/>
+                        <path d="M 25 35 L 32 42 L 47 27" stroke="var(--gold)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    </svg>
+                    <h3 class="feature-title">Developability Scoring</h3>
+                    <p class="feature-description">
+                        Predict manufacturing challenges early: aggregation propensity, chemical stability, viscosity, and expression yield—ensuring candidates are not just effective but manufacturable at scale.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Predictive Analytics</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 35 15 L 45 35 L 35 55 L 25 35 Z" fill="none" stroke="var(--copper)" stroke-width="3"/>
+                        <circle cx="35" cy="35" r="8" fill="var(--teal-accent)" opacity="0.6"/>
+                        <line x1="35" y1="5" x2="35" y2="15" stroke="var(--gold)" stroke-width="2"/>
+                        <line x1="35" y1="55" x2="35" y2="65" stroke="var(--gold)" stroke-width="2"/>
+                    </svg>
+                    <h3 class="feature-title">Immunogenicity Assessment</h3>
+                    <p class="feature-description">
+                        Identify and eliminate T-cell epitopes and immunogenic liabilities through AI-driven sequence analysis, dramatically reducing the risk of adverse immune responses in patients.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Deep Learning</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 20 50 Q 35 20 50 50" stroke="var(--teal-accent)" stroke-width="3" fill="none"/>
+                        <circle cx="25" cy="45" r="5" fill="var(--copper)"/>
+                        <circle cx="35" cy="30" r="5" fill="var(--gold)"/>
+                        <circle cx="45" cy="45" r="5" fill="var(--copper)"/>
+                    </svg>
+                    <h3 class="feature-title">Affinity Optimization</h3>
+                    <p class="feature-description">
+                        Fine-tune binding kinetics with sub-nanomolar precision, balancing target affinity against off-target effects to maximize therapeutic efficacy while minimizing side effects.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Molecular Modeling</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="35" cy="25" r="8" fill="none" stroke="var(--rich-blue)" stroke-width="2.5"/>
+                        <circle cx="25" cy="45" r="8" fill="none" stroke="var(--teal-accent)" stroke-width="2.5"/>
+                        <circle cx="45" cy="45" r="8" fill="none" stroke="var(--copper)" stroke-width="2.5"/>
+                        <line x1="35" y1="25" x2="25" y2="45" stroke="var(--gold)" stroke-width="2"/>
+                        <line x1="35" y1="25" x2="45" y2="45" stroke="var(--gold)" stroke-width="2"/>
+                    </svg>
+                    <h3 class="feature-title">Multi-Parameter Optimization</h3>
+                    <p class="feature-description">
+                        Simultaneously optimize across multiple therapeutic criteria—binding, stability, solubility, and safety—using advanced multi-objective algorithms that traditional methods cannot achieve.
+                    </p>
+                    <div>
+                        <span class="tech-badge">AI Optimization</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="15" y="20" width="40" height="8" rx="2" fill="var(--teal-accent)" opacity="0.6"/>
+                        <rect x="15" y="35" width="30" height="8" rx="2" fill="var(--copper)" opacity="0.6"/>
+                        <rect x="15" y="50" width="35" height="8" rx="2" fill="var(--gold)" opacity="0.6"/>
+                    </svg>
+                    <h3 class="feature-title">Data-Driven Insights</h3>
+                    <p class="feature-description">
+                        Leverage comprehensive databases of antibody sequences, clinical outcomes, and experimental data to continuously refine predictions and improve success rates with each iteration.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Big Data</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
+            <div class="footer-links">
+                <a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a>
+                <span>|</span>
+                <span>Cambridge, UK</span>
+                <span>|</span>
+                <a href="http://CamBiologics.com">CamBiologics.com</a>
+            </div>
+            <div style="margin-top: 2.5rem; font-size: 0.95rem; opacity: 0.8;">
+                © 2025 CamBioLogics. Advancing biotechnology through AI.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

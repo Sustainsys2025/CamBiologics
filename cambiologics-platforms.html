@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platforms - CamBioLogics</title>
+    <title>About Us - CamBioLogics</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -34,6 +34,7 @@
             overflow-x: hidden;
         }
 
+        /* Molecular background pattern */
         .molecular-bg {
             position: fixed;
             top: 0;
@@ -55,6 +56,7 @@
             100% { transform: translate(-30px, -30px) rotate(360deg); }
         }
 
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -175,6 +177,7 @@
             padding-left: 2.5rem;
         }
 
+        /* Hero Section */
         .hero {
             margin-top: 100px;
             padding: 5rem 4rem 4rem;
@@ -184,7 +187,7 @@
         }
 
         .hero-content {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 0 auto;
             animation: fadeIn 1.2s ease-out 0.3s both;
         }
@@ -198,7 +201,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 4rem;
             font-weight: 800;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -207,20 +210,15 @@
             letter-spacing: -1px;
         }
 
-        .hero-description {
-            font-size: 1.2rem;
-            line-height: 2;
-            color: var(--rich-blue);
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            text-align: left;
-        }
-
-        .hero-description strong {
+        .hero-subtitle {
+            font-size: 1.3rem;
             color: var(--copper);
             font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0.9;
         }
 
+        /* Accent shape */
         .accent-shape {
             position: absolute;
             right: 10%;
@@ -239,14 +237,15 @@
             50% { transform: scale(1.3); opacity: 0.5; }
         }
 
-        .platforms-section {
+        /* Background Section */
+        .background-section {
             padding: 7rem 4rem;
             background: white;
             position: relative;
             overflow: hidden;
         }
 
-        .platforms-section::before {
+        .background-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -259,7 +258,7 @@
         }
 
         .content-container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -267,8 +266,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
             font-weight: 800;
-            text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -278,36 +276,168 @@
         }
 
         .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--copper);
-            margin-bottom: 5rem;
+            margin-bottom: 3rem;
             font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
             animation: fadeIn 1s ease-out 0.2s both;
         }
 
-        .platforms-grid {
+        .story-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 3rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
             margin-top: 4rem;
         }
 
-        .platform-card {
+        .story-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--rich-blue);
+            opacity: 0.95;
+        }
+
+        .story-text p {
+            margin-bottom: 1.8rem;
+        }
+
+        .story-text strong {
+            color: var(--copper);
+            font-weight: 600;
+        }
+
+        .story-visual {
+            position: relative;
+            height: 450px;
             background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
             border-radius: 24px;
-            padding: 3.5rem 3rem;
+            padding: 3rem;
+            box-shadow: 0 12px 45px rgba(26, 58, 82, 0.12);
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cambridge-icon {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 7rem 4rem;
+            background: linear-gradient(180deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            position: relative;
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+            animation: fadeIn 1s ease-out both;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px white, 0 0 0 8px var(--gold);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(250, 250, 248, 0.95) 0%, rgba(245, 241, 237, 0.95) 100%);
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(26, 58, 82, 0.08);
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--copper);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--teal-accent);
+            opacity: 0.9;
+        }
+
+        /* Accomplishments Section */
+        .accomplishments-section {
+            padding: 7rem 4rem;
+            background: white;
+            position: relative;
+        }
+
+        .accomplishments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1300px;
+            margin: 4rem auto 0;
+        }
+
+        .accomplishment-card {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 24px;
+            padding: 0;
             box-shadow: 0 12px 45px rgba(26, 58, 82, 0.12);
             transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(184, 115, 51, 0.15);
-            cursor: pointer;
         }
 
-        .platform-card::before {
+        .accomplishment-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -319,91 +449,52 @@
             transition: transform 0.5s ease;
         }
 
-        .platform-card::after {
-            content: '';
-            position: absolute;
-            bottom: -100%;
-            right: -100%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(184, 115, 51, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            transition: all 0.6s ease;
-        }
-
-        .platform-card:hover {
-            transform: translateY(-15px);
+        .accomplishment-card:hover {
+            transform: translateY(-10px);
             box-shadow: 0 25px 70px rgba(26, 58, 82, 0.2);
         }
 
-        .platform-card:hover::before {
+        .accomplishment-card:hover::before {
             transform: scaleX(1);
         }
 
-        .platform-card:hover::after {
-            bottom: -20%;
-            right: -20%;
+        .accomplishment-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--teal-accent) 0%, var(--rich-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .platform-icon {
-            width: 90px;
-            height: 90px;
-            margin-bottom: 2rem;
-            filter: drop-shadow(0 4px 10px rgba(26, 58, 82, 0.15));
+        .accomplishment-icon {
+            width: 100px;
+            height: 100px;
+            opacity: 0.3;
         }
 
-        .platform-title {
+        .accomplishment-content {
+            padding: 2.5rem;
+        }
+
+        .accomplishment-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--rich-blue);
-            margin-bottom: 1.2rem;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 1rem;
         }
 
-        .platform-description {
-            font-size: 1.15rem;
-            line-height: 1.9;
+        .accomplishment-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
             color: var(--teal-accent);
             opacity: 0.9;
-            position: relative;
-            z-index: 1;
-            margin-bottom: 2rem;
         }
 
-        .tech-badge {
-            display: inline-block;
-            padding: 0.5rem 1.2rem;
-            background: linear-gradient(135deg, rgba(184, 115, 51, 0.15) 0%, rgba(184, 115, 51, 0.05) 100%);
-            border-radius: 25px;
-            font-size: 0.9rem;
-            color: var(--copper);
-            font-weight: 600;
-            margin-top: 1rem;
-            margin-right: 0.6rem;
-            border: 1px solid rgba(184, 115, 51, 0.25);
-            letter-spacing: 0.5px;
-        }
-
-        .learn-more {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.8rem 2rem;
-            background: var(--gradient-primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-        }
-
-        .learn-more:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(26, 58, 82, 0.3);
-        }
-
+        /* Footer */
         footer {
             background: var(--midnight);
             color: var(--soft-cream);
@@ -461,6 +552,7 @@
             transform: translateY(-2px);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 2rem;
@@ -487,7 +579,13 @@
                 font-size: 2.5rem;
             }
 
-            .platforms-section {
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .background-section,
+            .timeline-section,
+            .accomplishments-section {
                 padding: 5rem 2rem;
             }
 
@@ -495,7 +593,29 @@
                 font-size: 2.3rem;
             }
 
-            .platforms-grid {
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .story-visual {
+                height: 300px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+
+            .accomplishments-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -509,6 +629,7 @@
             }
         }
 
+        /* Scroll reveal animations */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -528,9 +649,9 @@
         <div class="logo">CamBioLogics</div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="cambiologics-about-us.html">About Us</a></li>
+            <li><a href="#" class="active">About Us</a></li>
             <li class="dropdown">
-                <a href="#" class="active">Platforms ▾</a>
+                <a href="cambiologics-platforms.html">Platforms ▾</a>
                 <div class="dropdown-content">
                     <a href="cambiologics-predict-mab.html">PREDICT-mAb</a>
                     <a href="cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
@@ -545,93 +666,179 @@
     <section class="hero">
         <div class="accent-shape"></div>
         <div class="hero-content">
-            <h1>PLATFORMS</h1>
-            <div class="hero-description">
-                <p style="margin-bottom: 1.5rem;">
-                    Artificial intelligence is fundamentally transforming biologics development, enabling unprecedented precision in designing, optimizing, and deploying biological agents as life-saving therapeutics. CamBiologics harnesses <strong>advanced machine learning, deep neural networks, and multi-omic data integration</strong> to overcome the inherent complexity of biological systems—predicting protein behavior, decoding genetic mechanisms, and engineering cellular therapies with accuracy impossible through traditional methods.
-                </p>
-                <p>
-                    Our AI platforms address the most challenging bottlenecks in biologics: the vast design space of antibody sequences, the intricate genetic architecture of rare diseases, and the multifaceted optimization required for cell and gene therapies. By <strong>computationally exploring millions of possibilities</strong> before a single experiment, we dramatically accelerate development timelines, reduce costs, and increase success rates across three critical therapeutic domains that represent the future of precision medicine.
-                </p>
+            <h1>About Us</h1>
+            <p class="hero-subtitle">Our Story, Mission & Journey</p>
+        </div>
+    </section>
+
+    <section class="background-section" id="background">
+        <div class="content-container">
+            <h2 class="section-title">Background</h2>
+            <p class="section-subtitle">A brief history</p>
+            
+            <div class="story-content">
+                <div class="story-text">
+                    <p>
+                        CamBioLogics was founded in <strong>Cambridge, United Kingdom</strong>, by a team of experienced biologists and life-science experts with deep backgrounds in genetics, antibody research, and biotechnology.
+                    </p>
+                    <p>
+                        The company was born from a shared observation: while biological data has grown exponentially, traditional research methods struggle to keep pace with its complexity. Recognising the <strong>transformative potential of artificial intelligence</strong>, the founders set out to build a company that could bridge advanced biology with intelligent computation.
+                    </p>
+                    <p>
+                        From its inception, CamBioLogics has focused on applying <strong>AI-driven approaches</strong> to core biological challenges—from understanding genetic variation to accelerating antibody discovery and optimisation. By combining rigorous biological science with modern machine-learning techniques, the team aims to shorten discovery timelines and enable more precise, data-driven decisions across the biotech pipeline.
+                    </p>
+                    <p>
+                        Rooted in Cambridge's globally recognised life-science ecosystem, CamBioLogics continues to grow as a research-driven, innovation-focused biotech company, collaborating with academic and industry partners to translate AI-powered biology into meaningful scientific and commercial impact.
+                    </p>
+                </div>
+
+                <div class="story-visual">
+                    <svg class="cambridge-icon" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cambridge University inspired building -->
+                        <rect x="100" y="200" width="200" height="150" fill="var(--rich-blue)" opacity="0.2"/>
+                        <rect x="120" y="220" width="40" height="60" fill="var(--teal-accent)" opacity="0.3"/>
+                        <rect x="180" y="220" width="40" height="60" fill="var(--teal-accent)" opacity="0.3"/>
+                        <rect x="240" y="220" width="40" height="60" fill="var(--teal-accent)" opacity="0.3"/>
+                        
+                        <!-- Spire/Tower -->
+                        <rect x="160" y="100" width="80" height="100" fill="var(--rich-blue)" opacity="0.25"/>
+                        <polygon points="200,60 170,100 230,100" fill="var(--copper)" opacity="0.4"/>
+                        <circle cx="200" cy="65" r="8" fill="var(--gold)" opacity="0.6"/>
+                        
+                        <!-- DNA helix overlay -->
+                        <path d="M 50 150 Q 70 130 50 110 T 50 70" stroke="var(--teal-accent)" 
+                              stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="5,5"/>
+                        <path d="M 80 150 Q 60 130 80 110 T 80 70" stroke="var(--teal-accent)" 
+                              stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="5,5"/>
+                        
+                        <!-- Neural network nodes -->
+                        <circle cx="320" cy="120" r="12" fill="var(--copper)" opacity="0.4"/>
+                        <circle cx="360" cy="160" r="10" fill="var(--copper)" opacity="0.4"/>
+                        <circle cx="340" cy="200" r="11" fill="var(--copper)" opacity="0.4"/>
+                        
+                        <line x1="320" y1="120" x2="360" y2="160" stroke="var(--gold)" stroke-width="2" opacity="0.3"/>
+                        <line x1="360" y1="160" x2="340" y2="200" stroke="var(--gold)" stroke-width="2" opacity="0.3"/>
+                        
+                        <!-- Decorative elements -->
+                        <circle cx="200" cy="320" r="40" fill="none" stroke="var(--gold)" 
+                                stroke-width="2" opacity="0.3" stroke-dasharray="5,5"/>
+                        <text x="200" y="330" text-anchor="middle" font-family="Playfair Display" 
+                              font-size="16" fill="var(--rich-blue)" font-weight="700" opacity="0.5">Cambridge</text>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="platforms-section">
+    <section class="timeline-section">
         <div class="content-container">
-            <h2 class="section-title">Our Innovation Focus</h2>
-            <p class="section-subtitle">Three Revolutionary Platforms</p>
+            <h2 class="section-title" style="text-align: center;">Our Journey</h2>
+            <p class="section-subtitle" style="text-align: center;">Milestones & Evolution</p>
             
-            <div class="platforms-grid">
-                <div class="platform-card">
-                    <svg class="platform-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 45 22 L 45 40 M 45 40 L 28 62 M 45 40 L 62 62" 
-                              stroke="var(--rich-blue)" stroke-width="5" fill="none" stroke-linecap="round"/>
-                        <circle cx="45" cy="22" r="10" fill="var(--teal-accent)"/>
-                        <circle cx="28" cy="62" r="10" fill="var(--copper)"/>
-                        <circle cx="62" cy="62" r="10" fill="var(--copper)"/>
-                        <circle cx="45" cy="40" r="7" fill="var(--gold)"/>
-                        <path d="M 15 28 L 22 35 L 29 28" stroke="var(--teal-accent)" stroke-width="2.5" fill="none" opacity="0.6"/>
-                        <path d="M 75 28 L 68 35 L 61 28" stroke="var(--teal-accent)" stroke-width="2.5" fill="none" opacity="0.6"/>
-                    </svg>
-                    <h3 class="platform-title">PREDICT-mAb</h3>
-                    <p class="platform-description">
-                        AI-Driven Monoclonal Antibody Optimization Platform. Advanced machine learning algorithms predict antibody behavior and optimize therapeutic candidates, reducing development time and increasing success rates through computational precision.
-                    </p>
-                    <div>
-                        <span class="tech-badge">AI/ML</span>
-                        <span class="tech-badge">Antibody Engineering</span>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Foundation</div>
+                        <h3 class="timeline-title">Company Founded in Cambridge</h3>
+                        <p class="timeline-description">
+                            A team of experienced biologists and life-science experts came together with a shared vision to bridge advanced biology with intelligent computation.
+                        </p>
                     </div>
-                    <a href="cambiologics-predict-mab.html" class="learn-more">Learn More →</a>
                 </div>
 
-                <div class="platform-card">
-                    <svg class="platform-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="45" cy="45" r="32" fill="none" stroke="var(--rich-blue)" stroke-width="3.5"/>
-                        <circle cx="45" cy="45" r="20" fill="none" stroke="var(--teal-accent)" stroke-width="2.5"/>
-                        <circle cx="33" cy="33" r="4" fill="var(--teal-accent)"/>
-                        <circle cx="57" cy="33" r="4" fill="var(--teal-accent)"/>
-                        <circle cx="45" cy="50" r="4" fill="var(--teal-accent)"/>
-                        <circle cx="33" cy="57" r="4" fill="var(--copper)"/>
-                        <circle cx="57" cy="57" r="4" fill="var(--copper)"/>
-                        <line x1="33" y1="33" x2="45" y2="50" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
-                        <line x1="57" y1="33" x2="45" y2="50" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
-                        <line x1="45" y1="50" x2="33" y2="57" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
-                        <line x1="45" y1="50" x2="57" y2="57" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
-                    </svg>
-                    <h3 class="platform-title">CellCipher</h3>
-                    <p class="platform-description">
-                        Decoding Cellular Therapy. Deep learning analysis of cell behavior enables precision medicine and personalized treatment approaches for complex diseases through comprehensive cellular understanding.
-                    </p>
-                    <div>
-                        <span class="tech-badge">Deep Learning</span>
-                        <span class="tech-badge">Cell Therapy</span>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Early Development</div>
+                        <h3 class="timeline-title">AI-Driven Approach Established</h3>
+                        <p class="timeline-description">
+                            Focused research efforts on applying machine learning to core biological challenges, establishing methodologies for antibody discovery and genetic analysis.
+                        </p>
                     </div>
-                    <a href="cambiologics-cellcipher.html" class="learn-more">Learn More →</a>
                 </div>
 
-                <div class="platform-card">
-                    <svg class="platform-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 28 18 Q 38 28 28 38 T 28 58 T 28 78" 
-                              stroke="var(--rich-blue)" stroke-width="3.5" fill="none"/>
-                        <path d="M 62 18 Q 52 28 62 38 T 62 58 T 62 78" 
-                              stroke="var(--rich-blue)" stroke-width="3.5" fill="none"/>
-                        <line x1="28" y1="23" x2="62" y2="23" stroke="var(--teal-accent)" stroke-width="2.5"/>
-                        <line x1="28" y1="38" x2="62" y2="38" stroke="var(--copper)" stroke-width="2.5"/>
-                        <line x1="28" y1="53" x2="62" y2="53" stroke="var(--gold)" stroke-width="2.5"/>
-                        <line x1="28" y1="68" x2="62" y2="68" stroke="var(--teal-accent)" stroke-width="2.5"/>
-                        <circle cx="65" cy="60" r="12" fill="none" stroke="var(--copper)" stroke-width="3"/>
-                        <line x1="73" y1="68" x2="80" y2="75" stroke="var(--copper)" stroke-width="3" stroke-linecap="round"/>
-                    </svg>
-                    <h3 class="platform-title">GenSpy</h3>
-                    <p class="platform-description">
-                        Revealing Hidden Genetic Causes. AI-powered genomic analysis brings hope and answers to undiagnosed patients by uncovering the genetic basis of rare diseases through sophisticated computational methods.
-                    </p>
-                    <div>
-                        <span class="tech-badge">Genomics</span>
-                        <span class="tech-badge">AI Diagnostics</span>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Platform Launch</div>
+                        <h3 class="timeline-title">Core Platforms Developed</h3>
+                        <p class="timeline-description">
+                            Launched PREDICT-mAb, CellCipher, and GenSpy platforms, combining rigorous biological science with modern machine-learning techniques.
+                        </p>
                     </div>
-                    <a href="cambiologics-genspy.html" class="learn-more">Learn More →</a>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Present Day</div>
+                        <h3 class="timeline-title">Growing Innovation Hub</h3>
+                        <p class="timeline-description">
+                            Continuing to expand collaborations with academic and industry partners, translating AI-powered biology into meaningful scientific and commercial impact.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="accomplishments-section">
+        <div class="content-container">
+            <h2 class="section-title" style="text-align: center;">Where We Are Today</h2>
+            <p class="section-subtitle" style="text-align: center;">Recent Accomplishments & Ongoing Initiatives</p>
+            
+            <div class="accomplishments-grid">
+                <div class="accomplishment-card">
+                    <div class="accomplishment-image">
+                        <svg class="accomplishment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Research icon -->
+                            <circle cx="50" cy="40" r="25" fill="none" stroke="white" stroke-width="4"/>
+                            <circle cx="50" cy="40" r="15" fill="white" opacity="0.3"/>
+                            <line x1="68" y1="58" x2="85" y2="75" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="accomplishment-content">
+                        <h3 class="accomplishment-title">Advanced Research Initiatives</h3>
+                        <p class="accomplishment-description">
+                            Expanding our AI-powered platforms with cutting-edge research in antibody engineering, cellular therapy, and rare disease diagnostics, pushing the boundaries of computational biology.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accomplishment-card">
+                    <div class="accomplishment-image">
+                        <svg class="accomplishment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Collaboration icon -->
+                            <circle cx="35" cy="35" r="12" fill="white" opacity="0.6"/>
+                            <circle cx="65" cy="35" r="12" fill="white" opacity="0.6"/>
+                            <circle cx="50" cy="60" r="12" fill="white" opacity="0.6"/>
+                            <line x1="35" y1="35" x2="50" y2="60" stroke="white" stroke-width="3"/>
+                            <line x1="65" y1="35" x2="50" y2="60" stroke="white" stroke-width="3"/>
+                            <line x1="35" y1="35" x2="65" y2="35" stroke="white" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="accomplishment-content">
+                        <h3 class="accomplishment-title">Strategic Partnerships</h3>
+                        <p class="accomplishment-description">
+                            Building collaborative relationships with leading academic institutions and industry partners to accelerate translation of AI-powered biology into real-world therapeutic solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accomplishment-card">
+                    <div class="accomplishment-image">
+                        <svg class="accomplishment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Innovation icon -->
+                            <path d="M 50 20 L 50 80" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="50" cy="35" r="15" fill="none" stroke="white" stroke-width="4"/>
+                            <line x1="35" y1="50" x2="25" y2="60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="65" y1="50" x2="75" y2="60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M 40 75 L 40 80 L 60 80 L 60 75" stroke="white" stroke-width="4" fill="white" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <div class="accomplishment-content">
+                        <h3 class="accomplishment-title">Continuous Innovation</h3>
+                        <p class="accomplishment-description">
+                            Investing in next-generation AI technologies and computational methods to maintain our position at the forefront of biotechnology innovation and drug discovery.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -641,7 +848,7 @@
         <div class="footer-content">
             <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
             <div class="footer-links">
-                <a href="/cdn-cgi/l/email-protection#6625070b240f090a09010f05152605070812070448080312"><span class="__cf_email__" data-cfemail="ce8dafa38ca7a1a2a1a9a7adbd8eadafa0baaface0a0abba">[email&#160;protected]</span></a>
+                <a href="/cdn-cgi/l/email-protection#b2f1d3dff0dbdddeddd5dbd1c1f2d1d3dcc6d3d09cdcd7c6"><span class="__cf_email__" data-cfemail="da99bbb798b3b5b6b5bdb3b9a99ab9bbb4aebbb8f4b4bfae">[email&#160;protected]</span></a>
                 <span>|</span>
                 <span>Cambridge, UK</span>
                 <span>|</span>
@@ -654,6 +861,7 @@
     </footer>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Scroll reveal animation
         const revealElements = document.querySelectorAll('.reveal');
         
         const revealOnScroll = () => {
@@ -669,6 +877,7 @@
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
 
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -682,6 +891,7 @@
             });
         });
 
+        // Parallax effect for accent shape
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
     

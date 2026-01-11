@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platforms - CamBioLogics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #0f1419;
+            --rich-blue: #1a3a52;
+            --teal-accent: #2c5f6f;
+            --copper: #b87333;
+            --gold: #d4af37;
+            --soft-cream: #f5f1ed;
+            --ivory: #fafaf8;
+            --midnight: #0a0e14;
+            --sage: #8b9d83;
+            --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
+            --gradient-accent: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #b87333 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--rich-blue);
+            background: var(--ivory);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .molecular-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--rich-blue) 3px, transparent 3px),
+                radial-gradient(circle at 80% 80%, var(--teal-accent) 2px, transparent 2px),
+                radial-gradient(circle at 40% 20%, var(--copper) 2px, transparent 2px);
+            background-size: 120px 80px, 180px 120px, 100px 70px;
+            animation: molecularFloat 80s linear infinite;
+        }
+
+        @keyframes molecularFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-30px, -30px) rotate(360deg); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 248, 0.97);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(26, 58, 82, 0.1);
+            animation: slideDown 0.8s ease-out;
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-blue);
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--copper);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            background: rgba(250, 250, 248, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 320px;
+            box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 0;
+            margin-top: 1rem;
+            animation: fadeInUp 0.4s ease;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--rich-blue);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, transparent 100%);
+            padding-left: 2.5rem;
+        }
+
+        .hero {
+            margin-top: 100px;
+            padding: 5rem 4rem 4rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            animation: fadeIn 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: var(--rich-blue);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            text-align: left;
+        }
+
+        .hero-description strong {
+            color: var(--copper);
+            font-weight: 600;
+        }
+
+        .accent-shape {
+            position: absolute;
+            right: 10%;
+            top: 20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(184, 115, 51, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            animation: pulse-accent 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse-accent {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 0.5; }
+        }
+
+        .platforms-section {
+            padding: 7rem 4rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platforms-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, transparent 0%, rgba(184, 115, 51, 0.04) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .content-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 1s ease-out;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--copper);
+            margin-bottom: 5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .platform-card {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 24px;
+            padding: 3.5rem 3rem;
+            box-shadow: 0 12px 45px rgba(26, 58, 82, 0.12);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            cursor: pointer;
+        }
+
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .platform-card::after {
+            content: '';
+            position: absolute;
+            bottom: -100%;
+            right: -100%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(184, 115, 51, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 70px rgba(26, 58, 82, 0.2);
+        }
+
+        .platform-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .platform-card:hover::after {
+            bottom: -20%;
+            right: -20%;
+        }
+
+        .platform-icon {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 4px 10px rgba(26, 58, 82, 0.15));
+        }
+
+        .platform-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .platform-description {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--teal-accent);
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, rgba(184, 115, 51, 0.15) 0%, rgba(184, 115, 51, 0.05) 100%);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--copper);
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-right: 0.6rem;
+            border: 1px solid rgba(184, 115, 51, 0.25);
+            letter-spacing: 0.5px;
+        }
+
+        .learn-more {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .learn-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 58, 82, 0.3);
+        }
+
+        footer {
+            background: var(--midnight);
+            color: var(--soft-cream);
+            padding: 4rem 4rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-accent);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--soft-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.95rem;
+            }
+
+            .hero {
+                padding: 4rem 2rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .platforms-section {
+                padding: 5rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2.3rem;
+            }
+
+            .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 3rem 2rem;
+            }
+
+            .accent-shape {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="molecular-bg"></div>
+
+    <nav>
+        <div class="logo">CamBioLogics</div>
+        <ul class="nav-links">
+            <li><a href="cambiologics-biotech-website.html">Home</a></li>
+            <li><a href="cambiologics-about-us.html">About Us</a></li>
+            <li class="dropdown">
+                <a href="#" class="active">Platforms ▾</a>
+                <div class="dropdown-content">
+                    <a href="cambiologics-predict-mab.html">PREDICT-mAb</a>
+                    <a href="cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
+                    <a href="cambiologics-genspy.html">GenSpy - Revealing hidden genetic causes</a>
+                </div>
+            </li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="accent-shape"></div>
+        <div class="hero-content">
+            <h1>PLATFORMS</h1>
+            <div class="hero-description">
+                <p style="margin-bottom: 1.5rem;">
+                    Artificial intelligence is fundamentally transforming biologics development, enabling unprecedented precision in designing, optimizing, and deploying biological agents as life-saving therapeutics. CamBiologics harnesses <strong>advanced machine learning, deep neural networks, and multi-omic data integration</strong> to overcome the inherent complexity of biological systems—predicting protein behavior, decoding genetic mechanisms, and engineering cellular therapies with accuracy impossible through traditional methods.
+                </p>
+                <p>
+                    Our AI platforms address the most challenging bottlenecks in biologics: the vast design space of antibody sequences, the intricate genetic architecture of rare diseases, and the multifaceted optimization required for cell and gene therapies. By <strong>computationally exploring millions of possibilities</strong> before a single experiment, we dramatically accelerate development timelines, reduce costs, and increase success rates across three critical therapeutic domains that represent the future of precision medicine.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="platforms-section">
+        <div class="content-container">
+            <h2 class="section-title">Our Innovation Focus</h2>
+            <p class="section-subtitle">Three Revolutionary Platforms</p>
+            
+            <div class="platforms-grid">
+                <div class="platform-card reveal">
+                    <svg class="platform-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 45 22 L 45 40 M 45 40 L 28 62 M 45 40 L 62 62" 
+                              stroke="var(--rich-blue)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <circle cx="45" cy="22" r="10" fill="var(--teal-accent)"/>
+                        <circle cx="28" cy="62" r="10" fill="var(--copper)"/>
+                        <circle cx="62" cy="62" r="10" fill="var(--copper)"/>
+                        <circle cx="45" cy="40" r="7" fill="var(--gold)"/>
+                        <path d="M 15 28 L 22 35 L 29 28" stroke="var(--teal-accent)" stroke-width="2.5" fill="none" opacity="0.6"/>
+                        <path d="M 75 28 L 68 35 L 61 28" stroke="var(--teal-accent)" stroke-width="2.5" fill="none" opacity="0.6"/>
+                    </svg>
+                    <h3 class="platform-title">PREDICT-mAb</h3>
+                    <p class="platform-description">
+                        AI-Driven Monoclonal Antibody Optimization Platform. Advanced machine learning algorithms predict antibody behavior and optimize therapeutic candidates, reducing development time and increasing success rates through computational precision.
+                    </p>
+                    <div>
+                        <span class="tech-badge">AI/ML</span>
+                        <span class="tech-badge">Antibody Engineering</span>
+                    </div>
+                    <a href="cambiologics-predict-mab.html" class="learn-more">Learn More →</a>
+                </div>
+
+                <div class="platform-card reveal" style="animation-delay: 0.2s">
+                    <svg class="platform-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="45" cy="45" r="32" fill="none" stroke="var(--rich-blue)" stroke-width="3.5"/>
+                        <circle cx="45" cy="45" r="20" fill="none" stroke="var(--teal-accent)" stroke-width="2.5"/>
+                        <circle cx="33" cy="33" r="4" fill="var(--teal-accent)"/>
+                        <circle cx="57" cy="33" r="4" fill="var(--teal-accent)"/>
+                        <circle cx="45" cy="50" r="4" fill="var(--teal-accent)"/>
+                        <circle cx="33" cy="57" r="4" fill="var(--copper)"/>
+                        <circle cx="57" cy="57" r="4" fill="var(--copper)"/>
+                        <line x1="33" y1="33" x2="45" y2="50" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
+                        <line x1="57" y1="33" x2="45" y2="50" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
+                        <line x1="45" y1="50" x2="33" y2="57" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
+                        <line x1="45" y1="50" x2="57" y2="57" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
+                    </svg>
+                    <h3 class="platform-title">CellCipher</h3>
+                    <p class="platform-description">
+                        Decoding Cellular Therapy. Deep learning analysis of cell behavior enables precision medicine and personalized treatment approaches for complex diseases through comprehensive cellular understanding.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Deep Learning</span>
+                        <span class="tech-badge">Cell Therapy</span>
+                    </div>
+                    <a href="cambiologics-cellcipher.html" class="learn-more">Learn More →</a>
+                </div>
+
+                <div class="platform-card reveal" style="animation-delay: 0.4s">
+                    <svg class="platform-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 28 18 Q 38 28 28 38 T 28 58 T 28 78" 
+                              stroke="var(--rich-blue)" stroke-width="3.5" fill="none"/>
+                        <path d="M 62 18 Q 52 28 62 38 T 62 58 T 62 78" 
+                              stroke="var(--rich-blue)" stroke-width="3.5" fill="none"/>
+                        <line x1="28" y1="23" x2="62" y2="23" stroke="var(--teal-accent)" stroke-width="2.5"/>
+                        <line x1="28" y1="38" x2="62" y2="38" stroke="var(--copper)" stroke-width="2.5"/>
+                        <line x1="28" y1="53" x2="62" y2="53" stroke="var(--gold)" stroke-width="2.5"/>
+                        <line x1="28" y1="68" x2="62" y2="68" stroke="var(--teal-accent)" stroke-width="2.5"/>
+                        <circle cx="65" cy="60" r="12" fill="none" stroke="var(--copper)" stroke-width="3"/>
+                        <line x1="73" y1="68" x2="80" y2="75" stroke="var(--copper)" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <h3 class="platform-title">GenSpy</h3>
+                    <p class="platform-description">
+                        Revealing Hidden Genetic Causes. AI-powered genomic analysis brings hope and answers to undiagnosed patients by uncovering the genetic basis of rare diseases through sophisticated computational methods.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Genomics</span>
+                        <span class="tech-badge">AI Diagnostics</span>
+                    </div>
+                    <a href="cambiologics-genspy.html" class="learn-more">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
+            <div class="footer-links">
+                <a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a>
+                <span>|</span>
+                <span>Cambridge, UK</span>
+                <span>|</span>
+                <a href="http://CamBiologics.com">CamBiologics.com</a>
+            </div>
+            <div style="margin-top: 2.5rem; font-size: 0.95rem; opacity: 0.8;">
+                © 2025 CamBioLogics. Advancing biotechnology through AI.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 120) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shape = document.querySelector('.accent-shape');
+            if (shape) {
+                shape.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0001})`;
+            }
+        });
+    </script>
+</body>
+</html>

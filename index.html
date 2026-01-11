@@ -132,6 +132,16 @@
             position: relative;
             cursor: pointer;
         }
+        
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            right: -20px;
+            height: 0.5rem;
+            background: transparent;
+        }
 
         .dropdown-content {
             display: none;
@@ -144,7 +154,7 @@
             box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
             border-radius: 12px;
             padding: 1.5rem 0;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             animation: fadeInUp 0.4s ease;
             border: 1px solid rgba(184, 115, 51, 0.15);
             z-index: 1001;

@@ -648,7 +648,7 @@
     <nav>
         <div class="logo">CamBioLogics</div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="cambiologics-biotech-website.html">Home</a></li>
             <li><a href="#" class="active">About Us</a></li>
             <li class="dropdown">
                 <a href="#platforms">Platforms ▾</a>
@@ -848,7 +848,7 @@
         <div class="footer-content">
             <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
             <div class="footer-links">
-                <a href="/cdn-cgi/l/email-protection#b2f1d3dff0dbdddeddd5dbd1c1f2d1d3dcc6d3d09cdcd7c6"><span class="__cf_email__" data-cfemail="da99bbb798b3b5b6b5bdb3b9a99ab9bbb4aebbb8f4b4bfae">[email&#160;protected]</span></a>
+                <a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a>
                 <span>|</span>
                 <span>Cambridge, UK</span>
                 <span>|</span>
@@ -860,7 +860,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Scroll reveal animation
         const revealElements = document.querySelectorAll('.reveal');
         
@@ -894,4 +894,11 @@
         // Parallax effect for accent shape
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
-    
+            const shape = document.querySelector('.accent-shape');
+            if (shape) {
+                shape.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0001})`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CamBioLogics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #0f1419;
+            --rich-blue: #1a3a52;
+            --teal-accent: #2c5f6f;
+            --copper: #b87333;
+            --gold: #d4af37;
+            --soft-cream: #f5f1ed;
+            --ivory: #fafaf8;
+            --midnight: #0a0e14;
+            --sage: #8b9d83;
+            --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
+            --gradient-accent: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #b87333 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--rich-blue);
+            background: var(--ivory);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Molecular background pattern */
+        .molecular-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--rich-blue) 3px, transparent 3px),
+                radial-gradient(circle at 80% 80%, var(--teal-accent) 2px, transparent 2px),
+                radial-gradient(circle at 40% 20%, var(--copper) 2px, transparent 2px);
+            background-size: 120px 80px, 180px 120px, 100px 70px;
+            animation: molecularFloat 80s linear infinite;
+        }
+
+        @keyframes molecularFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-30px, -30px) rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 248, 0.97);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(26, 58, 82, 0.1);
+            animation: slideDown 0.8s ease-out;
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-blue);
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--copper);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            background: rgba(250, 250, 248, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 320px;
+            box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 0;
+            margin-top: 1rem;
+            animation: fadeInUp 0.4s ease;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--rich-blue);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, transparent 100%);
+            padding-left: 2.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 100px;
+            padding: 5rem 4rem 4rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeIn 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--copper);
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        /* Accent shape */
+        .accent-shape {
+            position: absolute;
+            right: 10%;
+            top: 20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(184, 115, 51, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            animation: pulse-accent 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse-accent {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 0.5; }
+        }
+
+        /* Background Section */
+        .background-section {
+            padding: 7rem 4rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, transparent 0%, rgba(184, 115, 51, 0.04) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 1s ease-out;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--copper);
+            margin-bottom: 3rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+            margin-top: 4rem;
+        }
+
+        .story-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--rich-blue);
+            opacity: 0.95;
+        }
+
+        .story-text p {
+            margin-bottom: 1.8rem;
+        }
+
+        .story-text strong {
+            color: var(--copper);
+            font-weight: 600;
+        }
+
+        .story-visual {
+            position: relative;
+            height: 450px;
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 12px 45px rgba(26, 58, 82, 0.12);
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cambridge-icon {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 7rem 4rem;
+            background: linear-gradient(180deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            position: relative;
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+            animation: fadeIn 1s ease-out both;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px white, 0 0 0 8px var(--gold);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(250, 250, 248, 0.95) 0%, rgba(245, 241, 237, 0.95) 100%);
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(26, 58, 82, 0.08);
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--copper);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--teal-accent);
+            opacity: 0.9;
+        }
+
+        /* Accomplishments Section */
+        .accomplishments-section {
+            padding: 7rem 4rem;
+            background: white;
+            position: relative;
+        }
+
+        .accomplishments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1300px;
+            margin: 4rem auto 0;
+        }
+
+        .accomplishment-card {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 24px;
+            padding: 0;
+            box-shadow: 0 12px 45px rgba(26, 58, 82, 0.12);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        .accomplishment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .accomplishment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(26, 58, 82, 0.2);
+        }
+
+        .accomplishment-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .accomplishment-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--teal-accent) 0%, var(--rich-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accomplishment-icon {
+            width: 100px;
+            height: 100px;
+            opacity: 0.3;
+        }
+
+        .accomplishment-content {
+            padding: 2.5rem;
+        }
+
+        .accomplishment-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1rem;
+        }
+
+        .accomplishment-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--teal-accent);
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--midnight);
+            color: var(--soft-cream);
+            padding: 4rem 4rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-accent);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--soft-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.95rem;
+            }
+
+            .hero {
+                padding: 4rem 2rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .background-section,
+            .timeline-section,
+            .accomplishments-section {
+                padding: 5rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2.3rem;
+            }
+
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .story-visual {
+                height: 300px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+
+            .accomplishments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 3rem 2rem;
+            }
+
+            .accent-shape {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="molecular-bg"></div>
+
+    <nav>
+        <div class="logo">CamBioLogics</div>
+        <ul class="nav-links">
+            <li><a href="cambiologics-biotech-website.html">Home</a></li>
+            <li><a href="#" class="active">About Us</a></li>
+            <li class="dropdown">
+                <a href="#platforms">Platforms ▾</a>
+                <div class="dropdown-content">
+                    <a href="#predict">PREDICT-mAb</a>
+                    <a href="#cellcipher">CellCipher - Decoding cellular therapy</a>
+                    <a href="#genspy">GenSpy - Revealing hidden genetic causes</a>
+                </div>
+            </li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="accent-shape"></div>
+        <div class="hero-content">
+            <h1>About Us</h1>
+            <p class="hero-subtitle">Our Story, Mission & Journey</p>
+        </div>
+    </section>
+
+    <section class="background-section" id="background">
+        <div class="content-container">
+            <h2 class="section-title">Background</h2>
+            <p class="section-subtitle">A brief history</p>
+            
+            <div class="story-content">
+                <div class="story-text reveal">
+                    <p>
+                        CamBioLogics was founded in <strong>Cambridge, United Kingdom</strong>, by a team of experienced biologists and life-science experts with deep backgrounds in genetics, antibody research, and biotechnology.
+                    </p>
+                    <p>
+                        The company was born from a shared observation: while biological data has grown exponentially, traditional research methods struggle to keep pace with its complexity. Recognising the <strong>transformative potential of artificial intelligence</strong>, the founders set out to build a company that could bridge advanced biology with intelligent computation.
+                    </p>
+                    <p>
+                        From its inception, CamBioLogics has focused on applying <strong>AI-driven approaches</strong> to core biological challenges—from understanding genetic variation to accelerating antibody discovery and optimisation. By combining rigorous biological science with modern machine-learning techniques, the team aims to shorten discovery timelines and enable more precise, data-driven decisions across the biotech pipeline.
+                    </p>
+                    <p>
+                        Rooted in Cambridge's globally recognised life-science ecosystem, CamBioLogics continues to grow as a research-driven, innovation-focused biotech company, collaborating with academic and industry partners to translate AI-powered biology into meaningful scientific and commercial impact.
+                    </p>
+                </div>
+
+                <div class="story-visual reveal">
+                    <svg class="cambridge-icon" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cambridge University inspired building -->
+                        <rect x="100" y="200" width="200" height="150" fill="var(--rich-blue)" opacity="0.2"/>
+                        <rect x="120" y="220" width="40" height="60" fill="var(--teal-accent)" opacity="0.3"/>
+                        <rect x="180" y="220" width="40" height="60" fill="var(--teal-accent)" opacity="0.3"/>
+                        <rect x="240" y="220" width="40" height="60" fill="var(--teal-accent)" opacity="0.3"/>
+                        
+                        <!-- Spire/Tower -->
+                        <rect x="160" y="100" width="80" height="100" fill="var(--rich-blue)" opacity="0.25"/>
+                        <polygon points="200,60 170,100 230,100" fill="var(--copper)" opacity="0.4"/>
+                        <circle cx="200" cy="65" r="8" fill="var(--gold)" opacity="0.6"/>
+                        
+                        <!-- DNA helix overlay -->
+                        <path d="M 50 150 Q 70 130 50 110 T 50 70" stroke="var(--teal-accent)" 
+                              stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="5,5"/>
+                        <path d="M 80 150 Q 60 130 80 110 T 80 70" stroke="var(--teal-accent)" 
+                              stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="5,5"/>
+                        
+                        <!-- Neural network nodes -->
+                        <circle cx="320" cy="120" r="12" fill="var(--copper)" opacity="0.4"/>
+                        <circle cx="360" cy="160" r="10" fill="var(--copper)" opacity="0.4"/>
+                        <circle cx="340" cy="200" r="11" fill="var(--copper)" opacity="0.4"/>
+                        
+                        <line x1="320" y1="120" x2="360" y2="160" stroke="var(--gold)" stroke-width="2" opacity="0.3"/>
+                        <line x1="360" y1="160" x2="340" y2="200" stroke="var(--gold)" stroke-width="2" opacity="0.3"/>
+                        
+                        <!-- Decorative elements -->
+                        <circle cx="200" cy="320" r="40" fill="none" stroke="var(--gold)" 
+                                stroke-width="2" opacity="0.3" stroke-dasharray="5,5"/>
+                        <text x="200" y="330" text-anchor="middle" font-family="Playfair Display" 
+                              font-size="16" fill="var(--rich-blue)" font-weight="700" opacity="0.5">Cambridge</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="content-container">
+            <h2 class="section-title" style="text-align: center;">Our Journey</h2>
+            <p class="section-subtitle" style="text-align: center;">Milestones & Evolution</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Foundation</div>
+                        <h3 class="timeline-title">Company Founded in Cambridge</h3>
+                        <p class="timeline-description">
+                            A team of experienced biologists and life-science experts came together with a shared vision to bridge advanced biology with intelligent computation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Early Development</div>
+                        <h3 class="timeline-title">AI-Driven Approach Established</h3>
+                        <p class="timeline-description">
+                            Focused research efforts on applying machine learning to core biological challenges, establishing methodologies for antibody discovery and genetic analysis.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Platform Launch</div>
+                        <h3 class="timeline-title">Core Platforms Developed</h3>
+                        <p class="timeline-description">
+                            Launched PREDICT-mAb, CellCipher, and GenSpy platforms, combining rigorous biological science with modern machine-learning techniques.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Present Day</div>
+                        <h3 class="timeline-title">Growing Innovation Hub</h3>
+                        <p class="timeline-description">
+                            Continuing to expand collaborations with academic and industry partners, translating AI-powered biology into meaningful scientific and commercial impact.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="accomplishments-section">
+        <div class="content-container">
+            <h2 class="section-title" style="text-align: center;">Where We Are Today</h2>
+            <p class="section-subtitle" style="text-align: center;">Recent Accomplishments & Ongoing Initiatives</p>
+            
+            <div class="accomplishments-grid">
+                <div class="accomplishment-card reveal">
+                    <div class="accomplishment-image">
+                        <svg class="accomplishment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Research icon -->
+                            <circle cx="50" cy="40" r="25" fill="none" stroke="white" stroke-width="4"/>
+                            <circle cx="50" cy="40" r="15" fill="white" opacity="0.3"/>
+                            <line x1="68" y1="58" x2="85" y2="75" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="accomplishment-content">
+                        <h3 class="accomplishment-title">Advanced Research Initiatives</h3>
+                        <p class="accomplishment-description">
+                            Expanding our AI-powered platforms with cutting-edge research in antibody engineering, cellular therapy, and rare disease diagnostics, pushing the boundaries of computational biology.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accomplishment-card reveal" style="animation-delay: 0.2s">
+                    <div class="accomplishment-image">
+                        <svg class="accomplishment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Collaboration icon -->
+                            <circle cx="35" cy="35" r="12" fill="white" opacity="0.6"/>
+                            <circle cx="65" cy="35" r="12" fill="white" opacity="0.6"/>
+                            <circle cx="50" cy="60" r="12" fill="white" opacity="0.6"/>
+                            <line x1="35" y1="35" x2="50" y2="60" stroke="white" stroke-width="3"/>
+                            <line x1="65" y1="35" x2="50" y2="60" stroke="white" stroke-width="3"/>
+                            <line x1="35" y1="35" x2="65" y2="35" stroke="white" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="accomplishment-content">
+                        <h3 class="accomplishment-title">Strategic Partnerships</h3>
+                        <p class="accomplishment-description">
+                            Building collaborative relationships with leading academic institutions and industry partners to accelerate translation of AI-powered biology into real-world therapeutic solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accomplishment-card reveal" style="animation-delay: 0.4s">
+                    <div class="accomplishment-image">
+                        <svg class="accomplishment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Innovation icon -->
+                            <path d="M 50 20 L 50 80" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="50" cy="35" r="15" fill="none" stroke="white" stroke-width="4"/>
+                            <line x1="35" y1="50" x2="25" y2="60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="65" y1="50" x2="75" y2="60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M 40 75 L 40 80 L 60 80 L 60 75" stroke="white" stroke-width="4" fill="white" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <div class="accomplishment-content">
+                        <h3 class="accomplishment-title">Continuous Innovation</h3>
+                        <p class="accomplishment-description">
+                            Investing in next-generation AI technologies and computational methods to maintain our position at the forefront of biotechnology innovation and drug discovery.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
+            <div class="footer-links">
+                <a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a>
+                <span>|</span>
+                <span>Cambridge, UK</span>
+                <span>|</span>
+                <a href="http://CamBiologics.com">CamBiologics.com</a>
+            </div>
+            <div style="margin-top: 2.5rem; font-size: 0.95rem; opacity: 0.8;">
+                © 2025 CamBioLogics. Advancing biotechnology through AI.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 120) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for accent shape
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shape = document.querySelector('.accent-shape');
+            if (shape) {
+                shape.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0001})`;
+            }
+        });
+    </script>
+</body>
+</html>

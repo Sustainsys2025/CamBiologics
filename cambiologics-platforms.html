@@ -135,6 +135,21 @@
 
         .dropdown {
             position: relative;
+            cursor: pointer;
+        }
+        
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            right: -20px;
+            height: 0.5rem;
+            background: transparent;
+        }
+
+        .dropdown-old {
+            position: relative;
         }
 
         .dropdown-content {
@@ -148,7 +163,7 @@
             box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
             border-radius: 12px;
             padding: 1.5rem 0;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             animation: fadeInUp 0.4s ease;
             border: 1px solid rgba(184, 115, 51, 0.15);
         }
@@ -380,7 +395,7 @@
             font-size: 0.9rem;
             color: var(--copper);
             font-weight: 600;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             margin-right: 0.6rem;
             border: 1px solid rgba(184, 115, 51, 0.25);
             letter-spacing: 0.5px;

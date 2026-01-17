@@ -128,11 +128,21 @@
         .dropdown {
             position: relative;
         }
+        
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            right: 0;
+            height: 1rem;
+            background: transparent;
+        }
 
         .dropdown-content {
             display: none;
             position: absolute;
-            top: 100%;
+            top: calc(100% + 0.5rem);
             left: -20px;
             background: rgba(250, 250, 248, 0.98);
             backdrop-filter: blur(10px);
@@ -140,7 +150,6 @@
             box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
             border-radius: 12px;
             padding: 1.5rem 0;
-            margin-top: 1rem;
             animation: fadeInUp 0.4s ease;
             border: 1px solid rgba(184, 115, 51, 0.15);
         }

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CamBioLogics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #0f1419;
+            --rich-blue: #1a3a52;
+            --teal-accent: #2c5f6f;
+            --copper: #b87333;
+            --gold: #d4af37;
+            --soft-cream: #f5f1ed;
+            --ivory: #fafaf8;
+            --midnight: #0a0e14;
+            --sage: #8b9d83;
+            --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
+            --gradient-accent: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #b87333 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--rich-blue);
+            background: var(--ivory);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .molecular-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--rich-blue) 3px, transparent 3px),
+                radial-gradient(circle at 80% 80%, var(--teal-accent) 2px, transparent 2px),
+                radial-gradient(circle at 40% 20%, var(--copper) 2px, transparent 2px);
+            background-size: 120px 80px, 180px 120px, 100px 70px;
+            animation: molecularFloat 80s linear infinite;
+        }
+
+        @keyframes molecularFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-30px, -30px) rotate(360deg); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 248, 0.97);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(26, 58, 82, 0.1);
+            animation: slideDown 0.8s ease-out;
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-blue);
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--copper);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            background: rgba(250, 250, 248, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 320px;
+            box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 0;
+            margin-top: 1rem;
+            animation: fadeInUp 0.4s ease;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--rich-blue);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, transparent 100%);
+            padding-left: 2.5rem;
+        }
+
+        .hero {
+            margin-top: 100px;
+            padding: 5rem 4rem 4rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeIn 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--copper);
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .accent-shape {
+            position: absolute;
+            right: 10%;
+            top: 20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(184, 115, 51, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            animation: pulse-accent 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse-accent {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 0.5; }
+        }
+
+        .contact-section {
+            padding: 7rem 4rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, transparent 0%, rgba(184, 115, 51, 0.04) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .content-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 1s ease-out;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--copper);
+            margin-bottom: 5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 30px rgba(26, 58, 82, 0.1);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient-primary);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(26, 58, 82, 0.15);
+        }
+
+        .contact-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(26, 58, 82, 0.2);
+        }
+
+        .contact-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1rem;
+        }
+
+        .contact-details {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--teal-accent);
+            opacity: 0.95;
+        }
+
+        .contact-details a {
+            color: var(--copper);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        .map-container {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(26, 58, 82, 0.1);
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            height: 100%;
+            min-height: 500px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            border: none;
+        }
+
+        .cta-section {
+            padding: 6rem 4rem;
+            background: linear-gradient(135deg, var(--rich-blue) 0%, var(--teal-accent) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(184, 115, 51, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--gradient-accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(184, 115, 51, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(184, 115, 51, 0.4);
+        }
+
+        footer {
+            background: var(--midnight);
+            color: var(--soft-cream);
+            padding: 4rem 4rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-accent);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--soft-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.95rem;
+            }
+
+            .hero {
+                padding: 4rem 2rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-section,
+            .cta-section {
+                padding: 5rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2.3rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .map-container {
+                min-height: 400px;
+            }
+
+            footer {
+                padding: 3rem 2rem;
+            }
+
+            .accent-shape {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="molecular-bg"></div>
+
+    <nav>
+        <div class="logo">CamBioLogics</div>
+        <ul class="nav-links">
+            <li><a href="cambiologics-biotech-website.html">Home</a></li>
+            <li><a href="cambiologics-about-us.html">About Us</a></li>
+            <li class="dropdown">
+                <a href="cambiologics-platforms.html">Platforms ▾</a>
+                <div class="dropdown-content">
+                    <a href="cambiologics-predict-mab.html">PREDICT-mAb</a>
+                    <a href="cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
+                    <a href="cambiologics-genspy.html">GenSpy - Revealing hidden genetic causes</a>
+                </div>
+            </li>
+            <li><a href="cambiologics-team.html">Team</a></li>
+            <li><a href="#" class="active">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="accent-shape"></div>
+        <div class="hero-content">
+            <h1>Contact Us</h1>
+            <p class="hero-subtitle">Let's Transform Biotechnology Together</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="content-container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">We'd Love to Hear From You</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 8L10.89 13.26C11.53 13.67 12.47 13.67 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="contact-title">Email Us</h3>
+                        <div class="contact-details">
+                            <p>For general inquiries, collaborations, or partnership opportunities:</p>
+                            <p><a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="white" stroke-width="2"/>
+                                <path d="M12 7V12L15 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="contact-title">Office Hours</h3>
+                        <div class="contact-details">
+                            <p><strong>Cambridge, UK:</strong> Monday - Friday, 9:00 AM - 6:00 PM GMT</p>
+                            <p><strong>India Office:</strong> Monday - Friday, 9:00 AM - 6:00 PM IST</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="white" stroke-width="2"/>
+                                <path d="M12 6V12L16 14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="contact-title">Our Locations</h3>
+                        <div class="contact-details">
+                            <p><strong>Headquarters:</strong> Cambridge, United Kingdom</p>
+                            <p><strong>Research Center:</strong> India</p>
+                            <p style="margin-top: 1rem; font-style: italic; opacity: 0.8;">We operate across two continents, bridging world-class science and innovation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container reveal" style="animation-delay: 0.2s">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155498.60473547257!2d0.03261958203124987!3d52.205337699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d85d89f32a012d%3A0x63a320e1a35e3d21!2sCambridge%2C%20UK!5e0!3m2!1sen!2sus!4v1737148687282!5m2!1sen!2sus"
+                        width="600" 
+                        height="500" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Collaborate?</h2>
+            <p class="cta-description">
+                Whether you're interested in partnering with us, exploring our platforms, or learning more about how AI can transform your biologics development, we're here to help.
+            </p>
+            <a href="mailto:CamBiologics@cantab.net" class="cta-button">Start a Conversation →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
+            <div class="footer-links">
+                <a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a>
+                <span>|</span>
+                <span>Cambridge, UK</span>
+                <span>|</span>
+                <a href="http://CamBiologics.com">CamBiologics.com</a>
+            </div>
+            <div style="margin-top: 2.5rem; font-size: 0.95rem; opacity: 0.8;">
+                © 2025 CamBioLogics. Advancing biotechnology through AI.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 120) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for accent shape
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shape = document.querySelector('.accent-shape');
+            if (shape) {
+                shape.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0001})`;
+            }
+        });
+    </script>
+</body>
+</html>

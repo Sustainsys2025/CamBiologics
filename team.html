@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team - CamBioLogics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #0f1419;
+            --rich-blue: #1a3a52;
+            --teal-accent: #2c5f6f;
+            --copper: #b87333;
+            --gold: #d4af37;
+            --soft-cream: #f5f1ed;
+            --ivory: #fafaf8;
+            --midnight: #0a0e14;
+            --sage: #8b9d83;
+            --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
+            --gradient-accent: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #b87333 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--rich-blue);
+            background: var(--ivory);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .molecular-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--rich-blue) 3px, transparent 3px),
+                radial-gradient(circle at 80% 80%, var(--teal-accent) 2px, transparent 2px),
+                radial-gradient(circle at 40% 20%, var(--copper) 2px, transparent 2px);
+            background-size: 120px 80px, 180px 120px, 100px 70px;
+            animation: molecularFloat 80s linear infinite;
+        }
+
+        @keyframes molecularFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-30px, -30px) rotate(360deg); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 248, 0.97);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(26, 58, 82, 0.1);
+            animation: slideDown 0.8s ease-out;
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-blue);
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--copper);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            background: rgba(250, 250, 248, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 320px;
+            box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 0;
+            margin-top: 1rem;
+            animation: fadeInUp 0.4s ease;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--rich-blue);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, transparent 100%);
+            padding-left: 2.5rem;
+        }
+
+        .hero {
+            margin-top: 100px;
+            padding: 5rem 4rem 4rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            animation: fadeIn 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--copper);
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .accent-shape {
+            position: absolute;
+            right: 10%;
+            top: 20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(184, 115, 51, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            animation: pulse-accent 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse-accent {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 0.5; }
+        }
+
+        .team-intro-section {
+            padding: 7rem 4rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, transparent 0%, rgba(184, 115, 51, 0.04) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 1s ease-out;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--copper);
+            margin-bottom: 3rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .team-intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .team-description {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--rich-blue);
+            opacity: 0.95;
+        }
+
+        .team-description p {
+            margin-bottom: 1.8rem;
+        }
+
+        .team-description strong {
+            color: var(--copper);
+            font-weight: 600;
+        }
+
+        .team-stats {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            border-left: 4px solid var(--copper);
+            box-shadow: 0 6px 25px rgba(26, 58, 82, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 12px 40px rgba(26, 58, 82, 0.15);
+        }
+
+        .stat-card:nth-child(2) {
+            border-left-color: var(--teal-accent);
+        }
+
+        .stat-card:nth-child(3) {
+            border-left-color: var(--gold);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--teal-accent);
+            font-weight: 600;
+        }
+
+        .team-members-section {
+            padding: 7rem 4rem;
+            background: linear-gradient(180deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            position: relative;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            max-width: 1300px;
+            margin: 4rem auto 0;
+        }
+
+        .member-card {
+            background: linear-gradient(135deg, rgba(250, 250, 248, 0.95) 0%, rgba(245, 241, 237, 0.95) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(26, 58, 82, 0.1);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(26, 58, 82, 0.15);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 280px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 58, 82, 0.3) 0%, rgba(44, 95, 111, 0.3) 100%);
+        }
+
+        .member-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .member-placeholder svg {
+            width: 70px;
+            height: 70px;
+            opacity: 0.6;
+        }
+
+        .member-info {
+            padding: 2.5rem 2rem;
+        }
+
+        .member-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .member-title {
+            font-size: 1.1rem;
+            color: var(--copper);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.3px;
+        }
+
+        .member-bio {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--teal-accent);
+            opacity: 0.9;
+        }
+
+        .member-location {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, rgba(184, 115, 51, 0.15) 0%, rgba(184, 115, 51, 0.05) 100%);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--copper);
+            font-weight: 500;
+            border: 1px solid rgba(184, 115, 51, 0.25);
+        }
+
+        footer {
+            background: var(--midnight);
+            color: var(--soft-cream);
+            padding: 4rem 4rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-accent);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--soft-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.95rem;
+            }
+
+            .hero {
+                padding: 4rem 2rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .team-intro-section,
+            .team-members-section {
+                padding: 5rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2.3rem;
+            }
+
+            .team-intro-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 3rem 2rem;
+            }
+
+            .accent-shape {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="molecular-bg"></div>
+
+    <nav>
+        <div class="logo">CamBioLogics</div>
+        <ul class="nav-links">
+            <li><a href="cambiologics-biotech-website.html">Home</a></li>
+            <li><a href="cambiologics-about-us.html">About Us</a></li>
+            <li class="dropdown">
+                <a href="cambiologics-platforms.html">Platforms ▾</a>
+                <div class="dropdown-content">
+                    <a href="cambiologics-predict-mab.html">PREDICT-mAb</a>
+                    <a href="cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
+                    <a href="cambiologics-genspy.html">GenSpy - Revealing hidden genetic causes</a>
+                </div>
+            </li>
+            <li><a href="#" class="active">Team</a></li>
+            <li><a href="cambiologics-contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="accent-shape"></div>
+        <div class="hero-content">
+            <h1>Our Team</h1>
+            <p class="hero-subtitle">The Minds Behind the Innovation</p>
+        </div>
+    </section>
+
+    <section class="team-intro-section">
+        <div class="content-container">
+            <h2 class="section-title">Who We Are</h2>
+            <p class="section-subtitle">A Global Team United by Science</p>
+            
+            <div class="team-intro-content">
+                <div class="team-description reveal">
+                    <p>
+                        CamBioLogics brings together a <strong>multidisciplinary team of experts</strong> spanning two continents—Cambridge, UK, and India—united by a shared passion for transforming biotechnology through artificial intelligence.
+                    </p>
+                    <p>
+                        Our team comprises <strong>accomplished doctors, research associates, and computational scientists</strong> with over 10 years of combined experience in biotechnology, genomics, antibody engineering, and clinical research. This deep domain expertise ensures that our AI platforms are grounded in biological reality and clinical relevance.
+                    </p>
+                    <p>
+                        Recently, we've expanded our capabilities with a <strong>dedicated technology team</strong> specializing in machine learning, bioinformatics, and software engineering. This fusion of biological insight and computational innovation enables us to tackle challenges that neither discipline could address alone.
+                    </p>
+                    <p>
+                        From Cambridge's world-renowned scientific ecosystem to India's vibrant research landscape, our distributed team collaborates seamlessly to accelerate discovery, enhance precision, and maximize impact across therapeutics development.
+                    </p>
+                </div>
+
+                <div class="team-stats reveal" style="animation-delay: 0.2s">
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years of Combined Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Global Locations: UK & India</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">AI-Powered Platforms</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-members-section">
+        <div class="content-container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <p class="section-subtitle">The Experts Driving Our Mission</p>
+            
+            <div class="members-grid">
+                <!-- Member Card 1 -->
+                <div class="member-card reveal">
+                    <div class="member-image">
+                        <div class="member-placeholder">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="35" r="15" fill="white"/>
+                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Dr. Vikas Shigh</h3>
+                        <p class="member-title">Founder & Chief Scientific Officer</p>
+                        <p class="member-bio">
+                            Leading our scientific vision with extensive experience in biotechnology research and therapeutic development. Expert in antibody engineering and computational biology.
+                        </p>
+                        <span class="member-location">📍 Cambridge, UK</span>
+                    </div>
+                </div>
+
+                <!-- Member Card 2 -->
+                <div class="member-card reveal" style="animation-delay: 0.1s">
+                    <div class="member-image">
+                        <div class="member-placeholder">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="35" r="15" fill="white"/>
+                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Suman Grewal</h3>
+                        <p class="member-title">Senior Research Scientist</p>
+                        <p class="member-bio">
+                            Specializing in genomics and rare disease diagnostics with over 12 years of clinical and research experience. Leads our GenSpy platform development.
+                        </p>
+                        <span class="member-location">📍 India</span>
+                    </div>
+                </div>
+
+                <!-- Member Card 3 -->
+                <div class="member-card reveal" style="animation-delay: 0.2s">
+                    <div class="member-image">
+                        <div class="member-placeholder">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="35" r="15" fill="white"/>
+                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Shalu Grewal</h3>
+                        <p class="member-title">Head of Technology</p>
+                        <p class="member-bio">
+                            Leading our technology team in developing AI infrastructure and machine learning platforms. Expert in deep learning and bioinformatics systems.
+                        </p>
+                        <span class="member-location">📍 Cambridge, UK</span>
+                    </div>
+                </div>
+
+                <!-- Member Card 4 -->
+                <div class="member-card reveal" style="animation-delay: 0.3s">
+                    <div class="member-image">
+                        <div class="member-placeholder">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="35" r="15" fill="white"/>
+                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Dr. [Name]</h3>
+                        <p class="member-title">Research Associate - Cell Therapy</p>
+                        <p class="member-bio">
+                            Focused on cellular therapy research and CellCipher platform optimization. Brings expertise in immunology and translational medicine.
+                        </p>
+                        <span class="member-location">📍 India</span>
+                    </div>
+                </div>
+
+                <!-- Member Card 5 -->
+                <div class="member-card reveal" style="animation-delay: 0.4s">
+                    <div class="member-image">
+                        <div class="member-placeholder">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="35" r="15" fill="white"/>
+                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">[Name]</h3>
+                        <p class="member-title">Senior AI Engineer</p>
+                        <p class="member-bio">
+                            Developing machine learning models for PREDICT-mAb platform. Specializes in protein structure prediction and computational drug design.
+                        </p>
+                        <span class="member-location">📍 India</span>
+                    </div>
+                </div>
+
+                <!-- Member Card 6 -->
+                <div class="member-card reveal" style="animation-delay: 0.5s">
+                    <div class="member-image">
+                        <div class="member-placeholder">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="35" r="15" fill="white"/>
+                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Dr. [Name]</h3>
+                        <p class="member-title">Research Associate - Structural Biology</p>
+                        <p class="member-bio">
+                            Contributing expertise in protein engineering and structural analysis. Supports antibody optimization and therapeutic candidate validation.
+                        </p>
+                        <span class="member-location">📍 Cambridge, UK</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 4.5rem; text-align: center; font-size: 1.2rem; color: var(--teal-accent); font-weight: 500; line-height: 1.8; max-width: 900px; margin-left: auto; margin-right: auto;">
+                Our team's diverse backgrounds and complementary expertise create a unique environment where cutting-edge science meets innovative technology, all focused on transforming patient lives through precision biologics.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
+            <div class="footer-links">
+                <a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a>
+                <span>|</span>
+                <span>Cambridge, UK</span>
+                <span>|</span>
+                <a href="http://CamBiologics.com">CamBiologics.com</a>
+            </div>
+            <div style="margin-top: 2.5rem; font-size: 0.95rem; opacity: 0.8;">
+                © 2025 CamBioLogics. Advancing biotechnology through AI.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 120) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for accent shape
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shape = document.querySelector('.accent-shape');
+            if (shape) {
+                shape.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0001})`;
+            }
+        });
+    </script>
+</body>
+</html>

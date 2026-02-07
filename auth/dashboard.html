@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Dashboard</h1>
+        <div id="userInfo"></div>
+        <button id="logoutBtn">Logout</button>
+        <p><a href="../index.html">← Back to Home</a></p>
+    </div>
+
+    <script type="module">
+        import { supabase } from './js/supabase-config.js'
+
+        // Check if user is logged in
+        async function checkAuth() {
+            const { data: { session } } = await supabase.auth.getSession()
+            
+            if (!session) {
+                // Not logged in, redirect to login
+                window.location.href = 'login.html'
+                return
+            }
+
+            // Get user profile
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', session.user.id)
+                .single()
+
+            document.getElementById('userInfo').innerHTML = `
+                <h2>Hello, ${profile.full_name || session.user.email}!</h2>
+                <p>Email: ${session.user.email}</p>
+                <p>Phone: ${profile.phone || 'Not provided'}</p>
+            `
+        }
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await supabase.auth.signOut()
+            window.location.href = 'login.html'
+        })
+
+        checkAuth()
+    </script>
+</body>
+</html>

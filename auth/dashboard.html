@@ -3,26 +3,544 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Client Portal - CamBioLogics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #0f1419;
+            --rich-blue: #1a3a52;
+            --teal-accent: #2c5f6f;
+            --copper: #b87333;
+            --gold: #d4af37;
+            --soft-cream: #f5f1ed;
+            --ivory: #fafaf8;
+            --midnight: #0a0e14;
+            --sage: #8b9d83;
+            --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
+            --gradient-accent: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #b87333 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--rich-blue);
+            background: var(--ivory);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .molecular-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--rich-blue) 3px, transparent 3px),
+                radial-gradient(circle at 80% 80%, var(--teal-accent) 2px, transparent 2px),
+                radial-gradient(circle at 40% 20%, var(--copper) 2px, transparent 2px);
+            background-size: 120px 80px, 180px 120px, 100px 70px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 248, 0.97);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(26, 58, 82, 0.1);
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-blue);
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-login-btn {
+            background: var(--gradient-accent);
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(184, 115, 51, 0.3);
+            cursor: pointer;
+            border: none;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .nav-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(184, 115, 51, 0.45);
+        }
+
+        .nav-login-btn::after {
+            display: none !important;
+        }
+
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            right: -20px;
+            height: 0.5rem;
+            background: transparent;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            background: rgba(250, 250, 248, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 320px;
+            box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 0;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--rich-blue);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, transparent 100%);
+            padding-left: 2.5rem;
+            color: var(--copper);
+        }
+
+        /* Dashboard Content */
+        .dashboard-wrapper {
+            flex: 1;
+            padding: 8rem 4rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .dashboard-header {
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            font-size: 1.2rem;
+            color: var(--teal-accent);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            background: linear-gradient(135deg, rgba(250, 250, 248, 0.95) 0%, rgba(245, 241, 237, 0.95) 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 30px rgba(26, 58, 82, 0.1);
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(26, 58, 82, 0.15);
+        }
+
+        .dashboard-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--teal-accent);
+        }
+
+        .dashboard-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .user-profile-card {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .user-avatar svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .user-details h3 {
+            margin-bottom: 0.3rem;
+        }
+
+        .user-details p {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .placeholder-content {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .placeholder-content svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.2rem;
+            opacity: 0.4;
+        }
+
+        .placeholder-content p {
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Loading state */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--ivory);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.4s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--rich-blue);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--midnight);
+            color: var(--soft-cream);
+            padding: 3rem 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-accent);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.95rem;
+            }
+
+            .dashboard-wrapper {
+                padding: 7rem 2rem 3rem;
+            }
+
+            .dashboard-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Dashboard</h1>
-        <div id="userInfo"></div>
-        <button id="logoutBtn">Logout</button>
-        <p><a href="../index.html">← Back to Home</a></p>
+    <div class="molecular-bg"></div>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-text">Loading your portal...</div>
     </div>
+
+    <nav>
+        <a href="../index.html" class="logo">CamBioLogics</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../cambiologics-about-us.html">About Us</a></li>
+            <li class="dropdown">
+                <a href="../cambiologics-platforms.html">Platforms ▾</a>
+                <div class="dropdown-content">
+                    <a href="../cambiologics-predict-mab.html">PREDICT-mAb</a>
+                    <a href="../cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
+                    <a href="../cambiologics-genspy.html">GenSpy - Revealing hidden genetic causes</a>
+                </div>
+            </li>
+            <li><a href="../team.html">Team</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+            <li><button id="logoutBtn" class="nav-login-btn">Logout</button></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <div class="dashboard-header">
+            <h1>Client Portal</h1>
+            <p>Welcome to your personalised CamBioLogics dashboard</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- User Profile Card -->
+            <div class="dashboard-card">
+                <div class="user-profile-card">
+                    <div class="user-avatar">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="15" r="8" fill="white" opacity="0.9"/>
+                            <path d="M6 36 Q6 24 20 24 Q34 24 34 36" fill="white" opacity="0.9"/>
+                        </svg>
+                    </div>
+                    <div class="user-details" id="userInfo">
+                        <h3>Loading...</h3>
+                        <p>Fetching your profile</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Status -->
+            <div class="dashboard-card">
+                <h3>Project Status</h3>
+                <div class="placeholder-content">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="10" width="44" height="40" rx="4" fill="none" stroke="var(--teal-accent)" stroke-width="3"/>
+                        <line x1="16" y1="22" x2="44" y2="22" stroke="var(--teal-accent)" stroke-width="2"/>
+                        <line x1="16" y1="30" x2="36" y2="30" stroke="var(--copper)" stroke-width="2"/>
+                        <line x1="16" y1="38" x2="40" y2="38" stroke="var(--teal-accent)" stroke-width="2"/>
+                    </svg>
+                    <p>Your active projects will appear here once onboarded.</p>
+                </div>
+            </div>
+
+            <!-- Reports & Data -->
+            <div class="dashboard-card">
+                <h3>Reports &amp; Data</h3>
+                <div class="placeholder-content">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="30" width="8" height="20" rx="2" fill="var(--teal-accent)" opacity="0.6"/>
+                        <rect x="22" y="20" width="8" height="30" rx="2" fill="var(--copper)" opacity="0.6"/>
+                        <rect x="34" y="12" width="8" height="38" rx="2" fill="var(--rich-blue)" opacity="0.6"/>
+                        <rect x="46" y="24" width="8" height="26" rx="2" fill="var(--gold)" opacity="0.6"/>
+                    </svg>
+                    <p>Platform analysis reports and experimental data will be available here.</p>
+                </div>
+            </div>
+
+            <!-- Platform Access -->
+            <div class="dashboard-card">
+                <h3>Platform Access</h3>
+                <div class="placeholder-content">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="20" fill="none" stroke="var(--teal-accent)" stroke-width="3"/>
+                        <circle cx="30" cy="30" r="8" fill="var(--copper)" opacity="0.6"/>
+                        <line x1="30" y1="10" x2="30" y2="22" stroke="var(--teal-accent)" stroke-width="2"/>
+                        <line x1="30" y1="38" x2="30" y2="50" stroke="var(--teal-accent)" stroke-width="2"/>
+                        <line x1="10" y1="30" x2="22" y2="30" stroke="var(--teal-accent)" stroke-width="2"/>
+                        <line x1="38" y1="30" x2="50" y2="30" stroke="var(--teal-accent)" stroke-width="2"/>
+                    </svg>
+                    <p>Direct access to PREDICT-mAb, CellCipher, and GenSpy tools coming soon.</p>
+                </div>
+            </div>
+
+            <!-- Support -->
+            <div class="dashboard-card full-width">
+                <h3>Need Assistance?</h3>
+                <p>
+                    For questions about your projects or platform access, please reach out to our team
+                    via the <a href="../contact.html" style="color: var(--copper); font-weight: 600;">Contact page</a>
+                    or email us directly. We are here to support your research goals.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-tagline">Together, we're not just advancing science -- we're transforming lives.</div>
+            <div style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8;">
+                &copy; 2025 CamBioLogics. Advancing biotechnology through AI.
+            </div>
+        </div>
+    </footer>
 
     <script type="module">
         import { supabase } from './js/supabase-config.js'
 
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
         // Check if user is logged in
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession()
-            
+
             if (!session) {
-                // Not logged in, redirect to login
                 window.location.href = 'login.html'
                 return
             }
@@ -34,11 +552,17 @@
                 .eq('id', session.user.id)
                 .single()
 
+            const name = (profile && profile.full_name) || session.user.email;
+            const phone = (profile && profile.phone) || 'Not provided';
+
             document.getElementById('userInfo').innerHTML = `
-                <h2>Hello, ${profile.full_name || session.user.email}!</h2>
+                <h3>${name}</h3>
                 <p>Email: ${session.user.email}</p>
-                <p>Phone: ${profile.phone || 'Not provided'}</p>
+                <p>Phone: ${phone}</p>
             `
+
+            // Hide loading overlay
+            loadingOverlay.classList.add('hidden');
         }
 
         // Logout

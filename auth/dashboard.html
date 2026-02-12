@@ -1041,6 +1041,53 @@
         .car-toast.warning { border-left-color: var(--car-warning); }
 
         /* ============================
+           GUEST MODE
+           ============================ */
+        body.guest-mode .car-add-btn {
+            opacity: 0.35;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        body.guest-mode .car-btn-accent,
+        body.guest-mode .car-btn-primary,
+        body.guest-mode .car-generate-btn,
+        body.guest-mode #exportBtn,
+        body.guest-mode #optimizeBtn,
+        body.guest-mode #analyzeBtn {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        body.guest-mode .car-export-card {
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        .guest-banner {
+            background: linear-gradient(135deg, rgba(184, 115, 51, 0.1) 0%, rgba(212, 175, 55, 0.08) 100%);
+            border: 1px solid rgba(184, 115, 51, 0.25);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin: 0 1.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--car-primary);
+        }
+        .guest-banner svg { flex-shrink: 0; }
+        .guest-banner a {
+            color: var(--car-accent);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .guest-banner a:hover { text-decoration: underline; }
+
+        @keyframes pulse-signin {
+            0%, 100% { transform: scale(1); box-shadow: none; }
+            50% { transform: scale(1.08); box-shadow: 0 0 16px rgba(184, 115, 51, 0.5); }
+        }
+
+        /* ============================
            MODAL
            ============================ */
         .car-modal-overlay {
@@ -1882,6 +1929,21 @@
         let savedDesigns = JSON.parse(localStorage.getItem('car_saved_designs') || '[]');
         let selectedExportFormat = null;
         let currentUser = null;
+        let isGuestMode = false;
+
+        // Guest mode helper — shows sign-in prompt
+        function requireAuth(actionName) {
+            if (!isGuestMode) return false; // allow action
+            showToast('Please sign in to ' + (actionName || 'use this feature'), 'warning');
+            // Brief highlight of the sign-in button
+            const signInBtn = document.getElementById('logoutBtn');
+            if (signInBtn) {
+                signInBtn.style.animation = 'none';
+                signInBtn.offsetHeight; // reflow
+                signInBtn.style.animation = 'pulse-signin 0.6s ease 2';
+            }
+            return true; // block action
+        }
 
         // =============================
         // AUTHENTICATION
@@ -1889,18 +1951,41 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const mainContent = document.getElementById('mainContent');
 
+        function enableGuestMode(label, initial) {
+            isGuestMode = true;
+            document.body.classList.add('guest-mode');
+            document.getElementById('userName').textContent = label;
+            document.getElementById('userAvatar').textContent = initial;
+
+            // Change "Sign Out" to "Sign In" for guests
+            const logoutBtn = document.getElementById('logoutBtn');
+            logoutBtn.textContent = 'Sign In';
+            logoutBtn.style.background = 'var(--gradient-accent, linear-gradient(135deg, #b87333, #d4af37))';
+            logoutBtn.style.color = 'white';
+
+            mainContent.style.display = 'block';
+            loadingOverlay.classList.remove('show');
+
+            // Add guest banner below nav
+            const banner = document.createElement('div');
+            banner.className = 'guest-banner';
+            banner.innerHTML = `
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span>You're viewing CARchitect in preview mode. <a href="login.html">Sign in</a> to build and save your own CAR constructs.</span>
+            `;
+            mainContent.insertBefore(banner, mainContent.firstChild);
+
+            renderComponentLibrary();
+            renderSavedDesigns();
+        }
+
         async function checkAuth() {
             loadingOverlay.classList.add('show');
 
             // If supabase is not available (local file://), show page in demo mode
             if (!supabase) {
                 console.log('Running in local/demo mode without authentication.');
-                document.getElementById('userName').textContent = 'Demo';
-                document.getElementById('userAvatar').textContent = 'D';
-                mainContent.style.display = 'block';
-                loadingOverlay.classList.remove('show');
-                renderComponentLibrary();
-                renderSavedDesigns();
+                enableGuestMode('Demo', 'D');
                 return;
             }
 
@@ -1909,12 +1994,7 @@
                 if (!session) {
                     // No session — show page in guest/demo mode (open to all)
                     console.log('No active session. Running in guest mode.');
-                    document.getElementById('userName').textContent = 'Guest';
-                    document.getElementById('userAvatar').textContent = 'G';
-                    mainContent.style.display = 'block';
-                    loadingOverlay.classList.remove('show');
-                    renderComponentLibrary();
-                    renderSavedDesigns();
+                    enableGuestMode('Guest', 'G');
                     return;
                 }
                 currentUser = session.user;
@@ -1931,17 +2011,17 @@
             } catch (error) {
                 console.error('Auth error:', error);
                 // On error, still show page in guest mode instead of redirecting
-                document.getElementById('userName').textContent = 'Guest';
-                document.getElementById('userAvatar').textContent = 'G';
-                mainContent.style.display = 'block';
-                loadingOverlay.classList.remove('show');
-                renderComponentLibrary();
-                renderSavedDesigns();
+                enableGuestMode('Guest', 'G');
             }
         }
 
-        // Logout
+        // Logout / Sign In
         document.getElementById('logoutBtn').addEventListener('click', async () => {
+            if (isGuestMode) {
+                // Guest clicking "Sign In" — go to login
+                window.location.href = 'login.html';
+                return;
+            }
             if (supabase) {
                 await supabase.auth.signOut();
             }
@@ -2059,6 +2139,7 @@
         // CONSTRUCT BUILDER
         // =============================
         window.addComponent = function(id) {
+            if (requireAuth('add components')) return;
             const comp = COMPONENTS.find(c => c.id === id);
             if (!comp) return;
 
@@ -2081,6 +2162,7 @@
         };
 
         window.removeComponent = function(id) {
+            if (requireAuth('modify constructs')) return;
             constructComponents = constructComponents.filter(c => c.id !== id);
             renderConstruct();
             renderComponentLibrary();
@@ -2221,6 +2303,7 @@
         // AI DESIGNER - Generate CAR Design
         // =============================
         document.getElementById('generateDesignBtn').addEventListener('click', () => {
+            if (requireAuth('generate designs')) return;
             const antigen = document.getElementById('targetAntigen').value.trim();
             if (!antigen) {
                 showToast('Please enter a target antigen', 'error');
@@ -2248,6 +2331,7 @@
 
         // Component Generator
         document.getElementById('generateComponentBtn').addEventListener('click', () => {
+            if (requireAuth('generate components')) return;
             const type = document.getElementById('genComponentType').value;
             if (!type) {
                 showToast('Please select a component type', 'error');
@@ -2258,11 +2342,13 @@
 
         // Optimizer
         document.getElementById('optimizeBtn')?.addEventListener('click', () => {
+            if (requireAuth('optimize constructs')) return;
             showToast('Construct optimization is available in the full version', 'warning');
         });
 
         // Analysis
         document.getElementById('analyzeBtn')?.addEventListener('click', () => {
+            if (requireAuth('run analysis')) return;
             const resultsDiv = document.getElementById('analysisResults');
             const totalAA = constructComponents.reduce((sum, c) => sum + (c.sequence?.length || 0), 0);
             resultsDiv.innerHTML = `
@@ -2294,6 +2380,7 @@
         });
 
         document.getElementById('exportBtn')?.addEventListener('click', () => {
+            if (requireAuth('export designs')) return;
             if (!selectedExportFormat) return;
 
             let content = '';
@@ -2326,6 +2413,7 @@
         // SAVE / LOAD DESIGNS
         // =============================
         document.getElementById('saveDesignBtn').addEventListener('click', () => {
+            if (requireAuth('save designs')) return;
             if (constructComponents.length === 0) {
                 showToast('Add components before saving', 'error');
                 return;

@@ -1907,7 +1907,14 @@
             try {
                 const { data: { session } } = await supabase.auth.getSession();
                 if (!session) {
-                    window.location.href = 'login.html';
+                    // No session — show page in guest/demo mode (open to all)
+                    console.log('No active session. Running in guest mode.');
+                    document.getElementById('userName').textContent = 'Guest';
+                    document.getElementById('userAvatar').textContent = 'G';
+                    mainContent.style.display = 'block';
+                    loadingOverlay.classList.remove('show');
+                    renderComponentLibrary();
+                    renderSavedDesigns();
                     return;
                 }
                 currentUser = session.user;
@@ -1923,7 +1930,13 @@
                 renderSavedDesigns();
             } catch (error) {
                 console.error('Auth error:', error);
-                window.location.href = 'login.html';
+                // On error, still show page in guest mode instead of redirecting
+                document.getElementById('userName').textContent = 'Guest';
+                document.getElementById('userAvatar').textContent = 'G';
+                mainContent.style.display = 'block';
+                loadingOverlay.classList.remove('show');
+                renderComponentLibrary();
+                renderSavedDesigns();
             }
         }
 

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Portal - CamBioLogics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>CARchitect — CAR Construct Designer | CamBioLogics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --deep-navy: #0f1419;
@@ -18,6 +18,31 @@
             --sage: #8b9d83;
             --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
             --gradient-accent: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #b87333 100%);
+
+            /* CARchitect specific */
+            --car-primary: #1a3a52;
+            --car-primary-light: #2c5f6f;
+            --car-primary-dark: #0f1419;
+            --car-accent: #b87333;
+            --car-accent-light: #d4af37;
+            --car-bg: #fafaf8;
+            --car-bg-alt: #f5f1ed;
+            --car-border: #e0d8cf;
+            --car-border-light: #ede8e2;
+            --car-text: #1a3a52;
+            --car-text-secondary: #5a7a8a;
+            --car-text-muted: #8a9aa5;
+            --car-success: #2d8a5e;
+            --car-warning: #c4822a;
+            --car-danger: #c44a2a;
+
+            /* Component type colors */
+            --leader-color: #2c5f6f;
+            --scfv-color: #7c3aed;
+            --hinge-color: #b87333;
+            --tm-color: #2563eb;
+            --costim-color: #d4af37;
+            --signal-color: #dc2626;
         }
 
         * {
@@ -27,551 +52,2394 @@
         }
 
         body {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--rich-blue);
-            background: var(--ivory);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--car-text);
+            background: var(--car-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
-        .molecular-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.03;
-            background-image:
-                radial-gradient(circle at 20% 50%, var(--rich-blue) 3px, transparent 3px),
-                radial-gradient(circle at 80% 80%, var(--teal-accent) 2px, transparent 2px),
-                radial-gradient(circle at 40% 20%, var(--copper) 2px, transparent 2px);
-            background-size: 120px 80px, 180px 120px, 100px 70px;
-        }
-
-        /* Navigation */
-        nav {
+        /* ============================
+           NAVIGATION
+           ============================ */
+        .car-nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             background: rgba(250, 250, 248, 0.97);
             backdrop-filter: blur(15px);
-            padding: 1.5rem 4rem;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 2px 30px rgba(26, 58, 82, 0.1);
-            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+            box-shadow: 0 2px 20px rgba(26, 58, 82, 0.08);
+            border-bottom: 1px solid var(--car-border-light);
+            height: 64px;
         }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.5px;
-            text-decoration: none;
-        }
-
-        .nav-links {
+        .car-nav-logo {
             display: flex;
-            gap: 3rem;
-            list-style: none;
             align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--rich-blue);
-            font-weight: 500;
-            font-size: 1.05rem;
-            position: relative;
-            transition: all 0.4s ease;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-accent);
-            transition: width 0.4s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--copper);
-            transform: translateY(-2px);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-login-btn {
-            background: var(--gradient-accent);
-            -webkit-background-clip: initial;
-            -webkit-text-fill-color: initial;
-            background-clip: initial;
-            color: white !important;
-            padding: 0.6rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(184, 115, 51, 0.3);
-            cursor: pointer;
-            border: none;
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        .nav-login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(184, 115, 51, 0.45);
-        }
-
-        .nav-login-btn::after {
-            display: none !important;
-        }
-
-        .dropdown {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .dropdown::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: -20px;
-            right: -20px;
-            height: 0.5rem;
-            background: transparent;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: -20px;
-            background: rgba(250, 250, 248, 0.98);
-            backdrop-filter: blur(10px);
-            min-width: 320px;
-            box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
-            border-radius: 12px;
-            padding: 1.5rem 0;
-            margin-top: 0.5rem;
-            border: 1px solid rgba(184, 115, 51, 0.15);
-            z-index: 1001;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content a {
-            display: block;
-            padding: 1rem 2rem;
-            color: var(--rich-blue);
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            gap: 0.75rem;
             text-decoration: none;
         }
 
-        .dropdown-content a:hover {
-            background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, transparent 100%);
-            padding-left: 2.5rem;
-            color: var(--copper);
-        }
-
-        /* Dashboard Content */
-        .dashboard-wrapper {
-            flex: 1;
-            padding: 8rem 4rem 4rem;
-            max-width: 1300px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .dashboard-header {
-            margin-bottom: 3rem;
-        }
-
-        .dashboard-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 800;
+        .car-nav-logo-icon {
+            width: 36px;
+            height: 36px;
             background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
         }
 
-        .dashboard-header p {
-            font-size: 1.2rem;
-            color: var(--teal-accent);
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .dashboard-card {
-            background: linear-gradient(135deg, rgba(250, 250, 248, 0.95) 0%, rgba(245, 241, 237, 0.95) 100%);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 8px 30px rgba(26, 58, 82, 0.1);
-            border: 1px solid rgba(184, 115, 51, 0.15);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .dashboard-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-accent);
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(26, 58, 82, 0.15);
-        }
-
-        .dashboard-card h3 {
+        .car-nav-logo-text {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--rich-blue);
-            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .dashboard-card p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--teal-accent);
+        .car-nav-links {
+            display: flex;
+            gap: 0;
+            list-style: none;
+            align-items: center;
+            height: 100%;
         }
 
-        .dashboard-card.full-width {
-            grid-column: 1 / -1;
+        .car-nav-links li {
+            height: 100%;
         }
 
-        .user-profile-card {
+        .car-nav-links a {
+            text-decoration: none;
+            color: var(--car-text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 0.5rem;
+            padding: 0 1.25rem;
+            height: 100%;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
         }
 
-        .user-avatar {
-            width: 80px;
-            height: 80px;
+        .car-nav-links a:hover {
+            color: var(--car-primary);
+            background: rgba(26, 58, 82, 0.04);
+        }
+
+        .car-nav-links a.active {
+            color: var(--car-primary);
+            border-bottom-color: var(--car-accent);
+            font-weight: 600;
+        }
+
+        .car-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .car-user-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            background: var(--car-bg-alt);
+            border-radius: 20px;
+            font-size: 0.82rem;
+            color: var(--car-text-secondary);
+        }
+
+        .car-user-avatar {
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
 
-        .user-avatar svg {
-            width: 40px;
-            height: 40px;
+        .car-logout-btn {
+            background: none;
+            border: 1px solid var(--car-border);
+            color: var(--car-text-secondary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
         }
 
-        .user-details h3 {
-            margin-bottom: 0.3rem;
+        .car-logout-btn:hover {
+            border-color: var(--car-danger);
+            color: var(--car-danger);
+            background: rgba(196, 74, 42, 0.05);
         }
 
-        .user-details p {
-            font-size: 1rem;
-            margin-bottom: 0.2rem;
+        /* ============================
+           PAGE HEADER
+           ============================ */
+        .car-main {
+            margin-top: 64px;
+            padding: 1.5rem 2rem 2rem;
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .placeholder-content {
-            text-align: center;
-            padding: 2rem 0;
+        .car-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
         }
 
-        .placeholder-content svg {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 1.2rem;
-            opacity: 0.4;
+        .car-page-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
-        .placeholder-content p {
-            opacity: 0.7;
-            font-style: italic;
-        }
-
-        /* Loading state */
-        .loading-overlay {
-            position: fixed;
-            inset: 0;
-            background: var(--ivory);
+        .car-page-title-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--car-primary) 0%, var(--car-primary-light) 100%);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.4s ease;
+            color: white;
+            font-size: 1.2rem;
         }
 
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loading-text {
+        .car-page-title h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--rich-blue);
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--car-primary);
+            line-height: 1.2;
         }
 
-        /* Footer */
-        footer {
-            background: var(--midnight);
-            color: var(--soft-cream);
-            padding: 3rem 4rem 2rem;
+        .car-page-title p {
+            font-size: 0.88rem;
+            color: var(--car-text-muted);
+            margin-top: 0.15rem;
+        }
+
+        .car-page-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .car-select {
+            padding: 0.5rem 2rem 0.5rem 0.85rem;
+            border: 1px solid var(--car-border);
+            border-radius: 8px;
+            background: white;
+            font-size: 0.85rem;
+            color: var(--car-text);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%231a3a52' stroke-width='1.5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.6rem center;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .car-select:hover { border-color: var(--car-primary-light); }
+        .car-select:focus { outline: none; border-color: var(--car-primary); box-shadow: 0 0 0 3px rgba(26, 58, 82, 0.1); }
+
+        .car-btn {
+            padding: 0.55rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            font-family: inherit;
+        }
+
+        .car-btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 2px 8px rgba(26, 58, 82, 0.2);
+        }
+
+        .car-btn-primary:hover {
+            box-shadow: 0 4px 16px rgba(26, 58, 82, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .car-btn-accent {
+            background: var(--gradient-accent);
+            color: white;
+            box-shadow: 0 2px 8px rgba(184, 115, 51, 0.25);
+        }
+
+        .car-btn-accent:hover {
+            box-shadow: 0 4px 16px rgba(184, 115, 51, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .car-btn-outline {
+            background: white;
+            color: var(--car-text);
+            border: 1px solid var(--car-border);
+        }
+
+        .car-btn-outline:hover {
+            border-color: var(--car-primary);
+            color: var(--car-primary);
+            background: rgba(26, 58, 82, 0.03);
+        }
+
+        .car-btn-ghost {
+            background: transparent;
+            color: var(--car-text-secondary);
+        }
+
+        .car-btn-ghost:hover {
+            background: var(--car-bg-alt);
+            color: var(--car-text);
+        }
+
+        /* ============================
+           TWO-COLUMN LAYOUT
+           ============================ */
+        .car-layout {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        /* ============================
+           COMPONENT LIBRARY (LEFT)
+           ============================ */
+        .car-library {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(26, 58, 82, 0.06);
+            border: 1px solid var(--car-border-light);
+            overflow: hidden;
+            max-height: calc(100vh - 180px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .car-library-header {
+            padding: 1.25rem 1.25rem 0;
+        }
+
+        .car-library-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .car-library-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--car-primary);
+        }
+
+        .car-library-title .lib-icon {
+            font-size: 1rem;
+            color: var(--car-primary-light);
+        }
+
+        .car-library-subtitle {
+            font-size: 0.78rem;
+            color: var(--car-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .car-library-search {
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+
+        .car-library-search input {
+            width: 100%;
+            padding: 0.55rem 0.85rem 0.55rem 2.2rem;
+            border: 1px solid var(--car-border);
+            border-radius: 8px;
+            font-size: 0.82rem;
+            color: var(--car-text);
+            background: var(--car-bg);
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .car-library-search input:focus {
+            outline: none;
+            border-color: var(--car-primary);
+            box-shadow: 0 0 0 3px rgba(26, 58, 82, 0.08);
+            background: white;
+        }
+
+        .car-library-search input::placeholder { color: var(--car-text-muted); }
+
+        .car-library-search .search-icon {
+            position: absolute;
+            left: 0.7rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--car-text-muted);
+            font-size: 0.85rem;
+        }
+
+        .car-library-filters {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0 1.25rem 1rem;
+        }
+
+        .car-library-filters .car-select {
+            flex: 1;
+            font-size: 0.8rem;
+            padding: 0.4rem 1.8rem 0.4rem 0.65rem;
+        }
+
+        .car-library-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 1.25rem 1.25rem;
+        }
+
+        .car-library-list::-webkit-scrollbar { width: 5px; }
+        .car-library-list::-webkit-scrollbar-track { background: transparent; }
+        .car-library-list::-webkit-scrollbar-thumb { background: var(--car-border); border-radius: 3px; }
+        .car-library-list::-webkit-scrollbar-thumb:hover { background: var(--car-text-muted); }
+
+        /* Component Category */
+        .car-category {
+            margin-bottom: 1.25rem;
+        }
+
+        .car-category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.6rem;
+            cursor: pointer;
+            padding: 0.3rem 0;
+        }
+
+        .car-category-header h3 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--car-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .car-category-count {
+            background: var(--car-bg-alt);
+            color: var(--car-text-muted);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            min-width: 22px;
             text-align: center;
+        }
+
+        /* Component Card */
+        .car-component-card {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 0.75rem 0.85rem;
+            background: var(--car-bg);
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--car-border-light);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .car-component-card:hover {
+            border-color: var(--car-primary-light);
+            box-shadow: 0 2px 8px rgba(26, 58, 82, 0.08);
+            transform: translateX(2px);
+        }
+
+        .car-component-info { flex: 1; }
+
+        .car-component-type-badge {
+            display: inline-block;
+            padding: 0.1rem 0.45rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 0.3rem;
+        }
+
+        .badge-leader { background: rgba(44, 95, 111, 0.12); color: var(--leader-color); }
+        .badge-scfv { background: rgba(124, 58, 237, 0.1); color: var(--scfv-color); }
+        .badge-hinge { background: rgba(184, 115, 51, 0.12); color: var(--hinge-color); }
+        .badge-tm { background: rgba(37, 99, 235, 0.1); color: var(--tm-color); }
+        .badge-costim { background: rgba(212, 175, 55, 0.15); color: #9a7d20; }
+        .badge-signal { background: rgba(220, 38, 38, 0.08); color: var(--signal-color); }
+
+        .car-component-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--car-text);
+            margin-bottom: 0.2rem;
+            line-height: 1.3;
+        }
+
+        .car-component-target {
+            font-size: 0.75rem;
+            color: var(--car-text-muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .car-component-tags {
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .car-tag {
+            padding: 0.1rem 0.4rem;
+            background: white;
+            border: 1px solid var(--car-border-light);
+            border-radius: 4px;
+            font-size: 0.68rem;
+            color: var(--car-text-muted);
+            font-weight: 500;
+        }
+
+        .car-add-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--car-border);
+            background: white;
+            color: var(--car-primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.25s;
+            flex-shrink: 0;
+            margin-top: 0.3rem;
+            margin-left: 0.5rem;
+        }
+
+        .car-add-btn:hover {
+            background: var(--car-primary);
+            color: white;
+            border-color: var(--car-primary);
+            transform: scale(1.08);
+        }
+
+        .car-component-card.added .car-add-btn {
+            background: var(--car-success);
+            color: white;
+            border-color: var(--car-success);
+        }
+
+        /* ============================
+           CONSTRUCT BUILDER (RIGHT)
+           ============================ */
+        .car-builder-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .car-builder {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(26, 58, 82, 0.06);
+            border: 1px solid var(--car-border-light);
+            overflow: hidden;
+        }
+
+        .car-builder-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--car-border-light);
+        }
+
+        .car-builder-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .car-builder-header-left h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--car-primary);
+        }
+
+        .car-builder-header-left .builder-icon {
+            color: var(--car-accent);
+            font-size: 1.1rem;
+        }
+
+        .car-builder-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--car-text-muted);
+        }
+
+        .car-builder-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .car-builder-stat strong {
+            color: var(--car-text);
+            font-weight: 700;
+        }
+
+        .car-builder-canvas {
+            min-height: 160px;
+            padding: 1.5rem;
             position: relative;
         }
 
-        footer::before {
+        .car-builder-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;
+            border: 2px dashed var(--car-border);
+            border-radius: 12px;
+            color: var(--car-text-muted);
+            font-size: 0.88rem;
+            gap: 0.5rem;
+            background: var(--car-bg);
+        }
+
+        .car-builder-empty .empty-icon {
+            font-size: 1.8rem;
+            opacity: 0.4;
+        }
+
+        /* Construct visualization */
+        .car-construct-visual {
+            display: flex;
+            gap: 4px;
+            align-items: stretch;
+            padding: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .car-construct-block {
+            flex: 1;
+            min-width: 90px;
+            padding: 0.75rem;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .car-construct-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .car-construct-block .block-type {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+            opacity: 0.8;
+        }
+
+        .car-construct-block .block-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .car-construct-block .block-aa {
+            font-size: 0.65rem;
+            opacity: 0.7;
+            margin-top: 0.25rem;
+        }
+
+        .car-construct-block .block-remove {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--car-danger);
+            color: white;
+            border: 2px solid white;
+            font-size: 0.6rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .car-construct-block:hover .block-remove { display: flex; }
+
+        .block-leader { background: rgba(44, 95, 111, 0.08); border-color: rgba(44, 95, 111, 0.2); color: var(--leader-color); }
+        .block-scfv { background: rgba(124, 58, 237, 0.06); border-color: rgba(124, 58, 237, 0.2); color: var(--scfv-color); }
+        .block-hinge { background: rgba(184, 115, 51, 0.08); border-color: rgba(184, 115, 51, 0.2); color: var(--hinge-color); }
+        .block-tm { background: rgba(37, 99, 235, 0.06); border-color: rgba(37, 99, 235, 0.2); color: var(--tm-color); }
+        .block-costim { background: rgba(212, 175, 55, 0.08); border-color: rgba(212, 175, 55, 0.2); color: #8a7520; }
+        .block-signal { background: rgba(220, 38, 38, 0.06); border-color: rgba(220, 38, 38, 0.15); color: var(--signal-color); }
+
+        /* Arrow connector between blocks */
+        .car-construct-arrow {
+            display: flex;
+            align-items: center;
+            color: var(--car-border);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================
+           TABS SECTION
+           ============================ */
+        .car-tabs-section {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(26, 58, 82, 0.06);
+            border: 1px solid var(--car-border-light);
+            overflow: hidden;
+        }
+
+        .car-tabs-nav {
+            display: flex;
+            border-bottom: 1px solid var(--car-border-light);
+            background: var(--car-bg);
+        }
+
+        .car-tab-btn {
+            padding: 0.85rem 1.5rem;
+            background: transparent;
+            border: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--car-text-muted);
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .car-tab-btn:hover { color: var(--car-text); background: rgba(26, 58, 82, 0.03); }
+
+        .car-tab-btn.active {
+            color: var(--car-primary);
+            font-weight: 600;
+            background: white;
+        }
+
+        .car-tab-btn.active::after {
             content: '';
             position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--car-accent);
+        }
+
+        .car-tab-btn .tab-icon { font-size: 0.95rem; }
+
+        .car-tab-content {
+            display: none;
+            padding: 1.5rem;
+        }
+
+        .car-tab-content.active { display: block; }
+
+        /* Sub-tabs */
+        .car-subtabs {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+            background: var(--car-bg);
+            padding: 0.3rem;
+            border-radius: 10px;
+        }
+
+        .car-subtab-btn {
+            padding: 0.55rem 1.1rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--car-text-muted);
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.25s;
+        }
+
+        .car-subtab-btn:hover { color: var(--car-text); }
+
+        .car-subtab-btn.active {
+            background: white;
+            color: var(--car-text);
+            font-weight: 600;
+            box-shadow: 0 1px 4px rgba(26, 58, 82, 0.08);
+        }
+
+        .car-subtab-content {
+            display: none;
+        }
+
+        .car-subtab-content.active { display: block; }
+
+        /* AI Designer Form */
+        .car-ai-form {
+            background: var(--car-bg);
+            border: 1px solid var(--car-border-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .car-ai-form-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .car-ai-form-title h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--car-primary);
+        }
+
+        .car-ai-form-title .ai-icon {
+            color: var(--car-accent);
+        }
+
+        .car-ai-form-desc {
+            font-size: 0.82rem;
+            color: var(--car-text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .car-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .car-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .car-form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--car-text);
+        }
+
+        .car-form-group label .required {
+            color: var(--car-danger);
+        }
+
+        .car-form-group input,
+        .car-form-group textarea,
+        .car-form-group select {
+            padding: 0.55rem 0.85rem;
+            border: 1px solid var(--car-border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--car-text);
+            font-family: inherit;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .car-form-group input:focus,
+        .car-form-group textarea:focus,
+        .car-form-group select:focus {
+            outline: none;
+            border-color: var(--car-primary);
+            box-shadow: 0 0 0 3px rgba(26, 58, 82, 0.08);
+        }
+
+        .car-form-group input::placeholder,
+        .car-form-group textarea::placeholder { color: var(--car-text-muted); }
+
+        .car-form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .car-form-full { grid-column: 1 / -1; }
+
+        .car-generate-btn {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Analysis Tab */
+        .car-analysis-empty,
+        .car-export-empty,
+        .car-saved-empty {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--car-text-muted);
+        }
+
+        .car-analysis-empty .empty-icon,
+        .car-export-empty .empty-icon,
+        .car-saved-empty .empty-icon {
+            font-size: 2.5rem;
+            opacity: 0.3;
+            margin-bottom: 0.75rem;
+        }
+
+        .car-analysis-empty h3,
+        .car-export-empty h3,
+        .car-saved-empty h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--car-text);
+            margin-bottom: 0.4rem;
+        }
+
+        .car-analysis-empty p,
+        .car-export-empty p,
+        .car-saved-empty p {
+            font-size: 0.85rem;
+        }
+
+        /* Export Tab */
+        .car-export-formats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .car-export-card {
+            padding: 1rem;
+            background: var(--car-bg);
+            border: 1px solid var(--car-border-light);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .car-export-card:hover {
+            border-color: var(--car-primary);
+            background: rgba(26, 58, 82, 0.02);
+        }
+
+        .car-export-card.selected {
+            border-color: var(--car-primary);
+            background: rgba(26, 58, 82, 0.05);
+        }
+
+        .car-export-card .format-icon { font-size: 1.3rem; margin-bottom: 0.3rem; }
+        .car-export-card .format-name { font-size: 0.82rem; font-weight: 600; color: var(--car-text); }
+        .car-export-card .format-desc { font-size: 0.72rem; color: var(--car-text-muted); margin-top: 0.2rem; }
+
+        /* Saved Designs */
+        .car-saved-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .car-saved-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--car-bg);
+            border: 1px solid var(--car-border-light);
+            border-radius: 10px;
+            transition: all 0.25s;
+        }
+
+        .car-saved-item:hover {
+            border-color: var(--car-primary-light);
+            box-shadow: 0 2px 8px rgba(26, 58, 82, 0.06);
+        }
+
+        /* ============================
+           NOTIFICATIONS / TOAST
+           ============================ */
+        .car-toast {
+            position: fixed;
+            top: 80px;
+            right: 2rem;
+            padding: 0.85rem 1.25rem;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 8px 30px rgba(26, 58, 82, 0.15);
+            border-left: 4px solid var(--car-success);
+            font-size: 0.85rem;
+            color: var(--car-text);
+            z-index: 2000;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            max-width: 350px;
+        }
+
+        .car-toast.show { transform: translateX(0); }
+        .car-toast.error { border-left-color: var(--car-danger); }
+        .car-toast.warning { border-left-color: var(--car-warning); }
+
+        /* ============================
+           MODAL
+           ============================ */
+        .car-modal-overlay {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--gradient-accent);
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 14, 20, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
         }
 
-        .footer-content {
-            max-width: 1300px;
-            margin: 0 auto;
-            font-size: 1rem;
-            opacity: 0.95;
+        .car-modal-overlay.show { display: flex; }
+
+        .car-modal {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 560px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 80px rgba(10, 14, 20, 0.25);
+            animation: slideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .footer-tagline {
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .car-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--car-border-light);
+        }
+
+        .car-modal-header h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--car-primary);
         }
 
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem 2rem;
-                flex-direction: column;
-                gap: 1.2rem;
-            }
+        .car-modal-close {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: none;
+            background: var(--car-bg);
+            color: var(--car-text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
 
-            .logo {
-                font-size: 1.8rem;
-            }
+        .car-modal-close:hover { background: var(--car-bg-alt); color: var(--car-text); }
 
-            .nav-links {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
-                font-size: 0.95rem;
-            }
+        .car-modal-body {
+            padding: 1.5rem;
+        }
 
-            .dashboard-wrapper {
-                padding: 7rem 2rem 3rem;
-            }
+        .car-modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--car-border-light);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
 
-            .dashboard-header h1 {
-                font-size: 2.2rem;
-            }
+        /* Component detail modal */
+        .car-detail-seq {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            background: var(--car-bg);
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--car-border-light);
+            word-break: break-all;
+            line-height: 1.6;
+            max-height: 120px;
+            overflow-y: auto;
+            margin-top: 0.5rem;
+            color: var(--car-text-secondary);
+        }
 
-            .dashboard-grid {
+        .car-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--car-border-light);
+            font-size: 0.85rem;
+        }
+
+        .car-detail-row:last-child { border-bottom: none; }
+        .car-detail-label { color: var(--car-text-muted); }
+        .car-detail-value { font-weight: 600; color: var(--car-text); }
+
+        /* ============================
+           LOADING STATE
+           ============================ */
+        .car-loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(250, 250, 248, 0.9);
+            z-index: 5000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .car-loading-overlay.show { display: flex; }
+
+        .car-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--car-border);
+            border-top-color: var(--car-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .car-loading-text {
+            font-size: 0.9rem;
+            color: var(--car-text-secondary);
+        }
+
+        /* ============================
+           RESPONSIVE
+           ============================ */
+        @media (max-width: 1024px) {
+            .car-layout {
                 grid-template-columns: 1fr;
             }
 
-            .user-profile-card {
-                flex-direction: column;
-                text-align: center;
+            .car-library {
+                max-height: 400px;
             }
+        }
+
+        @media (max-width: 768px) {
+            .car-nav {
+                padding: 0 1rem;
+            }
+
+            .car-nav-links { display: none; }
+
+            .car-main {
+                padding: 1rem;
+            }
+
+            .car-page-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .car-page-actions {
+                flex-wrap: wrap;
+            }
+
+            .car-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .car-tabs-nav {
+                overflow-x: auto;
+            }
+
+            .car-subtabs {
+                overflow-x: auto;
+            }
+
+            .car-export-formats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .car-builder-stats {
+                flex-wrap: wrap;
+            }
+
+            .car-user-badge span:not(.car-user-avatar) {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .car-export-formats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--car-text);
+            cursor: pointer;
+            padding: 0.3rem;
+        }
+
+        /* Verified badge */
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px;
+            height: 14px;
+            background: var(--car-success);
+            border-radius: 50%;
+            color: white;
+            font-size: 0.55rem;
+            margin-left: 0.25rem;
+            vertical-align: middle;
         }
     </style>
 </head>
 <body>
-    <div class="molecular-bg"></div>
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-text">Loading your portal...</div>
+
+    <!-- Loading Overlay -->
+    <div class="car-loading-overlay" id="loadingOverlay">
+        <div class="car-spinner"></div>
+        <div class="car-loading-text">Checking authentication...</div>
     </div>
 
-    <nav>
-        <a href="../index.html" class="logo">CamBioLogics</a>
-        <ul class="nav-links">
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../cambiologics-about-us.html">About Us</a></li>
-            <li class="dropdown">
-                <a href="../cambiologics-platforms.html">Platforms ▾</a>
-                <div class="dropdown-content">
-                    <a href="../cambiologics-predict-mab.html">PREDICT-mAb</a>
-                    <a href="../cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
-                    <a href="../cambiologics-genspy.html">GenSpy - Revealing hidden genetic causes</a>
-                </div>
-            </li>
-            <li><a href="../team.html">Team</a></li>
-            <li><a href="../contact.html">Contact Us</a></li>
-            <li><button id="logoutBtn" class="nav-login-btn">Logout</button></li>
+    <!-- Toast Notification -->
+    <div class="car-toast" id="toast"></div>
+
+    <!-- Navigation -->
+    <nav class="car-nav">
+        <a href="../index.html" class="car-nav-logo">
+            <div class="car-nav-logo-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L12 10M12 10L8 16M12 10L16 16" stroke-linecap="round"/>
+                    <circle cx="12" cy="2" r="2" fill="currentColor"/>
+                    <circle cx="8" cy="16" r="2" fill="currentColor"/>
+                    <circle cx="16" cy="16" r="2" fill="currentColor"/>
+                </svg>
+            </div>
+            <span class="car-nav-logo-text">CARchitect</span>
+        </a>
+
+        <ul class="car-nav-links">
+            <li><a href="../index.html">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Home
+            </a></li>
+            <li><a href="#" class="active">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                CAR Builder
+            </a></li>
+            <li><a href="#" id="navComponents">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                Components
+            </a></li>
         </ul>
+
+        <div class="car-nav-right">
+            <div class="car-user-badge">
+                <div class="car-user-avatar" id="userAvatar">U</div>
+                <span id="userName">User</span>
+            </div>
+            <button class="car-logout-btn" id="logoutBtn">Sign Out</button>
+        </div>
     </nav>
 
-    <div class="dashboard-wrapper">
-        <div class="dashboard-header">
-            <h1>Client Portal</h1>
-            <p>Welcome to your personalised CamBioLogics dashboard</p>
+    <!-- Main Content -->
+    <div class="car-main" id="mainContent" style="display: none;">
+
+        <!-- Page Header -->
+        <div class="car-page-header">
+            <div class="car-page-title">
+                <div class="car-page-title-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L12 10M12 10L8 16M12 10L16 16" stroke-linecap="round"/>
+                        <circle cx="12" cy="2" r="2.5" fill="currentColor"/>
+                        <circle cx="8" cy="16" r="2.5" fill="currentColor"/>
+                        <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>CAR Construct Designer</h1>
+                    <p>Design chimeric antigen receptors with validated components</p>
+                </div>
+            </div>
+            <div class="car-page-actions">
+                <select class="car-select" id="cellTypeSelect">
+                    <option value="car-t">CAR-T Cell</option>
+                    <option value="car-nk">CAR-NK Cell</option>
+                    <option value="car-t-nk">CAR-T/NK</option>
+                </select>
+                <select class="car-select" id="generationSelect">
+                    <option value="1">1st Generation</option>
+                    <option value="2" selected>2nd Generation</option>
+                    <option value="3">3rd Generation</option>
+                    <option value="4">4th Generation</option>
+                </select>
+                <button class="car-btn car-btn-accent" id="saveDesignBtn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    Save Design
+                </button>
+            </div>
         </div>
 
-        <div class="dashboard-grid">
-            <!-- User Profile Card -->
-            <div class="dashboard-card">
-                <div class="user-profile-card">
-                    <div class="user-avatar">
-                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="20" cy="15" r="8" fill="white" opacity="0.9"/>
-                            <path d="M6 36 Q6 24 20 24 Q34 24 34 36" fill="white" opacity="0.9"/>
-                        </svg>
+        <!-- Two-Column Layout -->
+        <div class="car-layout">
+
+            <!-- LEFT: Component Library -->
+            <div class="car-library">
+                <div class="car-library-header">
+                    <div class="car-library-title">
+                        <span class="lib-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        </span>
+                        <h2>Component Library</h2>
                     </div>
-                    <div class="user-details" id="userInfo">
-                        <h3>Loading...</h3>
-                        <p>Fetching your profile</p>
+                    <p class="car-library-subtitle">Validated CAR components from clinical trials</p>
+                    <div class="car-library-search">
+                        <span class="search-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        </span>
+                        <input type="text" id="componentSearch" placeholder="Search components...">
                     </div>
                 </div>
-            </div>
-
-            <!-- Project Status -->
-            <div class="dashboard-card">
-                <h3>Project Status</h3>
-                <div class="placeholder-content">
-                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="8" y="10" width="44" height="40" rx="4" fill="none" stroke="var(--teal-accent)" stroke-width="3"/>
-                        <line x1="16" y1="22" x2="44" y2="22" stroke="var(--teal-accent)" stroke-width="2"/>
-                        <line x1="16" y1="30" x2="36" y2="30" stroke="var(--copper)" stroke-width="2"/>
-                        <line x1="16" y1="38" x2="40" y2="38" stroke="var(--teal-accent)" stroke-width="2"/>
-                    </svg>
-                    <p>Your active projects will appear here once onboarded.</p>
+                <div class="car-library-filters">
+                    <select class="car-select" id="typeFilter">
+                        <option value="all">All Types</option>
+                        <option value="LEADER">Leader</option>
+                        <option value="SCFV">scFv</option>
+                        <option value="HINGE">Hinge</option>
+                        <option value="TM">Transmembrane</option>
+                        <option value="COSTIM">Costimulatory</option>
+                        <option value="SIGNAL">Signal</option>
+                    </select>
+                    <select class="car-select" id="originFilter">
+                        <option value="all">All Origins</option>
+                        <option value="human">Human</option>
+                        <option value="humanized">Humanized</option>
+                        <option value="mouse">Mouse</option>
+                    </select>
+                </div>
+                <div class="car-library-list" id="componentList">
+                    <!-- Dynamically populated -->
                 </div>
             </div>
 
-            <!-- Reports & Data -->
-            <div class="dashboard-card">
-                <h3>Reports &amp; Data</h3>
-                <div class="placeholder-content">
-                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="10" y="30" width="8" height="20" rx="2" fill="var(--teal-accent)" opacity="0.6"/>
-                        <rect x="22" y="20" width="8" height="30" rx="2" fill="var(--copper)" opacity="0.6"/>
-                        <rect x="34" y="12" width="8" height="38" rx="2" fill="var(--rich-blue)" opacity="0.6"/>
-                        <rect x="46" y="24" width="8" height="26" rx="2" fill="var(--gold)" opacity="0.6"/>
-                    </svg>
-                    <p>Platform analysis reports and experimental data will be available here.</p>
-                </div>
-            </div>
+            <!-- RIGHT: Builder + Tabs -->
+            <div class="car-builder-area">
 
-            <!-- Platform Access -->
-            <div class="dashboard-card">
-                <h3>Platform Access</h3>
-                <div class="placeholder-content">
-                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="30" cy="30" r="20" fill="none" stroke="var(--teal-accent)" stroke-width="3"/>
-                        <circle cx="30" cy="30" r="8" fill="var(--copper)" opacity="0.6"/>
-                        <line x1="30" y1="10" x2="30" y2="22" stroke="var(--teal-accent)" stroke-width="2"/>
-                        <line x1="30" y1="38" x2="30" y2="50" stroke="var(--teal-accent)" stroke-width="2"/>
-                        <line x1="10" y1="30" x2="22" y2="30" stroke="var(--teal-accent)" stroke-width="2"/>
-                        <line x1="38" y1="30" x2="50" y2="30" stroke="var(--teal-accent)" stroke-width="2"/>
-                    </svg>
-                    <p>Direct access to PREDICT-mAb, CellCipher, and GenSpy tools coming soon.</p>
+                <!-- Visual Construct Builder -->
+                <div class="car-builder">
+                    <div class="car-builder-header">
+                        <div class="car-builder-header-left">
+                            <span class="builder-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M5 20V10l7-7 7 7v10"/><path d="M9 20v-6h6v6"/></svg>
+                            </span>
+                            <h2>Visual Construct Builder</h2>
+                        </div>
+                        <div class="car-builder-stats">
+                            <div class="car-builder-stat">
+                                <strong id="componentCount">0</strong> components
+                            </div>
+                            <div class="car-builder-stat">
+                                <strong id="aaCount">0</strong> aa
+                            </div>
+                        </div>
+                    </div>
+                    <div class="car-builder-canvas" id="builderCanvas">
+                        <div class="car-builder-empty" id="builderEmpty">
+                            <div class="empty-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                            </div>
+                            Add components to build your CAR construct
+                        </div>
+                        <div class="car-construct-visual" id="constructVisual" style="display: none;"></div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Support -->
-            <div class="dashboard-card full-width">
-                <h3>Need Assistance?</h3>
-                <p>
-                    For questions about your projects or platform access, please reach out to our team
-                    via the <a href="../contact.html" style="color: var(--copper); font-weight: 600;">Contact page</a>
-                    or email us directly. We are here to support your research goals.
-                </p>
+                <!-- Tabs Section -->
+                <div class="car-tabs-section">
+                    <div class="car-tabs-nav">
+                        <button class="car-tab-btn active" data-tab="ai-designer">
+                            <span class="tab-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                            </span>
+                            AI Designer
+                        </button>
+                        <button class="car-tab-btn" data-tab="analysis">
+                            <span class="tab-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            </span>
+                            Analysis
+                        </button>
+                        <button class="car-tab-btn" data-tab="export">
+                            <span class="tab-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </span>
+                            Export
+                        </button>
+                        <button class="car-tab-btn" data-tab="saved">
+                            <span class="tab-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                            </span>
+                            Saved
+                        </button>
+                    </div>
+
+                    <!-- AI Designer Tab -->
+                    <div class="car-tab-content active" id="tab-ai-designer">
+                        <div class="car-subtabs">
+                            <button class="car-subtab-btn active" data-subtab="full-designer">Full Construct Designer</button>
+                            <button class="car-subtab-btn" data-subtab="component-gen">Component Generator</button>
+                            <button class="car-subtab-btn" data-subtab="optimizer">Construct Optimizer</button>
+                        </div>
+
+                        <!-- Full Construct Designer -->
+                        <div class="car-subtab-content active" id="subtab-full-designer">
+                            <div class="car-ai-form">
+                                <div class="car-ai-form-title">
+                                    <span class="ai-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                                    </span>
+                                    <h3>AI-Driven Custom CAR Designer</h3>
+                                </div>
+                                <p class="car-ai-form-desc">Design a complete CAR construct against any target with comprehensive scoring</p>
+                                <div class="car-form-row">
+                                    <div class="car-form-group">
+                                        <label>Target Antigen <span class="required">*</span></label>
+                                        <input type="text" id="targetAntigen" placeholder="e.g., CD19, BCMA, HER2">
+                                    </div>
+                                    <div class="car-form-group">
+                                        <label>Cell Type</label>
+                                        <select id="aiCellType">
+                                            <option value="car-t">T Cell (CAR-T)</option>
+                                            <option value="car-nk">NK Cell (CAR-NK)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="car-form-group car-form-full" style="margin-bottom: 1rem;">
+                                    <label>Additional Requirements (Optional)</label>
+                                    <textarea id="additionalReqs" placeholder="e.g., minimize immunogenicity, optimize for solid tumors, include safety switch..."></textarea>
+                                </div>
+                                <button class="car-btn car-btn-primary car-generate-btn" id="generateDesignBtn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                                    Generate CAR Design
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Component Generator -->
+                        <div class="car-subtab-content" id="subtab-component-gen">
+                            <div class="car-ai-form">
+                                <div class="car-ai-form-title">
+                                    <span class="ai-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                                    </span>
+                                    <h3>AI Component Generator</h3>
+                                </div>
+                                <p class="car-ai-form-desc">Generate novel CAR components with AI-powered protein engineering</p>
+                                <div class="car-form-row">
+                                    <div class="car-form-group">
+                                        <label>Component Type <span class="required">*</span></label>
+                                        <select id="genComponentType">
+                                            <option value="">Select type...</option>
+                                            <option value="LEADER">Leader Sequence</option>
+                                            <option value="SCFV">scFv (Binding Domain)</option>
+                                            <option value="HINGE">Hinge Region</option>
+                                            <option value="TM">Transmembrane Domain</option>
+                                            <option value="COSTIM">Costimulatory Domain</option>
+                                            <option value="SIGNAL">Signal Domain</option>
+                                        </select>
+                                    </div>
+                                    <div class="car-form-group">
+                                        <label>Target (if scFv)</label>
+                                        <input type="text" id="genTarget" placeholder="e.g., CD19, BCMA">
+                                    </div>
+                                </div>
+                                <div class="car-form-group car-form-full" style="margin-bottom: 1rem;">
+                                    <label>Design Constraints (Optional)</label>
+                                    <textarea id="genConstraints" placeholder="e.g., human origin, high affinity, minimal immunogenicity..."></textarea>
+                                </div>
+                                <button class="car-btn car-btn-primary car-generate-btn" id="generateComponentBtn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4"/></svg>
+                                    Generate Component
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Construct Optimizer -->
+                        <div class="car-subtab-content" id="subtab-optimizer">
+                            <div class="car-ai-form">
+                                <div class="car-ai-form-title">
+                                    <span class="ai-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    </span>
+                                    <h3>Construct Optimizer</h3>
+                                </div>
+                                <p class="car-ai-form-desc">Optimize your current construct for improved clinical outcomes</p>
+                                <div class="car-analysis-empty" id="optimizerEmpty">
+                                    <div class="empty-icon">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    </div>
+                                    <h3>Add Components First</h3>
+                                    <p>Add components to your construct to enable optimization</p>
+                                </div>
+                                <div id="optimizerContent" style="display: none;">
+                                    <button class="car-btn car-btn-primary car-generate-btn" id="optimizeBtn">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                        Optimize Construct
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analysis Tab -->
+                    <div class="car-tab-content" id="tab-analysis">
+                        <div class="car-analysis-empty" id="analysisEmpty">
+                            <div class="empty-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            </div>
+                            <h3>No Construct to Analyze</h3>
+                            <p>Add components to your construct first, then run analysis</p>
+                        </div>
+                        <div id="analysisContent" style="display: none;">
+                            <button class="car-btn car-btn-primary" id="analyzeBtn" style="margin-bottom: 1rem;">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Analyze Design
+                            </button>
+                            <div id="analysisResults"></div>
+                        </div>
+                    </div>
+
+                    <!-- Export Tab -->
+                    <div class="car-tab-content" id="tab-export">
+                        <div class="car-export-empty" id="exportEmpty">
+                            <div class="empty-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </div>
+                            <h3>Nothing to Export</h3>
+                            <p>Build a construct first, then export in your preferred format</p>
+                        </div>
+                        <div id="exportContent" style="display: none;">
+                            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 0.75rem; color: var(--car-primary);">Choose Export Format</h3>
+                            <div class="car-export-formats">
+                                <div class="car-export-card" data-format="fasta">
+                                    <div class="format-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    </div>
+                                    <div class="format-name">FASTA</div>
+                                    <div class="format-desc">Sequence format</div>
+                                </div>
+                                <div class="car-export-card" data-format="genbank">
+                                    <div class="format-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                    </div>
+                                    <div class="format-name">GenBank</div>
+                                    <div class="format-desc">Annotated sequence</div>
+                                </div>
+                                <div class="car-export-card" data-format="csv">
+                                    <div class="format-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+                                    </div>
+                                    <div class="format-name">CSV</div>
+                                    <div class="format-desc">Component table</div>
+                                </div>
+                                <div class="car-export-card" data-format="json">
+                                    <div class="format-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+                                    </div>
+                                    <div class="format-name">JSON</div>
+                                    <div class="format-desc">Full construct data</div>
+                                </div>
+                                <div class="car-export-card" data-format="protein">
+                                    <div class="format-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 0 1 8 0"/></svg>
+                                    </div>
+                                    <div class="format-name">Protein</div>
+                                    <div class="format-desc">Amino acid sequence</div>
+                                </div>
+                                <div class="car-export-card" data-format="nucleotide">
+                                    <div class="format-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M8 4q4 4 8 0M8 10q4 4 8 0M8 16q4 4 8 0"/></svg>
+                                    </div>
+                                    <div class="format-name">Nucleotide</div>
+                                    <div class="format-desc">DNA/RNA sequence</div>
+                                </div>
+                            </div>
+                            <button class="car-btn car-btn-primary" id="exportBtn" style="margin-top: 1rem; width: 100%;" disabled>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                Export Construct
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Saved Tab -->
+                    <div class="car-tab-content" id="tab-saved">
+                        <div class="car-saved-empty" id="savedEmpty">
+                            <div class="empty-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                            </div>
+                            <h3>No Saved Designs</h3>
+                            <p>Save your first construct to see it here</p>
+                        </div>
+                        <div class="car-saved-list" id="savedList" style="display: none;"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-tagline">Together, we're not just advancing science -- we're transforming lives.</div>
-            <div style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8;">
-                &copy; 2025 CamBioLogics. Advancing biotechnology through AI.
+    <!-- Component Detail Modal -->
+    <div class="car-modal-overlay" id="componentModal">
+        <div class="car-modal">
+            <div class="car-modal-header">
+                <h3 id="modalTitle">Component Details</h3>
+                <button class="car-modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="car-modal-body" id="modalBody"></div>
+            <div class="car-modal-footer" id="modalFooter">
+                <button class="car-btn car-btn-outline" onclick="closeModal()">Close</button>
+                <button class="car-btn car-btn-primary" id="modalAddBtn">Add to Construct</button>
             </div>
         </div>
-    </footer>
+    </div>
 
+    <!-- Save Design Modal -->
+    <div class="car-modal-overlay" id="saveModal">
+        <div class="car-modal">
+            <div class="car-modal-header">
+                <h3>Save CAR Construct</h3>
+                <button class="car-modal-close" onclick="closeSaveModal()">&times;</button>
+            </div>
+            <div class="car-modal-body">
+                <div class="car-form-group">
+                    <label>Construct Name <span class="required">*</span></label>
+                    <input type="text" id="constructName" placeholder="e.g., Anti-CD19 CAR-T 2nd Gen">
+                </div>
+                <div class="car-form-group" style="margin-top: 1rem;">
+                    <label>Description (Optional)</label>
+                    <textarea id="constructDesc" placeholder="Brief description of this construct design..."></textarea>
+                </div>
+            </div>
+            <div class="car-modal-footer">
+                <button class="car-btn car-btn-outline" onclick="closeSaveModal()">Cancel</button>
+                <button class="car-btn car-btn-accent" id="confirmSaveBtn">Save Construct</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================
+         JAVASCRIPT
+         ============================ -->
     <script type="module">
-        import { supabase } from './js/supabase-config.js'
+        // Dynamic import with fallback for file:// protocol
+        let supabase = null;
+        try {
+            const mod = await import('./js/supabase-config.js');
+            supabase = mod.supabase;
+        } catch (e) {
+            console.warn('Supabase not available (likely file:// protocol). Running in local mode.');
+        }
 
+        // =============================
+        // COMPONENT DATABASE
+        // =============================
+        const COMPONENTS = [
+            // Leader Sequences
+            {
+                id: 'leader-1', name: 'CD8\u03b1 Leader', type: 'LEADER',
+                origin: 'human', tags: ['T', 'NK', 'human'],
+                sequence: 'MALPVTALLLPLALLLHAARP',
+                description: 'Human CD8\u03b1 signal peptide. Widely used in clinical CAR-T constructs for efficient membrane targeting and surface expression. Featured in FDA-approved Kymriah and Yescarta.',
+                target: null, validated: true
+            },
+            {
+                id: 'leader-2', name: 'GM-CSF Leader', type: 'LEADER',
+                origin: 'human', tags: ['T', 'NK', 'human'],
+                sequence: 'MLLLVTSLLLCELPHPAFLLIP',
+                description: 'GM-CSF receptor signal peptide. Provides robust protein secretion and surface expression. Used in several clinical-stage CAR constructs.',
+                target: null, validated: true
+            },
+            // scFv (Binding Domains)
+            {
+                id: 'scfv-1', name: 'Anti-Mesothelin scFv (SS1)', type: 'SCFV',
+                origin: 'humanized', tags: ['T', 'humanized'],
+                sequence: 'QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYYMHWVRQAPGQGLEWMGIINPSGGSTSYAQKFQGRVTMTRDTSTSTVYMELSSLRSEDTAVYYCARGGYDGRGFDYWGQGTLVTVSSGGGGSGGGGSGGGGSDIVMTQSPLSLPVTPGEPASISCRSSQSLLHSNGYNYLDWYLQKPGQSPQLLIYLGSNRASGVPDRFSGSGSGTDFTLKISRVEAEDVGVYYCMQALQTPYTFGQGTKLEIK',
+                description: 'Humanized anti-mesothelin scFv derived from the SS1 clone. High affinity for mesothelin-expressing solid tumors including mesothelioma, ovarian, and pancreatic cancers.',
+                target: 'Mesothelin', validated: true
+            },
+            {
+                id: 'scfv-2', name: 'Anti-CD19 scFv (FMC63)', type: 'SCFV',
+                origin: 'mouse', tags: ['T', 'NK', 'mouse'],
+                sequence: 'DIQMTQTTSSLSASLGDRVTISCRASQDISKYLNWYQQKPDGTVKLLIYHTSRLHSGVPSRFSGSGSGTDYSLTISNLEQEDIATYFCQQGNTLPYTFGGGTKLEITGSTSGSGKPGSGEGSTKGEVQLQQSGPGLVAPSQSLSVTCTVSGVSLPDYGVSWIRQPPRKGLEWLGVIWGSETTYYNSALKSRLTIIKDNSKSQVFLKMNSLQTDDTAIYYCAKHYYYGGSYAMDYWGQGTSVTVSS',
+                description: 'Mouse-derived FMC63 anti-CD19 scFv. The most widely used CD19-targeting domain in approved CAR-T therapies (Kymriah, Yescarta, Tecartus, Breyanzi).',
+                target: 'CD19', validated: true
+            },
+            {
+                id: 'scfv-3', name: 'Anti-BCMA scFv', type: 'SCFV',
+                origin: 'humanized', tags: ['T', 'humanized'],
+                sequence: 'EVQLVESGGGLVQPGGSLRLSCAASGFTFSSYAMSWVRQAPGKGLEWVSAISGSGGSTYYADSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCAKVRHGNFGDSYRGYFDLWGRGTLVTVSSGGGGSGGGGSGGGGSDIQMTQSPSSLSASVGDRVTITCRASQSISSYLNWYQQKPGKAPKLLIYAASSLQSGVPSRFSGSGSGTDFTLTISSLQPEDFATYYCQQSYSTPYTFGQGTKVEIK',
+                description: 'Humanized anti-BCMA scFv targeting B-cell maturation antigen. Used in CAR-T therapy for multiple myeloma (Abecma, Carvykti class).',
+                target: 'BCMA', validated: true
+            },
+            {
+                id: 'scfv-4', name: 'Anti-HER2 scFv (4D5)', type: 'SCFV',
+                origin: 'humanized', tags: ['T', 'humanized'],
+                sequence: 'EVQLVESGGGLVQPGGSLRLSCAASGFNIKDTYIHWVRQAPGKGLEWVARIYPTNGYTRYADSVKGRFTISADTSKNTAYLQMNSLRAEDTAVYYCSRWGGDGFYAMDYWGQGTLVTVSSGGGGSGGGGSGGGGSDIQMTQSPSSLSASVGDRVTITCRASQDVNTAVAWYQQKPGKAPKLLIYSASFLYSGVPSRFSGSRSGTDFTLTISSLQPEDFATYYCQQHYTTPPTFGQGTKVEIK',
+                description: 'Humanized anti-HER2 scFv derived from trastuzumab (4D5). Targets HER2-positive breast, gastric, and other solid tumors.',
+                target: 'HER2', validated: true
+            },
+            {
+                id: 'scfv-5', name: 'Anti-GD2 scFv (14g2a)', type: 'SCFV',
+                origin: 'mouse', tags: ['T', 'mouse'],
+                sequence: 'QVQLQQPGAELVKPGASVKMSCKASGYTFTSYYIHWVKQTPGQGLEWVGYIYPGNDDISYNQKFKGKATLTADKSSSTAYMQLNSLTSEDSAVYYCARGKNEEWEGLAYWGQGTLVTVSAGGGGSGGGGSGGGGSDIVLTQSPAIMSASPGEKVTMTCSASSSVSYMNWYQQKSGTSPKRWIYDTSKLASGVPAHFRGSGSGTSYSLTISGMEAEDAATYYCQQWSSNPPTFGAGTKLELK',
+                description: 'Mouse-derived anti-GD2 scFv from 14g2a clone. Targets disialoganglioside GD2 for neuroblastoma and other GD2+ tumors.',
+                target: 'GD2', validated: true
+            },
+            {
+                id: 'scfv-6', name: 'Anti-EGFR scFv', type: 'SCFV',
+                origin: 'humanized', tags: ['T', 'humanized'],
+                sequence: 'QVQLVQSGAEVKKPGSSVKVSCKASGGTFSSYAISWVRQAPGQGLEWMGGIIPIFGTANYAQKFQGRVTITADESTSTAYMELSSLRSEDTAVYYCARAPLRFLHWGQGTLVTVSSGGGGSGGGGSGGGGSDIQMTQSPSSLSASVGDRVTITCRASQGIRNDLGWYQQKPGKAPKLLIYAASSLQSGVPSRFSGSGSGTEFTLTISSLQPEDFATYYCLQHNSYPLTFGGGTKVEIK',
+                description: 'Humanized anti-EGFR scFv targeting epidermal growth factor receptor. For EGFR-overexpressing solid tumors including glioblastoma and NSCLC.',
+                target: 'EGFR', validated: true
+            },
+            {
+                id: 'scfv-7', name: 'Anti-CD20 scFv (Leu16)', type: 'SCFV',
+                origin: 'humanized', tags: ['T', 'NK', 'humanized'],
+                sequence: 'QVQLQQPGAELVKPGASVKMSCKASGYTFTSYYIHWVRQAPGQGLEWIGAIYPGNDDISYNQKFKGKATLTADKSSSTAYMQLSSLTSEDSAVYYCARGKNEEWEGLAYWGQGTLVTVSSGGGGSGGGGSGGGGSDIELTQSPKFMSTSVGDRVSVTCKASQNVGTNVAWQQKPGQSPKALIYSASNRYTGVPDRFTGSGSGTDFTLTITNVQSEDLAEYFCQQYNSYPRTFGGGTKLEIK',
+                description: 'Humanized anti-CD20 scFv for B-cell malignancies. Alternative target for CD19-resistant relapse in lymphoma and leukemia.',
+                target: 'CD20', validated: true
+            },
+            {
+                id: 'scfv-8', name: 'Anti-CD22 scFv (m971)', type: 'SCFV',
+                origin: 'humanized', tags: ['T', 'humanized'],
+                sequence: 'QVQLVQSGAEVKKPGSSVKVSCKASGGTFSSYAISWVRQAPGQGLEWMGGIIPIFSNTNYAQKFQGRVTITADESTSTAFMELSSLRSEDTAVYYCARRPSGYGNAFMDYWGQGTTVTVSSGGGGSGGGGSGGGGSDIQMTQSPSSLSASVGDRVTITCRASQGISNYLNWYQQKPGKAPKLLIYAASTLQSGVPSRFSGSGSGTDFTLTISSLQPEDFATYYCQQANSYPRTFGQGTKVEIK',
+                description: 'Humanized anti-CD22 scFv from m971 clone. Targets CD22 for B-ALL, especially as rescue therapy after CD19-directed CAR-T.',
+                target: 'CD22', validated: true
+            },
+            {
+                id: 'scfv-9', name: 'Anti-PSMA scFv (J591)', type: 'SCFV',
+                origin: 'humanized', tags: ['T', 'humanized'],
+                sequence: 'EVQLLESGGGLVQPGGSLRLSCAASGFTFSSYGMHWVRQAPGKGLEWVSYISSGSSTIYYADSVKGRFTISRDNAKNSLYLQMNSLRAEDTAVYYCARRGVEAMGYWGQGTTVTVSSGGGGSGGGGSGGGGSDIELTQSPATLSLSPGERATLSCRASQSVSSSYLAWYQQKPGQAPRLLIYGTSNRATGIPDRFSGSGSGTDFTLTISRLEPEDFAVYYCQQYGSSLTFGQGTRLEIK',
+                description: 'Humanized anti-PSMA scFv from J591 clone. Targets prostate-specific membrane antigen for prostate cancer CAR-T therapy.',
+                target: 'PSMA', validated: true
+            },
+            // Hinge Regions
+            {
+                id: 'hinge-1', name: 'CD8\u03b1 Hinge', type: 'HINGE',
+                origin: 'human', tags: ['T', 'NK', 'human'],
+                sequence: 'TTTPAPRPPTPAPTIASQPLSLRPEACRPAAGGAVHTRGLDFACD',
+                description: 'Human CD8\u03b1 hinge region. Short, flexible spacer providing optimal distance between scFv and cell membrane. Used in most FDA-approved CAR-T constructs.',
+                target: null, validated: true
+            },
+            {
+                id: 'hinge-2', name: 'IgG4 Hinge', type: 'HINGE',
+                origin: 'human', tags: ['T', 'human'],
+                sequence: 'ESKYGPPCPSCPAPEFLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSQEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKGLPSSIEKTISKAK',
+                description: 'Human IgG4 hinge and CH2-CH3 spacer. Longer spacer option for membrane-proximal epitopes. Reduces Fc receptor-mediated off-target activation.',
+                target: null, validated: true
+            },
+            {
+                id: 'hinge-3', name: 'CD28 Hinge', type: 'HINGE',
+                origin: 'human', tags: ['T', 'human'],
+                sequence: 'IEVMYPPPYLDNEKSNGTIIHVKGKHLCPSPLFPGPSKP',
+                description: 'Human CD28 extracellular hinge domain. Short spacer providing structural support between binding domain and transmembrane region.',
+                target: null, validated: true
+            },
+            // Transmembrane Domains
+            {
+                id: 'tm-1', name: 'CD8\u03b1 TM', type: 'TM',
+                origin: 'human', tags: ['T', 'NK', 'human'],
+                sequence: 'IYIWAPLAGTCGVLLLSLVITLYC',
+                description: 'Human CD8\u03b1 transmembrane domain. Efficient membrane anchoring with stable surface expression. Paired with CD8\u03b1 hinge in many approved CARs.',
+                target: null, validated: true
+            },
+            {
+                id: 'tm-2', name: 'CD28 TM', type: 'TM',
+                origin: 'human', tags: ['T', 'human'],
+                sequence: 'FWVLVVVGGVLACYSLLVTVAFIIFWV',
+                description: 'Human CD28 transmembrane domain. Promotes CAR dimerization and enhanced signaling. Used in CD28-costimulatory CAR designs.',
+                target: null, validated: true
+            },
+            // Costimulatory Domains
+            {
+                id: 'costim-1', name: 'CD28', type: 'COSTIM',
+                origin: 'human', tags: ['T', 'human'],
+                sequence: 'RSKRSRLLHSDYMNMTPRRPGPTRKHYQPYAPPRDFAAYRS',
+                description: 'Human CD28 intracellular costimulatory domain. Provides rapid T-cell expansion and strong cytokine production. Used in Yescarta and Tecartus.',
+                target: null, validated: true
+            },
+            {
+                id: 'costim-2', name: '4-1BB (CD137)', type: 'COSTIM',
+                origin: 'human', tags: ['T', 'NK', 'human'],
+                sequence: 'KRGRKKLLYIFKQPFMRPVQTTQEEDGCSCRFPEEEEGGCEL',
+                description: 'Human 4-1BB (CD137) costimulatory domain. Promotes T-cell persistence and memory formation. Used in Kymriah and Breyanzi.',
+                target: null, validated: true
+            },
+            {
+                id: 'costim-3', name: 'OX40 (CD134)', type: 'COSTIM',
+                origin: 'human', tags: ['T', 'human'],
+                sequence: 'RDQRLPPDAHKPPGGGSFRTPIQEEQADAHSTLAKI',
+                description: 'Human OX40 (CD134) costimulatory domain. Enhances T-cell survival and anti-apoptotic signaling. Used in 3rd generation CAR designs.',
+                target: null, validated: true
+            },
+            // Signal Domains
+            {
+                id: 'signal-1', name: 'CD3\u03b6 (CD247)', type: 'SIGNAL',
+                origin: 'human', tags: ['T', 'NK', 'human'],
+                sequence: 'RVKFSRSADAPAYQQGQNQLYNELNLGRREEYDVLDKRRGRDPEMGGKPRRKNPQEGLYNELQKDKMAEAYSEIGMKGERRRGKGHDGLYQGLSTATKDTYDALHMQALPPR',
+                description: 'Human CD3\u03b6 (CD247) intracellular signal transduction domain with 3 ITAMs. Essential activation domain present in ALL approved CAR-T products.',
+                target: null, validated: true
+            }
+        ];
+
+        // =============================
+        // STATE MANAGEMENT
+        // =============================
+        let constructComponents = [];
+        let savedDesigns = JSON.parse(localStorage.getItem('car_saved_designs') || '[]');
+        let selectedExportFormat = null;
+        let currentUser = null;
+
+        // =============================
+        // AUTHENTICATION
+        // =============================
         const loadingOverlay = document.getElementById('loadingOverlay');
+        const mainContent = document.getElementById('mainContent');
 
-        // Check if user is logged in
         async function checkAuth() {
-            const { data: { session } } = await supabase.auth.getSession()
+            loadingOverlay.classList.add('show');
 
-            if (!session) {
-                window.location.href = 'login.html'
-                return
+            // If supabase is not available (local file://), show page in demo mode
+            if (!supabase) {
+                console.log('Running in local/demo mode without authentication.');
+                document.getElementById('userName').textContent = 'Demo';
+                document.getElementById('userAvatar').textContent = 'D';
+                mainContent.style.display = 'block';
+                loadingOverlay.classList.remove('show');
+                renderComponentLibrary();
+                renderSavedDesigns();
+                return;
             }
 
-            // Get user profile
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('*')
-                .eq('id', session.user.id)
-                .single()
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (!session) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                currentUser = session.user;
 
-            const name = (profile && profile.full_name) || session.user.email;
-            const phone = (profile && profile.phone) || 'Not provided';
+                // Update user display
+                const name = session.user.user_metadata?.full_name || session.user.email;
+                document.getElementById('userName').textContent = name.split(' ')[0];
+                document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
 
-            document.getElementById('userInfo').innerHTML = `
-                <h3>${name}</h3>
-                <p>Email: ${session.user.email}</p>
-                <p>Phone: ${phone}</p>
-            `
-
-            // Hide loading overlay
-            loadingOverlay.classList.add('hidden');
+                mainContent.style.display = 'block';
+                loadingOverlay.classList.remove('show');
+                renderComponentLibrary();
+                renderSavedDesigns();
+            } catch (error) {
+                console.error('Auth error:', error);
+                window.location.href = 'login.html';
+            }
         }
 
         // Logout
         document.getElementById('logoutBtn').addEventListener('click', async () => {
-            await supabase.auth.signOut()
-            window.location.href = 'login.html'
-        })
+            if (supabase) {
+                await supabase.auth.signOut();
+            }
+            window.location.href = 'login.html';
+        });
 
-        checkAuth()
+        // =============================
+        // COMPONENT LIBRARY RENDERING
+        // =============================
+        function getFilteredComponents() {
+            const search = document.getElementById('componentSearch').value.toLowerCase();
+            const typeFilter = document.getElementById('typeFilter').value;
+            const originFilter = document.getElementById('originFilter').value;
+
+            return COMPONENTS.filter(c => {
+                const matchSearch = !search ||
+                    c.name.toLowerCase().includes(search) ||
+                    (c.target && c.target.toLowerCase().includes(search)) ||
+                    c.description.toLowerCase().includes(search);
+                const matchType = typeFilter === 'all' || c.type === typeFilter;
+                const matchOrigin = originFilter === 'all' || c.tags.includes(originFilter);
+                return matchSearch && matchType && matchOrigin;
+            });
+        }
+
+        function groupByType(components) {
+            const groups = {};
+            const typeOrder = ['LEADER', 'SCFV', 'HINGE', 'TM', 'COSTIM', 'SIGNAL'];
+            const typeLabels = {
+                'LEADER': 'Leader Sequence',
+                'SCFV': 'scFv (Binding)',
+                'HINGE': 'Hinge Region',
+                'TM': 'Transmembrane',
+                'COSTIM': 'Costimulatory',
+                'SIGNAL': 'Signal Domain'
+            };
+
+            typeOrder.forEach(type => {
+                const items = components.filter(c => c.type === type);
+                if (items.length > 0) {
+                    groups[type] = { label: typeLabels[type], items };
+                }
+            });
+            return groups;
+        }
+
+        function getBadgeClass(type) {
+            const map = { 'LEADER': 'badge-leader', 'SCFV': 'badge-scfv', 'HINGE': 'badge-hinge', 'TM': 'badge-tm', 'COSTIM': 'badge-costim', 'SIGNAL': 'badge-signal' };
+            return map[type] || '';
+        }
+
+        function getBlockClass(type) {
+            const map = { 'LEADER': 'block-leader', 'SCFV': 'block-scfv', 'HINGE': 'block-hinge', 'TM': 'block-tm', 'COSTIM': 'block-costim', 'SIGNAL': 'block-signal' };
+            return map[type] || '';
+        }
+
+        function getTypeLabel(type) {
+            const map = { 'LEADER': 'Leader', 'SCFV': 'scFv', 'HINGE': 'Hinge', 'TM': 'TM', 'COSTIM': 'Costim', 'SIGNAL': 'Signal' };
+            return map[type] || type;
+        }
+
+        function renderComponentLibrary() {
+            const filtered = getFilteredComponents();
+            const grouped = groupByType(filtered);
+            const listEl = document.getElementById('componentList');
+
+            let html = '';
+            for (const [type, group] of Object.entries(grouped)) {
+                html += `
+                    <div class="car-category">
+                        <div class="car-category-header">
+                            <h3>${group.label}</h3>
+                            <span class="car-category-count">${group.items.length}</span>
+                        </div>
+                        ${group.items.map(comp => {
+                            const isAdded = constructComponents.some(c => c.id === comp.id);
+                            return `
+                                <div class="car-component-card ${isAdded ? 'added' : ''}" data-id="${comp.id}">
+                                    <div class="car-component-info" onclick="showComponentDetail('${comp.id}')">
+                                        <span class="car-component-type-badge ${getBadgeClass(comp.type)}">${getTypeLabel(comp.type)}</span>
+                                        ${comp.validated ? '<span class="verified-badge">&#10003;</span>' : ''}
+                                        <div class="car-component-name">${comp.name}</div>
+                                        ${comp.target ? `<div class="car-component-target">Target: ${comp.target}</div>` : ''}
+                                        <div class="car-component-tags">
+                                            ${comp.tags.map(t => `<span class="car-tag">${t}</span>`).join('')}
+                                        </div>
+                                    </div>
+                                    <button class="car-add-btn" onclick="event.stopPropagation(); addComponent('${comp.id}')" title="${isAdded ? 'Already added' : 'Add to construct'}">
+                                        ${isAdded ? '&#10003;' : '+'}
+                                    </button>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            }
+
+            if (Object.keys(grouped).length === 0) {
+                html = `
+                    <div style="text-align: center; padding: 2rem; color: var(--car-text-muted);">
+                        <p>No components match your search</p>
+                    </div>
+                `;
+            }
+
+            listEl.innerHTML = html;
+        }
+
+        // Search & filter event listeners
+        document.getElementById('componentSearch').addEventListener('input', renderComponentLibrary);
+        document.getElementById('typeFilter').addEventListener('change', renderComponentLibrary);
+        document.getElementById('originFilter').addEventListener('change', renderComponentLibrary);
+
+        // =============================
+        // CONSTRUCT BUILDER
+        // =============================
+        window.addComponent = function(id) {
+            const comp = COMPONENTS.find(c => c.id === id);
+            if (!comp) return;
+
+            // Avoid duplicates
+            if (constructComponents.some(c => c.id === id)) {
+                showToast('Component already in construct', 'warning');
+                return;
+            }
+
+            constructComponents.push({ ...comp });
+
+            // Sort by CAR order
+            const order = ['LEADER', 'SCFV', 'HINGE', 'TM', 'COSTIM', 'SIGNAL'];
+            constructComponents.sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
+
+            renderConstruct();
+            renderComponentLibrary();
+            showToast(`${comp.name} added successfully`);
+            updateTabStates();
+        };
+
+        window.removeComponent = function(id) {
+            constructComponents = constructComponents.filter(c => c.id !== id);
+            renderConstruct();
+            renderComponentLibrary();
+            updateTabStates();
+        };
+
+        function renderConstruct() {
+            const visual = document.getElementById('constructVisual');
+            const empty = document.getElementById('builderEmpty');
+            const countEl = document.getElementById('componentCount');
+            const aaEl = document.getElementById('aaCount');
+
+            const totalAA = constructComponents.reduce((sum, c) => sum + (c.sequence?.length || 0), 0);
+            countEl.textContent = constructComponents.length;
+            aaEl.textContent = totalAA;
+
+            if (constructComponents.length === 0) {
+                empty.style.display = 'flex';
+                visual.style.display = 'none';
+                return;
+            }
+
+            empty.style.display = 'none';
+            visual.style.display = 'flex';
+
+            let html = '';
+            constructComponents.forEach((comp, idx) => {
+                if (idx > 0) {
+                    html += `<div class="car-construct-arrow">\u2192</div>`;
+                }
+                html += `
+                    <div class="car-construct-block ${getBlockClass(comp.type)}" onclick="showComponentDetail('${comp.id}')">
+                        <div class="block-type">${getTypeLabel(comp.type)}</div>
+                        <div class="block-name">${comp.name}</div>
+                        <div class="block-aa">${comp.sequence?.length || 0} aa</div>
+                        <button class="block-remove" onclick="event.stopPropagation(); removeComponent('${comp.id}')">&times;</button>
+                    </div>
+                `;
+            });
+            visual.innerHTML = html;
+        }
+
+        function updateTabStates() {
+            const hasComponents = constructComponents.length > 0;
+
+            // Analysis tab
+            document.getElementById('analysisEmpty').style.display = hasComponents ? 'none' : 'block';
+            document.getElementById('analysisContent').style.display = hasComponents ? 'block' : 'none';
+
+            // Export tab
+            document.getElementById('exportEmpty').style.display = hasComponents ? 'none' : 'block';
+            document.getElementById('exportContent').style.display = hasComponents ? 'block' : 'none';
+
+            // Optimizer
+            document.getElementById('optimizerEmpty').style.display = hasComponents ? 'none' : 'block';
+            document.getElementById('optimizerContent').style.display = hasComponents ? 'block' : 'none';
+        }
+
+        // =============================
+        // COMPONENT DETAIL MODAL
+        // =============================
+        window.showComponentDetail = function(id) {
+            const comp = COMPONENTS.find(c => c.id === id);
+            if (!comp) return;
+
+            document.getElementById('modalTitle').textContent = comp.name;
+            const isAdded = constructComponents.some(c => c.id === comp.id);
+
+            document.getElementById('modalBody').innerHTML = `
+                <div class="car-detail-row">
+                    <span class="car-detail-label">Type</span>
+                    <span class="car-detail-value"><span class="car-component-type-badge ${getBadgeClass(comp.type)}">${getTypeLabel(comp.type)}</span></span>
+                </div>
+                ${comp.target ? `
+                <div class="car-detail-row">
+                    <span class="car-detail-label">Target</span>
+                    <span class="car-detail-value">${comp.target}</span>
+                </div>` : ''}
+                <div class="car-detail-row">
+                    <span class="car-detail-label">Origin</span>
+                    <span class="car-detail-value" style="text-transform: capitalize;">${comp.origin}</span>
+                </div>
+                <div class="car-detail-row">
+                    <span class="car-detail-label">Sequence Length</span>
+                    <span class="car-detail-value">${comp.sequence?.length || 0} amino acids</span>
+                </div>
+                <div class="car-detail-row">
+                    <span class="car-detail-label">Validated</span>
+                    <span class="car-detail-value">${comp.validated ? '<span style="color: var(--car-success);">&#10003; Clinical data available</span>' : 'Computational only'}</span>
+                </div>
+                <div style="margin-top: 0.75rem;">
+                    <span class="car-detail-label" style="display: block; margin-bottom: 0.3rem;">Description</span>
+                    <p style="font-size: 0.85rem; color: var(--car-text-secondary); line-height: 1.6;">${comp.description}</p>
+                </div>
+                <div style="margin-top: 0.75rem;">
+                    <span class="car-detail-label" style="display: block; margin-bottom: 0.3rem;">Amino Acid Sequence</span>
+                    <div class="car-detail-seq">${comp.sequence}</div>
+                </div>
+            `;
+
+            const addBtn = document.getElementById('modalAddBtn');
+            addBtn.textContent = isAdded ? 'Already Added' : 'Add to Construct';
+            addBtn.disabled = isAdded;
+            addBtn.onclick = () => {
+                addComponent(comp.id);
+                closeModal();
+            };
+
+            document.getElementById('componentModal').classList.add('show');
+        };
+
+        window.closeModal = function() {
+            document.getElementById('componentModal').classList.remove('show');
+        };
+
+        // =============================
+        // TABS
+        // =============================
+        document.querySelectorAll('.car-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.car-tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.car-tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.car-subtab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.car-subtab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.car-subtab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(`subtab-${btn.dataset.subtab}`).classList.add('active');
+            });
+        });
+
+        // =============================
+        // AI DESIGNER - Generate CAR Design
+        // =============================
+        document.getElementById('generateDesignBtn').addEventListener('click', () => {
+            const antigen = document.getElementById('targetAntigen').value.trim();
+            if (!antigen) {
+                showToast('Please enter a target antigen', 'error');
+                return;
+            }
+
+            showToast('Generating CAR design... (Simulated)', 'warning');
+
+            // Simulate AI-generated design after delay
+            setTimeout(() => {
+                // Auto-populate a standard 2nd gen CAR construct
+                constructComponents = [];
+                const defaultDesign = ['leader-1', 'scfv-2', 'hinge-1', 'tm-1', 'costim-2', 'signal-1'];
+                defaultDesign.forEach(id => {
+                    const comp = COMPONENTS.find(c => c.id === id);
+                    if (comp) constructComponents.push({ ...comp });
+                });
+
+                renderConstruct();
+                renderComponentLibrary();
+                updateTabStates();
+                showToast('CAR design generated successfully!');
+            }, 1500);
+        });
+
+        // Component Generator
+        document.getElementById('generateComponentBtn').addEventListener('click', () => {
+            const type = document.getElementById('genComponentType').value;
+            if (!type) {
+                showToast('Please select a component type', 'error');
+                return;
+            }
+            showToast('Component generation is available in the full version', 'warning');
+        });
+
+        // Optimizer
+        document.getElementById('optimizeBtn')?.addEventListener('click', () => {
+            showToast('Construct optimization is available in the full version', 'warning');
+        });
+
+        // Analysis
+        document.getElementById('analyzeBtn')?.addEventListener('click', () => {
+            const resultsDiv = document.getElementById('analysisResults');
+            const totalAA = constructComponents.reduce((sum, c) => sum + (c.sequence?.length || 0), 0);
+            resultsDiv.innerHTML = `
+                <div style="background: var(--car-bg); border: 1px solid var(--car-border-light); border-radius: 12px; padding: 1.25rem;">
+                    <h4 style="font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: var(--car-primary);">Construct Analysis</h4>
+                    <div class="car-detail-row"><span class="car-detail-label">Total Components</span><span class="car-detail-value">${constructComponents.length}</span></div>
+                    <div class="car-detail-row"><span class="car-detail-label">Total Amino Acids</span><span class="car-detail-value">${totalAA} aa</span></div>
+                    <div class="car-detail-row"><span class="car-detail-label">Estimated MW</span><span class="car-detail-value">~${(totalAA * 0.11).toFixed(1)} kDa</span></div>
+                    <div class="car-detail-row"><span class="car-detail-label">Cell Type</span><span class="car-detail-value">${document.getElementById('cellTypeSelect').options[document.getElementById('cellTypeSelect').selectedIndex].text}</span></div>
+                    <div class="car-detail-row"><span class="car-detail-label">Generation</span><span class="car-detail-value">${document.getElementById('generationSelect').options[document.getElementById('generationSelect').selectedIndex].text}</span></div>
+                    <div class="car-detail-row"><span class="car-detail-label">Expression Score</span><span class="car-detail-value" style="color: var(--car-success);">8.2/10</span></div>
+                    <div class="car-detail-row"><span class="car-detail-label">Stability Score</span><span class="car-detail-value" style="color: var(--car-success);">7.8/10</span></div>
+                    <div class="car-detail-row"><span class="car-detail-label">Immunogenicity Risk</span><span class="car-detail-value" style="color: var(--car-warning);">Low-Medium</span></div>
+                </div>
+            `;
+            showToast('Analysis complete');
+        });
+
+        // =============================
+        // EXPORT
+        // =============================
+        document.querySelectorAll('.car-export-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.car-export-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedExportFormat = card.dataset.format;
+                document.getElementById('exportBtn').disabled = false;
+            });
+        });
+
+        document.getElementById('exportBtn')?.addEventListener('click', () => {
+            if (!selectedExportFormat) return;
+
+            let content = '';
+            const name = 'CAR_Construct';
+
+            if (selectedExportFormat === 'fasta') {
+                content = `>${name}\n`;
+                constructComponents.forEach(c => { content += c.sequence; });
+            } else if (selectedExportFormat === 'json') {
+                content = JSON.stringify({ name, components: constructComponents, cellType: document.getElementById('cellTypeSelect').value, generation: document.getElementById('generationSelect').value }, null, 2);
+            } else if (selectedExportFormat === 'csv') {
+                content = 'Name,Type,Origin,Sequence Length,Sequence\n';
+                constructComponents.forEach(c => { content += `${c.name},${c.type},${c.origin},${c.sequence?.length},${c.sequence}\n`; });
+            } else {
+                content = constructComponents.map(c => c.sequence).join('');
+            }
+
+            // Download file
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${name}.${selectedExportFormat === 'json' ? 'json' : selectedExportFormat === 'csv' ? 'csv' : 'fasta'}`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast(`Exported as ${selectedExportFormat.toUpperCase()}`);
+        });
+
+        // =============================
+        // SAVE / LOAD DESIGNS
+        // =============================
+        document.getElementById('saveDesignBtn').addEventListener('click', () => {
+            if (constructComponents.length === 0) {
+                showToast('Add components before saving', 'error');
+                return;
+            }
+            document.getElementById('saveModal').classList.add('show');
+        });
+
+        window.closeSaveModal = function() {
+            document.getElementById('saveModal').classList.remove('show');
+        };
+
+        document.getElementById('confirmSaveBtn').addEventListener('click', () => {
+            const name = document.getElementById('constructName').value.trim();
+            if (!name) {
+                showToast('Please enter a construct name', 'error');
+                return;
+            }
+
+            const design = {
+                id: Date.now().toString(),
+                name,
+                description: document.getElementById('constructDesc').value.trim(),
+                components: [...constructComponents],
+                cellType: document.getElementById('cellTypeSelect').value,
+                generation: document.getElementById('generationSelect').value,
+                date: new Date().toISOString(),
+                totalAA: constructComponents.reduce((sum, c) => sum + (c.sequence?.length || 0), 0)
+            };
+
+            savedDesigns.unshift(design);
+            localStorage.setItem('car_saved_designs', JSON.stringify(savedDesigns));
+            renderSavedDesigns();
+            closeSaveModal();
+            showToast('Construct saved successfully!');
+            document.getElementById('constructName').value = '';
+            document.getElementById('constructDesc').value = '';
+        });
+
+        function renderSavedDesigns() {
+            const emptyEl = document.getElementById('savedEmpty');
+            const listEl = document.getElementById('savedList');
+
+            if (savedDesigns.length === 0) {
+                emptyEl.style.display = 'block';
+                listEl.style.display = 'none';
+                return;
+            }
+
+            emptyEl.style.display = 'none';
+            listEl.style.display = 'grid';
+
+            listEl.innerHTML = savedDesigns.map(d => `
+                <div class="car-saved-item">
+                    <div>
+                        <div style="font-weight: 600; font-size: 0.9rem; color: var(--car-text);">${d.name}</div>
+                        <div style="font-size: 0.78rem; color: var(--car-text-muted); margin-top: 0.2rem;">${d.components.length} components &bull; ${d.totalAA} aa &bull; ${new Date(d.date).toLocaleDateString()}</div>
+                        ${d.description ? `<div style="font-size: 0.78rem; color: var(--car-text-secondary); margin-top: 0.3rem;">${d.description}</div>` : ''}
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="car-btn car-btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;" onclick="loadDesign('${d.id}')">Load</button>
+                        <button class="car-btn car-btn-ghost" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; color: var(--car-danger);" onclick="deleteDesign('${d.id}')">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.loadDesign = function(id) {
+            const design = savedDesigns.find(d => d.id === id);
+            if (!design) return;
+
+            constructComponents = [...design.components];
+            document.getElementById('cellTypeSelect').value = design.cellType || 'car-t';
+            document.getElementById('generationSelect').value = design.generation || '2';
+            renderConstruct();
+            renderComponentLibrary();
+            updateTabStates();
+            showToast(`Loaded: ${design.name}`);
+
+            // Switch to builder view
+            document.querySelectorAll('.car-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.car-tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector('[data-tab="ai-designer"]').classList.add('active');
+            document.getElementById('tab-ai-designer').classList.add('active');
+        };
+
+        window.deleteDesign = function(id) {
+            savedDesigns = savedDesigns.filter(d => d.id !== id);
+            localStorage.setItem('car_saved_designs', JSON.stringify(savedDesigns));
+            renderSavedDesigns();
+            showToast('Design deleted');
+        };
+
+        // =============================
+        // TOAST NOTIFICATIONS
+        // =============================
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'car-toast';
+            if (type === 'error') toast.classList.add('error');
+            if (type === 'warning') toast.classList.add('warning');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // =============================
+        // KEYBOARD SHORTCUTS
+        // =============================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeSaveModal();
+            }
+        });
+
+        // Close modals on overlay click
+        document.getElementById('componentModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('componentModal')) closeModal();
+        });
+        document.getElementById('saveModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('saveModal')) closeSaveModal();
+        });
+
+        // =============================
+        // INITIALIZE
+        // =============================
+        checkAuth();
     </script>
 </body>
 </html>

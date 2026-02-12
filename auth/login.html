@@ -5,35 +5,645 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | CamBioLogics - CARchitect</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --deep-navy: #0f1419;
+            --rich-blue: #1a3a52;
+            --teal-accent: #2c5f6f;
+            --copper: #b87333;
+            --gold: #d4af37;
+            --soft-cream: #f5f1ed;
+            --ivory: #fafaf8;
+            --midnight: #0a0e14;
+            --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
+            --gradient-accent: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #b87333 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--rich-blue);
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ─── Navigation ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 248, 0.97);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(26, 58, 82, 0.1);
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-blue);
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.login-btn {
+            background: var(--gradient-accent);
+            color: white !important;
+            -webkit-text-fill-color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 10px rgba(184, 115, 51, 0.25);
+        }
+
+        .nav-links a.login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 18px rgba(184, 115, 51, 0.4);
+        }
+
+        .nav-links a.login-btn::after {
+            display: none;
+        }
+
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            right: -20px;
+            height: 0.5rem;
+            background: transparent;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            background: rgba(250, 250, 248, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 320px;
+            box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 0;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--rich-blue);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, transparent 100%);
+            padding-left: 2.5rem;
+            color: var(--copper);
+        }
+
+        .dropdown-content a::after {
+            display: none;
+        }
+
+        /* ─── Main Content ─── */
+        .login-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 140px 20px 60px;
+        }
+
+        /* ─── Auth Card ─── */
+        .auth-card {
+            background: var(--ivory);
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(10, 14, 20, 0.35);
+            max-width: 460px;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            animation: cardFadeIn 0.8s ease-out;
+        }
+
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-header {
+            background: var(--ivory);
+            padding: 2.5rem 2.5rem 0;
+            text-align: center;
+        }
+
+        .auth-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-subtitle {
+            font-size: 1rem;
+            color: var(--teal-accent);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        /* ─── Tabs ─── */
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid #e0d8cf;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #8a9aa5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: none;
+            border: none;
+        }
+
+        .auth-tab.active {
+            color: var(--rich-blue);
+        }
+
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        .auth-tab:hover:not(.active) {
+            color: var(--teal-accent);
+        }
+
+        /* ─── Form Container ─── */
+        .auth-body {
+            padding: 2rem 2.5rem 2.5rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: tabFadeIn 0.4s ease;
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--rich-blue);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0d8cf;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            background: white;
+            color: var(--rich-blue);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--teal-accent);
+            box-shadow: 0 0 0 3px rgba(44, 95, 111, 0.12);
+        }
+
+        .form-group input::placeholder {
+            color: #a0adb5;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .auth-btn:hover {
+            box-shadow: 0 6px 20px rgba(26, 58, 82, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .auth-btn:active {
+            transform: translateY(0);
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            text-align: center;
+            min-height: 1.5em;
+        }
+
+        .form-message p {
+            margin: 0;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--copper);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--teal-accent);
+        }
+
+        /* ─── Footer ─── */
+        footer {
+            background: var(--midnight);
+            color: var(--soft-cream);
+            padding: 3rem 4rem 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-accent);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--soft-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--copper);
+        }
+
+        .footer-links span {
+            opacity: 0.5;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.9rem;
+            }
+
+            .login-section {
+                padding: 120px 16px 40px;
+            }
+
+            .auth-card {
+                border-radius: 16px;
+            }
+
+            .auth-header {
+                padding: 2rem 1.5rem 0;
+            }
+
+            .auth-body {
+                padding: 1.5rem;
+            }
+
+            footer {
+                padding: 2rem 1.5rem;
+            }
+
+            .footer-tagline {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ─── Hamburger Menu ─── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--rich-blue);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 900px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(250, 250, 248, 0.98);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                gap: 1.2rem;
+                box-shadow: 0 10px 30px rgba(26, 58, 82, 0.15);
+                border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                border: none;
+                padding: 0.5rem 0 0 1rem;
+                min-width: auto;
+                background: transparent;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Register</h1>
-        <form id="registerForm">
-            <input type="text" id="fullName" placeholder="Full Name" required>
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="tel" id="phone" placeholder="Phone">
-            <input type="password" id="password" placeholder="Password" minlength="6" required>
-            <button type="submit">Register</button>
-        </form>
-        <div id="message"></div>
-        
-        <hr>
-        
-        <h2>Login</h2>
-        <form id="loginForm">
-            <input type="email" id="loginEmail" placeholder="Email" required>
-            <input type="password" id="loginPassword" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <div id="loginMessage"></div>
-        
-        <p style="text-align: center; margin-top: 20px;">
-            <a href="../index.html">← Back to Home</a>
-        </p>
+    <!-- Navigation -->
+    <nav>
+        <a href="../index.html" class="logo">CamBioLogics</a>
+        <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../cambiologics-about-us.html">About Us</a></li>
+            <li class="dropdown">
+                <a href="../cambiologics-platforms.html">Platforms ▾</a>
+                <div class="dropdown-content">
+                    <a href="../cambiologics-predict-mab.html">PREDICT-mAb</a>
+                    <a href="../cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
+                    <a href="../cambiologics-genspy.html">GenSpy - Revealing hidden genetic causes</a>
+                </div>
+            </li>
+            <li><a href="../team.html">Team</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+            <li><a href="login.html" class="login-btn">Login / Register</a></li>
+        </ul>
+    </nav>
+
+    <!-- Login Section -->
+    <div class="login-section">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">CARchitect</div>
+                <div class="auth-subtitle">CAR Construct Designer Portal</div>
+
+                <!-- Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                    <button class="auth-tab" onclick="switchTab('register')">Register</button>
+                </div>
+            </div>
+
+            <div class="auth-body">
+                <!-- Login Form -->
+                <div id="loginTab" class="tab-content active">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="auth-btn">Login</button>
+                        <div id="loginMessage" class="form-message"></div>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div id="registerTab" class="tab-content">
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" placeholder="Optional">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Minimum 6 characters" minlength="6" required>
+                        </div>
+                        <button type="submit" class="auth-btn">Create Account</button>
+                        <div id="message" class="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-tagline">Together, we're not just advancing science — we're transforming lives.</div>
+            <div class="footer-links">
+                <span>Cambridge, UK</span>
+                <span>|</span>
+                <a href="https://CamBiologics.com">CamBiologics.com</a>
+            </div>
+            <div style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8;">
+                &copy; 2025 CamBioLogics. Advancing biotechnology through AI.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Tab Switching Script -->
+    <script>
+        function switchTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            if (tab === 'login') {
+                document.querySelectorAll('.auth-tab')[0].classList.add('active');
+                document.getElementById('loginTab').classList.add('active');
+            } else {
+                document.querySelectorAll('.auth-tab')[1].classList.add('active');
+                document.getElementById('registerTab').classList.add('active');
+            }
+        }
+    </script>
+
+    <!-- Auth Script -->
     <script type="module" src="js/auth.js"></script>
 </body>
 </html>

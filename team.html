@@ -42,7 +42,7 @@
             height: 100%;
             z-index: -1;
             opacity: 0.03;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 50%, var(--rich-blue) 3px, transparent 3px),
                 radial-gradient(circle at 80% 80%, var(--teal-accent) 2px, transparent 2px),
                 radial-gradient(circle at 40% 20%, var(--copper) 2px, transparent 2px);
@@ -292,7 +292,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 linear-gradient(135deg, transparent 0%, rgba(184, 115, 51, 0.04) 50%, transparent 100%);
             pointer-events: none;
         }
@@ -394,6 +394,7 @@
             font-weight: 600;
         }
 
+        /* Team Members Section */
         .team-members-section {
             padding: 7rem 4rem;
             background: linear-gradient(180deg, var(--ivory) 0%, var(--soft-cream) 100%);
@@ -402,7 +403,7 @@
 
         .members-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
             max-width: 1300px;
             margin: 4rem auto 0;
@@ -424,61 +425,47 @@
 
         .member-image {
             width: 100%;
-            height: 280px;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 320px;
+            background: linear-gradient(180deg, var(--soft-cream) 0%, var(--ivory) 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .member-image::before {
-            content: '';
+        .member-image img {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(26, 58, 82, 0.3) 0%, rgba(44, 95, 111, 0.3) 100%);
-        }
-
-        .member-placeholder {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            border: 4px solid rgba(255, 255, 255, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 88%;
+            width: auto;
+            max-width: 90%;
+            object-fit: contain;
+            display: block;
             z-index: 1;
+            transition: transform 0.5s ease;
         }
 
-        .member-placeholder svg {
-            width: 70px;
-            height: 70px;
-            opacity: 0.6;
+        .member-card:hover .member-image img {
+            transform: translateX(-50%) scale(1.05);
         }
 
         .member-info {
-            padding: 2.5rem 2rem;
+            padding: 2rem 2rem 2.5rem;
         }
 
         .member-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--rich-blue);
             margin-bottom: 0.5rem;
         }
 
         .member-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--copper);
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             letter-spacing: 0.3px;
         }
 
@@ -489,16 +476,54 @@
             opacity: 0.9;
         }
 
-        .member-location {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.4rem 1rem;
-            background: linear-gradient(135deg, rgba(184, 115, 51, 0.15) 0%, rgba(184, 115, 51, 0.05) 100%);
+        /* Advisory Board Section */
+        .advisory-section {
+            padding: 7rem 4rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .advisory-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(135deg, transparent 0%, rgba(44, 95, 111, 0.04) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .advisory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1300px;
+            margin: 4rem auto 0;
+        }
+
+        .advisory-card {
+            background: linear-gradient(135deg, rgba(250, 250, 248, 0.95) 0%, rgba(245, 241, 237, 0.95) 100%);
             border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--copper);
-            font-weight: 500;
-            border: 1px solid rgba(184, 115, 51, 0.25);
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(26, 58, 82, 0.1);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(44, 95, 111, 0.15);
+        }
+
+        .advisory-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(26, 58, 82, 0.15);
+        }
+
+        .advisory-card .member-image {
+            background: linear-gradient(180deg, #ffffff 0%, var(--ivory) 100%);
+        }
+
+        .advisory-card .member-title {
+            color: var(--teal-accent);
         }
 
         footer {
@@ -558,6 +583,13 @@
             transform: translateY(-2px);
         }
 
+        @media (max-width: 1024px) {
+            .members-grid,
+            .advisory-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 2rem;
@@ -585,7 +617,8 @@
             }
 
             .team-intro-section,
-            .team-members-section {
+            .team-members-section,
+            .advisory-section {
                 padding: 5rem 2rem;
             }
 
@@ -598,7 +631,8 @@
                 gap: 2.5rem;
             }
 
-            .members-grid {
+            .members-grid,
+            .advisory-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -633,7 +667,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="cambiologics-about-us.html">About Us</a></li>
             <li class="dropdown">
-                <a href="cambiologics-platforms.html">Platforms ▾</a>
+                <a href="cambiologics-platforms.html">Platforms &#9662;</a>
                 <div class="dropdown-content">
                     <a href="cambiologics-predict-mab.html">PREDICT-mAb</a>
                     <a href="cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
@@ -655,15 +689,123 @@
         </div>
     </section>
 
+    <!-- Leadership Section -->
+    <section class="team-members-section">
+        <div class="content-container">
+            <h2 class="section-title">Leadership</h2>
+            <p class="section-subtitle">Driving Vision, Strategy & Innovation</p>
+
+            <div class="members-grid">
+                <!-- Dr. Vikash Singh -->
+                <div class="member-card reveal">
+                    <div class="member-image">
+                        <img src="team-photos/vikash-singh.png" alt="Dr. Vikash Singh">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Dr. Vikash Singh</h3>
+                        <p class="member-title">Founder & Chief Scientific Officer</p>
+                        <p class="member-bio">
+                            Expert in cellular pathogenesis, tumor biology and CRISPR-based gene editing. Dr. Singh brings deep scientific leadership to CamBioLogics, guiding the company's research direction and ensuring that every platform is anchored in rigorous biological science. His pioneering work in gene editing and cancer biology underpins the company's therapeutic vision.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Shalu Grewal -->
+                <div class="member-card reveal" style="animation-delay: 0.1s">
+                    <div class="member-image">
+                        <img src="team-photos/shalu-grewal.png" alt="Shalu Grewal">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Shalu Grewal</h3>
+                        <p class="member-title">Director</p>
+                        <p class="member-bio">
+                            Expert in AI infrastructure and machine learning platforms with an interest in financial and insurance consultancy. Shalu oversees the strategic direction and operational excellence of CamBioLogics, bringing a unique blend of technical acumen and business insight that bridges the gap between cutting-edge AI research and real-world deployment.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Dr. Suman Dhanda -->
+                <div class="member-card reveal" style="animation-delay: 0.2s">
+                    <div class="member-image">
+                        <img src="team-photos/suman-dhanda.png" alt="Dr. Suman Dhanda">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Dr. Suman Dhanda</h3>
+                        <p class="member-title">Business Development Officer, Head India</p>
+                        <p class="member-bio">
+                            Expert in building strategic business partnerships that fuel growth. Dr. Dhanda leads CamBioLogics' expansion in India, forging alliances with research institutions, pharmaceutical partners, and healthcare organisations to extend the reach and impact of the company's AI-driven platforms across the subcontinent.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advisory Board Section -->
+    <section class="advisory-section">
+        <div class="content-container">
+            <h2 class="section-title">Advisory Board</h2>
+            <p class="section-subtitle">World-Class Expertise Guiding Our Mission</p>
+
+            <div class="advisory-grid">
+                <!-- Dr. Nitin Kumar -->
+                <div class="advisory-card reveal">
+                    <div class="member-image">
+                        <img src="team-photos/nitin-kumar.png" alt="Dr. Nitin Kumar">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Dr. Nitin Kumar</h3>
+                        <p class="member-title">Founder & Director, Pangenomix</p>
+                        <p class="member-bio">
+                            Senior Bioinformatics Consultant, previously at Wellcome Sanger, expert in gut microbiome genomics. Dr. Kumar brings extensive experience in large-scale genomic data analysis and microbial ecology, advising CamBioLogics on bioinformatics strategy and genomic pipeline development to ensure robust and scalable analytical frameworks.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Dr. Rahuman S. Malik Sheriff -->
+                <div class="advisory-card reveal" style="animation-delay: 0.1s">
+                    <div class="member-image">
+                        <img src="team-photos/rahuman-sheriff.png" alt="Dr. Rahuman S. Malik Sheriff">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Dr. Rahuman S. Malik Sheriff</h3>
+                        <p class="member-title">Senior Project Leader, EMBL-EBI</p>
+                        <p class="member-bio">
+                            Expert in computational biology and applied AI-ML based mathematical modeling and digital biology. Dr. Malik Sheriff's deep expertise in systems biology and data-driven modeling helps CamBioLogics refine its machine learning approaches, ensuring that predictive models are both mathematically sound and biologically meaningful.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Dr. Elise Kaplan -->
+                <div class="advisory-card reveal" style="animation-delay: 0.2s">
+                    <div class="member-image">
+                        <img src="team-photos/elise-kaplan.png" alt="Dr. Elise Kaplan">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Dr. Elise Kaplan</h3>
+                        <p class="member-title">Senior Researcher, CNRS, France</p>
+                        <p class="member-bio">
+                            Expert in structural biology and Cryo-EM based protein analysis. Dr. Kaplan's specialisation in high-resolution protein structure determination provides CamBioLogics with invaluable guidance on antibody engineering and structure-function relationships, strengthening the scientific foundation of the PREDICT-mAb platform.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 4.5rem; text-align: center; font-size: 1.2rem; color: var(--teal-accent); font-weight: 500; line-height: 1.8; max-width: 900px; margin-left: auto; margin-right: auto;">
+                Our team's diverse backgrounds and complementary expertise create a unique environment where cutting-edge science meets innovative technology, all focused on transforming patient lives through precision biologics.
+            </div>
+        </div>
+    </section>
+
     <section class="team-intro-section">
         <div class="content-container">
             <h2 class="section-title">Who We Are</h2>
             <p class="section-subtitle">A Global Team United by Science</p>
-            
+
             <div class="team-intro-content">
                 <div class="team-description reveal">
                     <p>
-                        CamBioLogics brings together a <strong>multidisciplinary team of experts</strong> spanning two continents—Cambridge, UK, and India—united by a shared passion for transforming biotechnology through artificial intelligence.
+                        CamBioLogics brings together a <strong>multidisciplinary team of experts</strong> spanning two continents&mdash;Cambridge, UK, and India&mdash;united by a shared passion for transforming biotechnology through artificial intelligence.
                     </p>
                     <p>
                         Our team comprises <strong>accomplished doctors, research associates, and computational scientists</strong> with over 10 years of combined experience in biotechnology, genomics, antibody engineering, and clinical research. This deep domain expertise ensures that our AI platforms are grounded in biological reality and clinical relevance.
@@ -694,142 +836,9 @@
         </div>
     </section>
 
-    <section class="team-members-section">
-        <div class="content-container">
-            <h2 class="section-title">Meet Our Team</h2>
-            <p class="section-subtitle">The Experts Driving Our Mission</p>
-            
-            <div class="members-grid">
-                <!-- Member Card 1 -->
-                <div class="member-card reveal">
-                    <div class="member-image">
-                        <div class="member-placeholder">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="35" r="15" fill="white"/>
-                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Dr. Vikas Shigh</h3>
-                        <p class="member-title">Founder & Chief Scientific Officer</p>
-                        <p class="member-bio">
-                            Leading our scientific vision with extensive experience in biotechnology research and therapeutic development. Expert in antibody engineering and computational biology.
-                        </p>
-                        <span class="member-location">📍 Cambridge, UK</span>
-                    </div>
-                </div>
-
-                <!-- Member Card 2 -->
-                <div class="member-card reveal" style="animation-delay: 0.1s">
-                    <div class="member-image">
-                        <div class="member-placeholder">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="35" r="15" fill="white"/>
-                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Suman Grewal</h3>
-                        <p class="member-title">Senior Research Scientist</p>
-                        <p class="member-bio">
-                            Specializing in genomics and rare disease diagnostics with over 12 years of clinical and research experience. Leads our GenSpy platform development.
-                        </p>
-                        <span class="member-location">📍 India</span>
-                    </div>
-                </div>
-
-                <!-- Member Card 3 -->
-                <div class="member-card reveal" style="animation-delay: 0.2s">
-                    <div class="member-image">
-                        <div class="member-placeholder">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="35" r="15" fill="white"/>
-                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Shalu Grewal</h3>
-                        <p class="member-title">Head of Technology</p>
-                        <p class="member-bio">
-                            Leading our technology team in developing AI infrastructure and machine learning platforms. Expert in deep learning and bioinformatics systems.
-                        </p>
-                        <span class="member-location">📍 Cambridge, UK</span>
-                    </div>
-                </div>
-
-                <!-- Member Card 4 -->
-                <div class="member-card reveal" style="animation-delay: 0.3s">
-                    <div class="member-image">
-                        <div class="member-placeholder">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="35" r="15" fill="white"/>
-                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Dr. Paarth</h3>
-                        <p class="member-title">Research Associate - Cell Therapy</p>
-                        <p class="member-bio">
-                            Focused on cellular therapy research and CellCipher platform optimization. Brings expertise in immunology and translational medicine.
-                        </p>
-                        <span class="member-location">📍 India</span>
-                    </div>
-                </div>
-
-                <!-- Member Card 5 -->
-                <div class="member-card reveal" style="animation-delay: 0.4s">
-                    <div class="member-image">
-                        <div class="member-placeholder">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="35" r="15" fill="white"/>
-                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Veer Singh</h3>
-                        <p class="member-title">Senior AI Engineer</p>
-                        <p class="member-bio">
-                            Developing machine learning models for PREDICT-mAb platform. Specializes in protein structure prediction and computational drug design.
-                        </p>
-                        <span class="member-location">📍 India</span>
-                    </div>
-                </div>
-
-                <!-- Member Card 6 -->
-                <div class="member-card reveal" style="animation-delay: 0.5s">
-                    <div class="member-image">
-                        <div class="member-placeholder">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="35" r="15" fill="white"/>
-                                <path d="M 25 75 Q 25 55 50 55 Q 75 55 75 75 Z" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Dr. Vihaan Singh</h3>
-                        <p class="member-title">Research Associate - Structural Biology</p>
-                        <p class="member-bio">
-                            Contributing expertise in protein engineering and structural analysis. Supports antibody optimization and therapeutic candidate validation.
-                        </p>
-                        <span class="member-location">📍 Cambridge, UK</span>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 4.5rem; text-align: center; font-size: 1.2rem; color: var(--teal-accent); font-weight: 500; line-height: 1.8; max-width: 900px; margin-left: auto; margin-right: auto;">
-                Our team's diverse backgrounds and complementary expertise create a unique environment where cutting-edge science meets innovative technology, all focused on transforming patient lives through precision biologics.
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="footer-content">
-            <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
+            <div class="footer-tagline">Together, we're not just advancing science&mdash;we're transforming lives.</div>
             <div class="footer-links">
                 <a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a>
                 <span>|</span>
@@ -838,7 +847,7 @@
                 <a href="http://CamBiologics.com">CamBiologics.com</a>
             </div>
             <div style="margin-top: 2.5rem; font-size: 0.95rem; opacity: 0.8;">
-                © 2025 CamBioLogics. Advancing biotechnology through AI.
+                &copy; 2025 CamBioLogics. Advancing biotechnology through AI.
             </div>
         </div>
     </footer>
@@ -846,7 +855,7 @@
     <script>
         // Scroll reveal animation
         const revealElements = document.querySelectorAll('.reveal');
-        
+
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
             revealElements.forEach(element => {

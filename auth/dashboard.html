@@ -1336,9 +1336,106 @@
             margin-left: 0.25rem;
             vertical-align: middle;
         }
+        /* === Blur overlay for preview mode === */
+        body .car-nav ~ *:not(.car-nav):not(.car-loading-overlay):not(.car-toast):not(.blur-overlay) {
+            filter: blur(3px);
+            -webkit-filter: blur(3px);
+            pointer-events: none;
+            user-select: none;
+        }
+        .car-nav .car-nav-links,
+        .car-nav .car-nav-actions {
+            filter: blur(3px);
+            -webkit-filter: blur(3px);
+        }
+        .car-nav .car-nav-logo {
+            filter: none !important;
+        }
+        .blur-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        .blur-overlay-card {
+            background: rgba(26, 58, 82, 0.92);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 3rem 4rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(184, 115, 51, 0.3);
+            pointer-events: auto;
+            max-width: 500px;
+        }
+        .blur-overlay-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: #f5f1ed;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .blur-overlay-card p {
+            color: rgba(245, 241, 237, 0.8);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .blur-overlay-card a {
+            display: inline-block;
+            background: linear-gradient(135deg, #b87333 0%, #d4af37 100%);
+            color: #fff;
+            padding: 0.8rem 2.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blur-overlay-card a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(184, 115, 51, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .blur-overlay {
+                padding: 1rem;
+            }
+            .blur-overlay-card {
+                padding: 2rem 1.5rem;
+                border-radius: 16px;
+                max-width: 90%;
+            }
+            .blur-overlay-card h2 {
+                font-size: 1.4rem;
+            }
+            .blur-overlay-card p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+                margin-bottom: 1.2rem;
+            }
+            .blur-overlay-card a {
+                padding: 0.7rem 2rem;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Preview blur overlay -->
+    <div class="blur-overlay">
+        <div class="blur-overlay-card">
+            <h2>CARchitect Preview</h2>
+            <p>This dashboard is available to registered users. Contact us to request access to the full CAR construct designer platform.</p>
+            <a href="../contact.html">Request Access</a>
+        </div>
+    </div>
 
     <!-- Loading Overlay -->
     <div class="car-loading-overlay" id="loadingOverlay">
@@ -2051,7 +2148,8 @@
         }
 
         async function checkAuth() {
-            loadingOverlay.classList.add('show');
+            // Skip loading overlay in preview/blur mode
+            // loadingOverlay.classList.add('show');
 
             // If supabase is not available (local file://), show page in demo mode
             if (!supabase) {

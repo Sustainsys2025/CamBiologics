@@ -144,13 +144,14 @@
             position: absolute;
             top: 100%;
             left: -20px;
-            background: rgba(250, 250, 248, 0.98);
+            background: rgba(240, 236, 230, 0.98);
             backdrop-filter: blur(10px);
             min-width: 320px;
             box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
             border-radius: 12px;
             padding: 1.5rem 0;
-            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            margin-top: 0;
             border: 1px solid rgba(184, 115, 51, 0.15);
             z-index: 1001;
         }
@@ -175,6 +176,81 @@
 
         .dropdown-content a::after {
             display: none;
+        }
+
+        /* CARchitect flagship highlight */
+        .dropdown-flagship {
+            background: linear-gradient(135deg, rgba(26, 58, 82, 0.06), rgba(44, 95, 111, 0.08));
+            padding: 1rem 2rem !important;
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+            position: relative;
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .dropdown-flagship::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #b87333, #d4af37);
+        }
+        .dropdown-flagship:hover {
+            background: linear-gradient(135deg, rgba(184, 115, 51, 0.1), rgba(212, 175, 55, 0.08)) !important;
+            padding-left: 2rem !important;
+        }
+        .dropdown-flagship .flagship-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .dropdown-flagship .flagship-desc {
+            font-size: 0.75rem;
+            color: #64748b;
+            display: block;
+            margin-top: 0.15rem;
+        }
+        .dropdown-flagship .flagship-badges {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.3rem;
+            margin-left: 1rem;
+        }
+        .flagship-badge {
+            background: linear-gradient(135deg, #b87333, #d4af37, #b87333);
+            background-size: 200% 100%;
+            animation: flagshipShimmer 3s ease infinite;
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(184, 115, 51, 0.3);
+        }
+        .flagship-badge-outline {
+            border: 1px solid rgba(44, 95, 111, 0.4);
+            color: #2c5f6f;
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+        }
+        @keyframes flagshipShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .dropdown-divider-label {
+            padding: 0.5rem 2rem 0.25rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         /* ─── Main Content ─── */
@@ -541,10 +617,20 @@
             <li class="dropdown">
                 <a href="../cambiologics-platforms.html">Platforms ▾</a>
                 <div class="dropdown-content">
+                    <a href="dashboard.html" class="dropdown-flagship">
+                        <div>
+                            <span class="flagship-name">CARchitect</span>
+                            <span class="flagship-desc">AI-powered CAR construct design platform</span>
+                        </div>
+                        <div class="flagship-badges">
+                            <span class="flagship-badge">Flagship</span>
+                            <span class="flagship-badge-outline">AI-Powered</span>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider-label">Other Platforms</div>
                     <a href="../cambiologics-predict-mab.html">PREDICT-mAb</a>
-                    <a href="../cambiologics-cellcipher.html">CellCipher - Decoding cellular therapy</a>
-                    <a href="../cambiologics-genspy.html">GenSpy - Revealing hidden genetic causes</a>
-                    <a href="dashboard.html">CARchitect - CAR Construct Designer</a>
+                    <a href="../cambiologics-cellcipher.html">CellCipher</a>
+                    <a href="../cambiologics-genspy.html">GenSpy</a>
                 </div>
             </li>
             <li><a href="../team.html">Team</a></li>

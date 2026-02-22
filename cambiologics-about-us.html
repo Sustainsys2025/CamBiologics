@@ -423,20 +423,27 @@
         .story-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: start;
-            margin-top: 4rem;
+            gap: 4rem;
+            align-items: stretch;
+            margin-top: 3rem;
         }
 
         .story-text {
-            font-size: 1.15rem;
-            line-height: 2;
+            font-size: 1.1rem;
+            line-height: 1.85;
             color: var(--rich-blue);
             opacity: 0.95;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .story-text p {
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .story-text p:last-child {
+            margin-bottom: 0;
         }
 
         .story-text strong {
@@ -446,20 +453,21 @@
 
         .story-visual {
             position: relative;
-            height: 450px;
-            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
             border-radius: 24px;
-            padding: 3rem;
+            overflow: hidden;
             box-shadow: 0 12px 45px rgba(26, 58, 82, 0.12);
             border: 1px solid rgba(184, 115, 51, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            min-height: 400px;
         }
 
-        .cambridge-icon {
+        .story-visual img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         /* Timeline Section */
@@ -597,18 +605,20 @@
         .accomplishment-image {
             width: 100%;
             height: 250px;
-            background: linear-gradient(135deg, var(--teal-accent) 0%, var(--rich-blue) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
             overflow: hidden;
         }
 
-        .accomplishment-icon {
-            width: 100px;
-            height: 100px;
-            opacity: 0.3;
+        .accomplishment-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .accomplishment-card:hover .accomplishment-image img {
+            transform: scale(1.05);
         }
 
         .accomplishment-content {
@@ -708,34 +718,48 @@
             }
 
             .hero {
-                padding: 4rem 2rem 3rem;
+                padding: 2rem 1.5rem 1.5rem;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             .hero-subtitle {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .background-section,
             .timeline-section,
             .accomplishments-section {
-                padding: 5rem 2rem;
+                padding: 3rem 1.5rem;
             }
 
             .section-title {
-                font-size: 2.3rem;
+                font-size: 1.8rem;
             }
 
             .story-content {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: 2rem;
+            }
+
+            .story-text {
+                font-size: 1rem;
+                line-height: 1.7;
             }
 
             .story-visual {
-                height: 300px;
+                height: 250px;
+                min-height: unset;
+            }
+
+            .accomplishment-image {
+                height: 180px;
+            }
+
+            .accomplishment-content {
+                padding: 1.5rem;
             }
 
             .timeline::before {
@@ -841,38 +865,8 @@
                 </div>
 
                 <div class="story-visual">
-                    <svg class="cambridge-icon" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Cambridge University inspired building -->
-                        <rect x="100" y="200" width="200" height="150" fill="var(--rich-blue)" opacity="0.2"/>
-                        <rect x="120" y="220" width="40" height="60" fill="var(--teal-accent)" opacity="0.3"/>
-                        <rect x="180" y="220" width="40" height="60" fill="var(--teal-accent)" opacity="0.3"/>
-                        <rect x="240" y="220" width="40" height="60" fill="var(--teal-accent)" opacity="0.3"/>
-                        
-                        <!-- Spire/Tower -->
-                        <rect x="160" y="100" width="80" height="100" fill="var(--rich-blue)" opacity="0.25"/>
-                        <polygon points="200,60 170,100 230,100" fill="var(--copper)" opacity="0.4"/>
-                        <circle cx="200" cy="65" r="8" fill="var(--gold)" opacity="0.6"/>
-                        
-                        <!-- DNA helix overlay -->
-                        <path d="M 50 150 Q 70 130 50 110 T 50 70" stroke="var(--teal-accent)" 
-                              stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="5,5"/>
-                        <path d="M 80 150 Q 60 130 80 110 T 80 70" stroke="var(--teal-accent)" 
-                              stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="5,5"/>
-                        
-                        <!-- Neural network nodes -->
-                        <circle cx="320" cy="120" r="12" fill="var(--copper)" opacity="0.4"/>
-                        <circle cx="360" cy="160" r="10" fill="var(--copper)" opacity="0.4"/>
-                        <circle cx="340" cy="200" r="11" fill="var(--copper)" opacity="0.4"/>
-                        
-                        <line x1="320" y1="120" x2="360" y2="160" stroke="var(--gold)" stroke-width="2" opacity="0.3"/>
-                        <line x1="360" y1="160" x2="340" y2="200" stroke="var(--gold)" stroke-width="2" opacity="0.3"/>
-                        
-                        <!-- Decorative elements -->
-                        <circle cx="200" cy="320" r="40" fill="none" stroke="var(--gold)" 
-                                stroke-width="2" opacity="0.3" stroke-dasharray="5,5"/>
-                        <text x="200" y="330" text-anchor="middle" font-family="Playfair Display" 
-                              font-size="16" fill="var(--rich-blue)" font-weight="700" opacity="0.5">Cambridge</text>
-                    </svg>
+                    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80"
+                         alt="Biotechnology laboratory research with molecular analysis">
                 </div>
             </div>
         </div>
@@ -935,12 +929,7 @@
             <div class="accomplishments-grid">
                 <div class="accomplishment-card">
                     <div class="accomplishment-image">
-                        <svg class="accomplishment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Research icon -->
-                            <circle cx="50" cy="40" r="25" fill="none" stroke="white" stroke-width="4"/>
-                            <circle cx="50" cy="40" r="15" fill="white" opacity="0.3"/>
-                            <line x1="68" y1="58" x2="85" y2="75" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                        </svg>
+                        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&q=80" alt="Advanced molecular research in laboratory">
                     </div>
                     <div class="accomplishment-content">
                         <h3 class="accomplishment-title">Advanced Research Initiatives</h3>
@@ -952,15 +941,7 @@
 
                 <div class="accomplishment-card">
                     <div class="accomplishment-image">
-                        <svg class="accomplishment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Collaboration icon -->
-                            <circle cx="35" cy="35" r="12" fill="white" opacity="0.6"/>
-                            <circle cx="65" cy="35" r="12" fill="white" opacity="0.6"/>
-                            <circle cx="50" cy="60" r="12" fill="white" opacity="0.6"/>
-                            <line x1="35" y1="35" x2="50" y2="60" stroke="white" stroke-width="3"/>
-                            <line x1="65" y1="35" x2="50" y2="60" stroke="white" stroke-width="3"/>
-                            <line x1="35" y1="35" x2="65" y2="35" stroke="white" stroke-width="3"/>
-                        </svg>
+                        <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&q=80" alt="Scientists collaborating in biotech research">
                     </div>
                     <div class="accomplishment-content">
                         <h3 class="accomplishment-title">Strategic Partnerships</h3>
@@ -972,14 +953,7 @@
 
                 <div class="accomplishment-card">
                     <div class="accomplishment-image">
-                        <svg class="accomplishment-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Innovation icon -->
-                            <path d="M 50 20 L 50 80" stroke="white" stroke-width="4" stroke-linecap="round"/>
-                            <circle cx="50" cy="35" r="15" fill="none" stroke="white" stroke-width="4"/>
-                            <line x1="35" y1="50" x2="25" y2="60" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                            <line x1="65" y1="50" x2="75" y2="60" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                            <path d="M 40 75 L 40 80 L 60 80 L 60 75" stroke="white" stroke-width="4" fill="white" opacity="0.3"/>
-                        </svg>
+                        <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=600&q=80" alt="Innovation in biotechnology and AI-driven platforms">
                     </div>
                     <div class="accomplishment-content">
                         <h3 class="accomplishment-title">Continuous Innovation</h3>
@@ -996,7 +970,7 @@
         <div class="footer-content">
             <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
             <div class="footer-links">
-                <a href="/cdn-cgi/l/email-protection#b2f1d3dff0dbdddeddd5dbd1c1f2d1d3dcc6d3d09cdcd7c6"><span class="__cf_email__" data-cfemail="da99bbb798b3b5b6b5bdb3b9a99ab9bbb4aebbb8f4b4bfae">[email&#160;protected]</span></a>
+                <a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a>
                 <span>|</span>
                 <span>Cambridge, UK</span>
                 <span>|</span>

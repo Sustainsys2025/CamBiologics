@@ -298,7 +298,7 @@
 
         .hero {
             margin-top: 100px;
-            padding: 5rem 4rem 4rem;
+            padding: 3rem 4rem 2rem;
             position: relative;
             background: linear-gradient(135deg, var(--ivory) 0%, var(--soft-cream) 100%);
             text-align: center;
@@ -472,20 +472,23 @@
 
         /* Team Members Section */
         .team-members-section {
-            padding: 7rem 4rem;
+            padding: 3rem 4rem;
             background: linear-gradient(180deg, var(--ivory) 0%, var(--soft-cream) 100%);
             position: relative;
         }
 
         .members-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-direction: column;
             gap: 3rem;
-            max-width: 1300px;
-            margin: 4rem auto 0;
+            max-width: 1100px;
+            margin: 3rem auto 0;
         }
 
         .member-card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             background: linear-gradient(135deg, rgba(250, 250, 248, 0.95) 0%, rgba(245, 241, 237, 0.95) 100%);
             border-radius: 20px;
             overflow: hidden;
@@ -494,14 +497,19 @@
             border: 1px solid rgba(184, 115, 51, 0.15);
         }
 
+        .member-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
         .member-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-6px);
             box-shadow: 0 15px 50px rgba(26, 58, 82, 0.15);
         }
 
         .member-image {
-            width: 100%;
-            height: 320px;
+            width: 280px;
+            min-width: 280px;
+            height: 300px;
             background: linear-gradient(180deg, var(--soft-cream) 0%, var(--ivory) 100%);
             position: relative;
             overflow: hidden;
@@ -512,13 +520,14 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            height: 88%;
+            height: 92%;
             width: auto;
-            max-width: 90%;
+            max-width: 95%;
             object-fit: contain;
             display: block;
             z-index: 1;
             transition: transform 0.5s ease;
+            mix-blend-mode: multiply;
         }
 
         .member-card:hover .member-image img {
@@ -526,19 +535,31 @@
         }
 
         .member-info {
-            padding: 2rem 2rem 2.5rem;
+            padding: 2.5rem 3rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .member-card:nth-child(even) .member-info {
+            text-align: right;
+        }
+
+        .member-bio {
+            flex: 1;
         }
 
         .member-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--rich-blue);
             margin-bottom: 0.5rem;
         }
 
         .member-title {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--copper);
             font-weight: 600;
             margin-bottom: 1.2rem;
@@ -660,7 +681,18 @@
         }
 
         @media (max-width: 1024px) {
-            .members-grid,
+            .member-card,
+            .member-card:nth-child(even) {
+                flex-direction: column;
+            }
+            .member-card:nth-child(even) .member-info {
+                text-align: left;
+            }
+            .member-image {
+                width: 100%;
+                min-width: unset;
+                height: 280px;
+            }
             .advisory-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -685,21 +717,52 @@
             }
 
             .hero {
-                padding: 4rem 2rem 3rem;
+                padding: 2rem 1.5rem 1.5rem;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             .team-intro-section,
             .team-members-section,
             .advisory-section {
-                padding: 5rem 2rem;
+                padding: 3rem 1.5rem;
+            }
+
+            .members-grid {
+                gap: 2rem;
+            }
+
+            .member-card,
+            .member-card:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .member-card:nth-child(even) .member-info {
+                text-align: left;
+            }
+
+            .member-image {
+                width: 100%;
+                min-width: unset;
+                height: 240px;
+            }
+
+            .member-info {
+                padding: 1.5rem;
+            }
+
+            .member-name {
+                font-size: 1.4rem;
+            }
+
+            .member-bio {
+                font-size: 0.95rem;
             }
 
             .section-title {
-                font-size: 2.3rem;
+                font-size: 2rem;
             }
 
             .team-intro-content {
@@ -707,13 +770,12 @@
                 gap: 2.5rem;
             }
 
-            .members-grid,
             .advisory-grid {
                 grid-template-columns: 1fr;
             }
 
             footer {
-                padding: 3rem 2rem;
+                padding: 3rem 1.5rem;
             }
 
             .accent-shape {
@@ -820,6 +882,20 @@
                         <p class="member-title">Business Development Officer, Head India</p>
                         <p class="member-bio">
                             Expert in building strategic business partnerships that fuel growth. Dr. Dhanda leads CamBioLogics' expansion in India, forging alliances with research institutions, pharmaceutical partners, and healthcare organisations to extend the reach and impact of the company's AI-driven platforms across the subcontinent.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Satyawan S. -->
+                <div class="member-card reveal" style="animation-delay: 0.3s">
+                    <div class="member-image">
+                        <img src="team-photos/satya_photo.png" alt="Satyawan S.">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Satyawan S.</h3>
+                        <p class="member-title">Chief Technology Officer</p>
+                        <p class="member-bio">
+                            Specialist in GenAI architecture, RAG systems, and LLM integrations with deep experience across financial services, healthcare, and biosciences. Satya brings over a decade of enterprise delivery expertise to CamBioLogics, bridging advanced AI capabilities and real-world business outcomes. His hands-on work in data engineering, agentic workflows, and AI-driven platforms underpins the company's technology vision.
                         </p>
                     </div>
                 </div>

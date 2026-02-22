@@ -43,6 +43,7 @@
             --tm-color: #2563eb;
             --costim-color: #d4af37;
             --signal-color: #dc2626;
+            --safety-color: #5a7a4a;
         }
 
         * {
@@ -294,6 +295,17 @@
             transform: translateY(-1px);
         }
 
+        .car-generate-btn {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 50%, #c4b5fd 100%) !important;
+            color: white !important;
+            box-shadow: 0 2px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .car-generate-btn:hover {
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.45) !important;
+            transform: translateY(-1px);
+        }
+
         .car-btn-accent {
             background: var(--gradient-accent);
             color: white;
@@ -510,6 +522,7 @@
         .badge-tm { background: rgba(37, 99, 235, 0.1); color: var(--tm-color); }
         .badge-costim { background: rgba(212, 175, 55, 0.15); color: #9a7d20; }
         .badge-signal { background: rgba(220, 38, 38, 0.08); color: var(--signal-color); }
+        .badge-safety { background: rgba(139, 157, 131, 0.15); color: #5a7a4a; }
 
         .car-component-name {
             font-size: 0.88rem;
@@ -730,6 +743,7 @@
         .block-tm { background: rgba(37, 99, 235, 0.06); border-color: rgba(37, 99, 235, 0.2); color: var(--tm-color); }
         .block-costim { background: rgba(212, 175, 55, 0.08); border-color: rgba(212, 175, 55, 0.2); color: #8a7520; }
         .block-signal { background: rgba(220, 38, 38, 0.06); border-color: rgba(220, 38, 38, 0.15); color: var(--signal-color); }
+        .block-safety { background: rgba(139, 157, 131, 0.08); border-color: rgba(139, 157, 131, 0.2); color: #5a7a4a; }
 
         /* Arrow connector between blocks */
         .car-construct-arrow {
@@ -1440,6 +1454,7 @@
                         <option value="TM">Transmembrane</option>
                         <option value="COSTIM">Costimulatory</option>
                         <option value="SIGNAL">Signal</option>
+                        <option value="SAFETY">Safety Switch</option>
                     </select>
                     <select class="car-select" id="originFilter">
                         <option value="all">All Origins</option>
@@ -1499,6 +1514,12 @@
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                             </span>
                             Analysis
+                        </button>
+                        <button class="car-tab-btn" data-tab="scfv-analysis">
+                            <span class="tab-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            </span>
+                            scFv Analysis
                         </button>
                         <button class="car-tab-btn" data-tab="export">
                             <span class="tab-icon">
@@ -1637,6 +1658,41 @@
                                 Analyze Design
                             </button>
                             <div id="analysisResults"></div>
+                        </div>
+                    </div>
+
+                    <!-- scFv Analysis Tab -->
+                    <div class="car-tab-content" id="tab-scfv-analysis">
+                        <div class="car-analysis-empty" id="scfvAnalysisEmpty">
+                            <div class="empty-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                            </div>
+                            <h3>scFv Sequence Analysis</h3>
+                            <p>Select an scFv component to analyze binding affinity, immunogenicity risk, and structural predictions</p>
+                        </div>
+                        <div id="scfvAnalysisContent" style="display: none;">
+                            <div class="car-form-row">
+                                <div class="car-form-group">
+                                    <label>Select scFv Component</label>
+                                    <select id="scfvSelect" class="car-select" style="width: 100%;">
+                                        <option value="">Choose an scFv...</option>
+                                    </select>
+                                </div>
+                                <div class="car-form-group">
+                                    <label>Analysis Type</label>
+                                    <select id="scfvAnalysisType" class="car-select" style="width: 100%;">
+                                        <option value="full">Full Analysis</option>
+                                        <option value="binding">Binding Affinity</option>
+                                        <option value="immunogenicity">Immunogenicity</option>
+                                        <option value="structure">Structure Prediction</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="car-btn car-btn-primary" id="runScfvAnalysis" style="width: 100%; margin-top: 0.5rem;">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                Run scFv Analysis
+                            </button>
+                            <div id="scfvResults" style="margin-top: 1rem;"></div>
                         </div>
                     </div>
 
@@ -1795,63 +1851,63 @@
                 origin: 'humanized', tags: ['T', 'humanized'],
                 sequence: 'QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYYMHWVRQAPGQGLEWMGIINPSGGSTSYAQKFQGRVTMTRDTSTSTVYMELSSLRSEDTAVYYCARGGYDGRGFDYWGQGTLVTVSSGGGGSGGGGSGGGGSDIVMTQSPLSLPVTPGEPASISCRSSQSLLHSNGYNYLDWYLQKPGQSPQLLIYLGSNRASGVPDRFSGSGSGTDFTLKISRVEAEDVGVYYCMQALQTPYTFGQGTKLEIK',
                 description: 'Humanized anti-mesothelin scFv derived from the SS1 clone. High affinity for mesothelin-expressing solid tumors including mesothelioma, ovarian, and pancreatic cancers.',
-                target: 'Mesothelin', validated: true
+                target: 'Mesothelin', validated: true, trials: 2, pubs: 1
             },
             {
                 id: 'scfv-2', name: 'Anti-CD19 scFv (FMC63)', type: 'SCFV',
                 origin: 'mouse', tags: ['T', 'NK', 'mouse'],
                 sequence: 'DIQMTQTTSSLSASLGDRVTISCRASQDISKYLNWYQQKPDGTVKLLIYHTSRLHSGVPSRFSGSGSGTDYSLTISNLEQEDIATYFCQQGNTLPYTFGGGTKLEITGSTSGSGKPGSGEGSTKGEVQLQQSGPGLVAPSQSLSVTCTVSGVSLPDYGVSWIRQPPRKGLEWLGVIWGSETTYYNSALKSRLTIIKDNSKSQVFLKMNSLQTDDTAIYYCAKHYYYGGSYAMDYWGQGTSVTVSS',
                 description: 'Mouse-derived FMC63 anti-CD19 scFv. The most widely used CD19-targeting domain in approved CAR-T therapies (Kymriah, Yescarta, Tecartus, Breyanzi).',
-                target: 'CD19', validated: true
+                target: 'CD19', validated: true, trials: 3, pubs: 2
             },
             {
                 id: 'scfv-3', name: 'Anti-BCMA scFv', type: 'SCFV',
                 origin: 'humanized', tags: ['T', 'humanized'],
                 sequence: 'EVQLVESGGGLVQPGGSLRLSCAASGFTFSSYAMSWVRQAPGKGLEWVSAISGSGGSTYYADSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCAKVRHGNFGDSYRGYFDLWGRGTLVTVSSGGGGSGGGGSGGGGSDIQMTQSPSSLSASVGDRVTITCRASQSISSYLNWYQQKPGKAPKLLIYAASSLQSGVPSRFSGSGSGTDFTLTISSLQPEDFATYYCQQSYSTPYTFGQGTKVEIK',
                 description: 'Humanized anti-BCMA scFv targeting B-cell maturation antigen. Used in CAR-T therapy for multiple myeloma (Abecma, Carvykti class).',
-                target: 'BCMA', validated: true
+                target: 'BCMA', validated: true, trials: 2, pubs: 1
             },
             {
                 id: 'scfv-4', name: 'Anti-HER2 scFv (4D5)', type: 'SCFV',
                 origin: 'humanized', tags: ['T', 'humanized'],
                 sequence: 'EVQLVESGGGLVQPGGSLRLSCAASGFNIKDTYIHWVRQAPGKGLEWVARIYPTNGYTRYADSVKGRFTISADTSKNTAYLQMNSLRAEDTAVYYCSRWGGDGFYAMDYWGQGTLVTVSSGGGGSGGGGSGGGGSDIQMTQSPSSLSASVGDRVTITCRASQDVNTAVAWYQQKPGKAPKLLIYSASFLYSGVPSRFSGSRSGTDFTLTISSLQPEDFATYYCQQHYTTPPTFGQGTKVEIK',
                 description: 'Humanized anti-HER2 scFv derived from trastuzumab (4D5). Targets HER2-positive breast, gastric, and other solid tumors.',
-                target: 'HER2', validated: true
+                target: 'HER2', validated: true, trials: 2, pubs: 1
             },
             {
                 id: 'scfv-5', name: 'Anti-GD2 scFv (14g2a)', type: 'SCFV',
                 origin: 'mouse', tags: ['T', 'mouse'],
                 sequence: 'QVQLQQPGAELVKPGASVKMSCKASGYTFTSYYIHWVKQTPGQGLEWVGYIYPGNDDISYNQKFKGKATLTADKSSSTAYMQLNSLTSEDSAVYYCARGKNEEWEGLAYWGQGTLVTVSAGGGGSGGGGSGGGGSDIVLTQSPAIMSASPGEKVTMTCSASSSVSYMNWYQQKSGTSPKRWIYDTSKLASGVPAHFRGSGSGTSYSLTISGMEAEDAATYYCQQWSSNPPTFGAGTKLELK',
                 description: 'Mouse-derived anti-GD2 scFv from 14g2a clone. Targets disialoganglioside GD2 for neuroblastoma and other GD2+ tumors.',
-                target: 'GD2', validated: true
+                target: 'GD2', validated: true, trials: 2, pubs: 1
             },
             {
                 id: 'scfv-6', name: 'Anti-EGFR scFv', type: 'SCFV',
                 origin: 'humanized', tags: ['T', 'humanized'],
                 sequence: 'QVQLVQSGAEVKKPGSSVKVSCKASGGTFSSYAISWVRQAPGQGLEWMGGIIPIFGTANYAQKFQGRVTITADESTSTAYMELSSLRSEDTAVYYCARAPLRFLHWGQGTLVTVSSGGGGSGGGGSGGGGSDIQMTQSPSSLSASVGDRVTITCRASQGIRNDLGWYQQKPGKAPKLLIYAASSLQSGVPSRFSGSGSGTEFTLTISSLQPEDFATYYCLQHNSYPLTFGGGTKVEIK',
                 description: 'Humanized anti-EGFR scFv targeting epidermal growth factor receptor. For EGFR-overexpressing solid tumors including glioblastoma and NSCLC.',
-                target: 'EGFR', validated: true
+                target: 'EGFR', validated: true, trials: 1, pubs: 0
             },
             {
                 id: 'scfv-7', name: 'Anti-CD20 scFv (Leu16)', type: 'SCFV',
                 origin: 'humanized', tags: ['T', 'NK', 'humanized'],
                 sequence: 'QVQLQQPGAELVKPGASVKMSCKASGYTFTSYYIHWVRQAPGQGLEWIGAIYPGNDDISYNQKFKGKATLTADKSSSTAYMQLSSLTSEDSAVYYCARGKNEEWEGLAYWGQGTLVTVSSGGGGSGGGGSGGGGSDIELTQSPKFMSTSVGDRVSVTCKASQNVGTNVAWQQKPGQSPKALIYSASNRYTGVPDRFTGSGSGTDFTLTITNVQSEDLAEYFCQQYNSYPRTFGGGTKLEIK',
                 description: 'Humanized anti-CD20 scFv for B-cell malignancies. Alternative target for CD19-resistant relapse in lymphoma and leukemia.',
-                target: 'CD20', validated: true
+                target: 'CD20', validated: true, trials: 1, pubs: 1
             },
             {
                 id: 'scfv-8', name: 'Anti-CD22 scFv (m971)', type: 'SCFV',
                 origin: 'humanized', tags: ['T', 'humanized'],
                 sequence: 'QVQLVQSGAEVKKPGSSVKVSCKASGGTFSSYAISWVRQAPGQGLEWMGGIIPIFSNTNYAQKFQGRVTITADESTSTAFMELSSLRSEDTAVYYCARRPSGYGNAFMDYWGQGTTVTVSSGGGGSGGGGSGGGGSDIQMTQSPSSLSASVGDRVTITCRASQGISNYLNWYQQKPGKAPKLLIYAASTLQSGVPSRFSGSGSGTDFTLTISSLQPEDFATYYCQQANSYPRTFGQGTKVEIK',
                 description: 'Humanized anti-CD22 scFv from m971 clone. Targets CD22 for B-ALL, especially as rescue therapy after CD19-directed CAR-T.',
-                target: 'CD22', validated: true
+                target: 'CD22', validated: true, trials: 2, pubs: 1
             },
             {
                 id: 'scfv-9', name: 'Anti-PSMA scFv (J591)', type: 'SCFV',
                 origin: 'humanized', tags: ['T', 'humanized'],
                 sequence: 'EVQLLESGGGLVQPGGSLRLSCAASGFTFSSYGMHWVRQAPGKGLEWVSYISSGSSTIYYADSVKGRFTISRDNAKNSLYLQMNSLRAEDTAVYYCARRGVEAMGYWGQGTTVTVSSGGGGSGGGGSGGGGSDIELTQSPATLSLSPGERATLSCRASQSVSSSYLAWYQQKPGQAPRLLIYGTSNRATGIPDRFSGSGSGTDFTLTISRLEPEDFAVYYCQQYGSSLTFGQGTRLEIK',
                 description: 'Humanized anti-PSMA scFv from J591 clone. Targets prostate-specific membrane antigen for prostate cancer CAR-T therapy.',
-                target: 'PSMA', validated: true
+                target: 'PSMA', validated: true, trials: 2, pubs: 1
             },
             // Hinge Regions
             {
@@ -1866,7 +1922,7 @@
                 origin: 'human', tags: ['T', 'human'],
                 sequence: 'ESKYGPPCPSCPAPEFLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSQEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKGLPSSIEKTISKAK',
                 description: 'Human IgG4 hinge and CH2-CH3 spacer. Longer spacer option for membrane-proximal epitopes. Reduces Fc receptor-mediated off-target activation.',
-                target: null, validated: true
+                target: null, validated: true, trials: 1, pubs: 0
             },
             {
                 id: 'hinge-3', name: 'CD28 Hinge', type: 'HINGE',
@@ -1896,21 +1952,21 @@
                 origin: 'human', tags: ['T', 'human'],
                 sequence: 'RSKRSRLLHSDYMNMTPRRPGPTRKHYQPYAPPRDFAAYRS',
                 description: 'Human CD28 intracellular costimulatory domain. Provides rapid T-cell expansion and strong cytokine production. Used in Yescarta and Tecartus.',
-                target: null, validated: true
+                target: null, validated: true, trials: 2, pubs: 0
             },
             {
                 id: 'costim-2', name: '4-1BB (CD137)', type: 'COSTIM',
                 origin: 'human', tags: ['T', 'NK', 'human'],
                 sequence: 'KRGRKKLLYIFKQPFMRPVQTTQEEDGCSCRFPEEEEGGCEL',
                 description: 'Human 4-1BB (CD137) costimulatory domain. Promotes T-cell persistence and memory formation. Used in Kymriah and Breyanzi.',
-                target: null, validated: true
+                target: null, validated: true, trials: 2, pubs: 0
             },
             {
                 id: 'costim-3', name: 'OX40 (CD134)', type: 'COSTIM',
                 origin: 'human', tags: ['T', 'human'],
                 sequence: 'RDQRLPPDAHKPPGGGSFRTPIQEEQADAHSTLAKI',
                 description: 'Human OX40 (CD134) costimulatory domain. Enhances T-cell survival and anti-apoptotic signaling. Used in 3rd generation CAR designs.',
-                target: null, validated: true
+                target: null, validated: true, trials: 1, pubs: 0
             },
             // Signal Domains
             {
@@ -1919,6 +1975,21 @@
                 sequence: 'RVKFSRSADAPAYQQGQNQLYNELNLGRREEYDVLDKRRGRDPEMGGKPRRKNPQEGLYNELQKDKMAEAYSEIGMKGERRRGKGHDGLYQGLSTATKDTYDALHMQALPPR',
                 description: 'Human CD3\u03b6 (CD247) intracellular signal transduction domain with 3 ITAMs. Essential activation domain present in ALL approved CAR-T products.',
                 target: null, validated: true
+            },
+            // Safety Switches
+            {
+                id: 'safety-1', name: 'iCasp9 Safety Switch', type: 'SAFETY',
+                origin: 'human', tags: ['T', 'NK', 'human'],
+                sequence: 'GFGDVGALESLRGNADLAYILSMEPCGHCLIINNVNFCRESGLRTRTGSNIDCEKLRRRFSSLHFMVEVKGDLTAKKMVLALLELAQQDHGALDCCVVVILSHGCQASHLQFPGAVYGTDGCPVSVEKIVNIFNGTSCPSLGGKPKLFFIQACGGEQKDHGFEVASTSPEDESPGSNPEPDATPFQEGLRTFDQLDAISSLPTPSDIFVSYSTFPGFVSWRDPKSGSWYVETLDDIFEQWAHSEDLQSLLLRVANAVSVKGIYKQMPGCFNFLRKKLFFKTS',
+                description: 'Inducible caspase-9 safety switch. Activated by AP1903/rimiducid small molecule to trigger rapid apoptosis of CAR-T cells in case of severe toxicity (CRS/GVHD). Used in clinical trials.',
+                target: null, validated: true, trials: 1, pubs: 0
+            },
+            {
+                id: 'safety-2', name: 'HSV-TK Safety Switch', type: 'SAFETY',
+                origin: 'viral', tags: ['T', 'NK', 'viral'],
+                sequence: 'MASYPCHQHASAFDQAARSRGHSNRRTALRPRRQQEATEVRLEQKMPTLLRVYIDGPHGMGKTTTTQLLVALGSRDDIVYVPEPMTYWQVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGMPYAVTDAVLAPHIGGEAGSSHAPPPALTLIFDRHPIAALLCYPAARYLMGSMTPQAVLAFVALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGERLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLSGTAVPPQGAEPQSNAGPRPHIGDTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRPMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAREMGEAN',
+                description: 'Herpes Simplex Virus Thymidine Kinase safety switch. Activated by ganciclovir to eliminate transduced cells. Established clinical safety profile in adoptive cell therapy.',
+                target: null, validated: true, trials: 1, pubs: 0
             }
         ];
 
@@ -2049,14 +2120,15 @@
 
         function groupByType(components) {
             const groups = {};
-            const typeOrder = ['LEADER', 'SCFV', 'HINGE', 'TM', 'COSTIM', 'SIGNAL'];
+            const typeOrder = ['LEADER', 'SCFV', 'HINGE', 'TM', 'COSTIM', 'SIGNAL', 'SAFETY'];
             const typeLabels = {
                 'LEADER': 'Leader Sequence',
                 'SCFV': 'scFv (Binding)',
                 'HINGE': 'Hinge Region',
                 'TM': 'Transmembrane',
                 'COSTIM': 'Costimulatory',
-                'SIGNAL': 'Signal Domain'
+                'SIGNAL': 'Signal Domain',
+                'SAFETY': 'Safety Switch'
             };
 
             typeOrder.forEach(type => {
@@ -2069,17 +2141,17 @@
         }
 
         function getBadgeClass(type) {
-            const map = { 'LEADER': 'badge-leader', 'SCFV': 'badge-scfv', 'HINGE': 'badge-hinge', 'TM': 'badge-tm', 'COSTIM': 'badge-costim', 'SIGNAL': 'badge-signal' };
+            const map = { 'LEADER': 'badge-leader', 'SCFV': 'badge-scfv', 'HINGE': 'badge-hinge', 'TM': 'badge-tm', 'COSTIM': 'badge-costim', 'SIGNAL': 'badge-signal', 'SAFETY': 'badge-safety' };
             return map[type] || '';
         }
 
         function getBlockClass(type) {
-            const map = { 'LEADER': 'block-leader', 'SCFV': 'block-scfv', 'HINGE': 'block-hinge', 'TM': 'block-tm', 'COSTIM': 'block-costim', 'SIGNAL': 'block-signal' };
+            const map = { 'LEADER': 'block-leader', 'SCFV': 'block-scfv', 'HINGE': 'block-hinge', 'TM': 'block-tm', 'COSTIM': 'block-costim', 'SIGNAL': 'block-signal', 'SAFETY': 'block-safety' };
             return map[type] || '';
         }
 
         function getTypeLabel(type) {
-            const map = { 'LEADER': 'Leader', 'SCFV': 'scFv', 'HINGE': 'Hinge', 'TM': 'TM', 'COSTIM': 'Costim', 'SIGNAL': 'Signal' };
+            const map = { 'LEADER': 'Leader', 'SCFV': 'scFv', 'HINGE': 'Hinge', 'TM': 'TM', 'COSTIM': 'Costim', 'SIGNAL': 'Signal', 'SAFETY': 'Safety' };
             return map[type] || type;
         }
 
@@ -2108,6 +2180,10 @@
                                         <div class="car-component-tags">
                                             ${comp.tags.map(t => `<span class="car-tag">${t}</span>`).join('')}
                                         </div>
+                                        ${(comp.trials || comp.pubs) ? `<div class="car-component-evidence" style="display: flex; gap: 0.3rem; margin-top: 0.3rem;">
+                                            ${comp.trials ? `<span class="car-tag" style="color: #2c5f6f; border-color: rgba(44,95,111,0.2);">${comp.trials} trial${comp.trials > 1 ? 's' : ''}</span>` : ''}
+                                            ${comp.pubs ? `<span class="car-tag" style="color: #b87333; border-color: rgba(184,115,51,0.2);">${comp.pubs} pub${comp.pubs > 1 ? 's' : ''}</span>` : ''}
+                                        </div>` : ''}
                                     </div>
                                     <button class="car-add-btn" onclick="event.stopPropagation(); addComponent('${comp.id}')" title="${isAdded ? 'Already added' : 'Add to construct'}">
                                         ${isAdded ? '&#10003;' : '+'}

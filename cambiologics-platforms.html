@@ -88,6 +88,32 @@
             letter-spacing: 0.5px;
         }
 
+        .nav-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none;
+        }
+
+        .nav-brand img {
+            height: 42px;
+            width: auto;
+        }
+
+        .nav-tagline {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #2c5f6f;
+            margin-top: 2px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .nav-tagline span {
+            color: #b87333;
+        }
+
         .nav-links {
             display: flex;
             gap: 3rem;
@@ -661,7 +687,10 @@
     <div class="molecular-bg"></div>
 
     <nav>
-        <div class="logo">CamBioLogics</div>
+        <a href="index.html" class="nav-brand">
+            <img src="Cambilogics_new_logo_transparent.png" alt="CamBioLogics">
+            <span class="nav-tagline">Engineering <span>Intelligence</span> into Cell & Gene Therapy</span>
+        </a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="cambiologics-about-us.html">About Us</a></li>

@@ -60,14 +60,29 @@
         }
 
         .nav-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #b87333, #d4af37, #b87333);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.03em;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none;
+        }
+
+        .nav-brand img {
+            height: 42px;
+            width: auto;
+        }
+
+        .nav-tagline {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #2c5f6f;
+            margin-top: 2px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .nav-tagline span {
+            color: #b87333;
         }
 
         .nav-links {
@@ -1130,7 +1145,10 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <div class="nav-brand">CamBioLogics</div>
+            <a href="index.html" class="nav-brand">
+                <img src="Cambilogics_new_logo_transparent.png" alt="CamBioLogics">
+                <span class="nav-tagline">Engineering <span>Intelligence</span> into Cell & Gene Therapy</span>
+            </a>
             <div class="hamburger" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('open')">
                 <span></span>
                 <span></span>
@@ -1345,7 +1363,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h3>CamBioLogics</h3>
+                    <img src="Cambilogics_logo_light.png" alt="CamBioLogics" style="height: 40px; width: auto; margin-bottom: 0.75rem;">
                     <p>CAR construct design platform for cell & gene therapy research</p>
                 </div>
 

@@ -629,6 +629,15 @@
     </style>
 </head>
 <body>
+<script>
+    // Route protection: login page is hidden from public access
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('access') !== 'admin') {
+            window.location.replace('../index.html');
+        }
+    })();
+</script>
     <!-- Navigation -->
     <nav>
         <a href="../index.html" class="nav-brand">
@@ -664,7 +673,7 @@
             </li>
             <li><a href="../team.html">Team</a></li>
             <li><a href="../contact.html">Contact Us</a></li>
-            <li><a href="login.html" class="login-btn">Login / Register</a></li>
+            <li><a href="../industry-updates.html" class="login-btn">Industry Updates</a></li>
         </ul>
     </nav>
 

@@ -8,17 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --deep-navy: #0f1419;
-            --rich-blue: #1a3a52;
-            --teal-accent: #2c5f6f;
-            --copper: #b87333;
-            --gold: #d4af37;
-            --soft-cream: #f5f1ed;
-            --ivory: #f0ece6;
-            --midnight: #0a0e14;
+            --deep-navy: #1e2d4a;
+            --rich-blue: #2a7272;
+            --teal-accent: #3d8b8b;
+            --copper: #c4614e;
+            --gold: #d4836e;
+            --soft-cream: #f8f9fa;
+            --ivory: #ffffff;
+            --midnight: #1e2d4a;
             --sage: #8b9d83;
-            --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2c5f6f 50%, #3d7a8a 100%);
-            --gradient-accent: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #b87333 100%);
+            --gradient-primary: linear-gradient(135deg, #2a7272 0%, #3d8b8b 50%, #5aadad 100%);
+            --gradient-accent: linear-gradient(135deg, #c4614e 0%, #d4836e 50%, #c4614e 100%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -65,15 +65,15 @@
         }
 
         .nav-brand {
-            display: flex; flex-direction: column; align-items: flex-start; text-decoration: none;
+            display: flex; flex-direction: column; align-items: center; text-decoration: none;
         }
-        .nav-brand img { height: 42px; width: auto; }
+        .nav-brand img { height: 68px; width: auto; mix-blend-mode: multiply; }
         .nav-tagline {
             font-size: 0.55rem; font-weight: 600; letter-spacing: 0.15em;
-            text-transform: uppercase; color: #2c5f6f; margin-top: 2px;
-            font-family: 'Cormorant Garamond', serif;
+            text-transform: uppercase; color: #3d8b8b; margin-top: 2px;
+            font-family: 'Cormorant Garamond', serif; text-align: center; align-self: center;
         }
-        .nav-tagline span { color: #b87333; }
+        .nav-tagline span { color: #c4614e; }
 
         .nav-links { display: flex; gap: 3rem; list-style: none; align-items: center; }
         .nav-links a {
@@ -320,7 +320,7 @@
     <!-- Navigation -->
     <nav>
         <a href="index.html" class="nav-brand">
-            <img src="Cambilogics_new_logo_transparent.png" alt="CamBioLogics">
+            <img src="New_Logo_Cambiologics_1Mar.png" alt="CamBioLogics">
             <span class="nav-tagline">Engineering <span>Intelligence</span> into Cell & Gene Therapy</span>
         </a>
         <div class="hamburger" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('open')">
@@ -406,7 +406,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="Cambilogics_logo_light.png" alt="CamBioLogics" style="height: 40px; width: auto; margin-bottom: 0.75rem;">
+                    <img src="New_Logo_Cambiologics_1Mar.png" alt="CamBioLogics" style="height: 52px; width: auto; margin-bottom: 0.75rem; filter: brightness(1.8) contrast(0.9);">
                     <p>CAR construct design platform for cell &amp; gene therapy research</p>
                 </div>
                 <div class="footer-links">

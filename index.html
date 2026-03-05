@@ -77,14 +77,24 @@
             font-weight: 600;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: #3d8b8b;
+            color: rgba(255, 255, 255, 0.8);
             margin-top: 2px;
             font-family: 'Cormorant Garamond', serif;
             text-align: center;
             align-self: center;
+            transition: color 0.3s ease;
         }
 
         .nav-tagline span {
+            color: #e8826e;
+            transition: color 0.3s ease;
+        }
+
+        nav.scrolled .nav-tagline {
+            color: #3d8b8b;
+        }
+
+        nav.scrolled .nav-tagline span {
             color: #c4614e;
         }
 
@@ -96,7 +106,7 @@
         }
 
         .nav-links a {
-            color: #2a7272;
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
@@ -105,6 +115,14 @@
         }
 
         .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        nav.scrolled .nav-links a {
+            color: #2a7272;
+        }
+
+        nav.scrolled .nav-links a:hover {
             color: #5b93c4;
         }
 
@@ -128,6 +146,22 @@
             align-items: center;
             gap: 0.5rem;
             cursor: pointer;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .dropdown-trigger:hover {
+            color: #ffffff;
+        }
+
+        nav.scrolled .dropdown-trigger {
+            color: #2a7272;
+        }
+
+        nav.scrolled .dropdown-trigger:hover {
+            color: #5b93c4;
         }
 
         .dropdown-arrow {
@@ -330,9 +364,13 @@
             display: block;
             width: 24px;
             height: 2.5px;
-            background: #2a7272;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 2px;
             transition: all 0.3s ease;
+        }
+
+        nav.scrolled .hamburger span {
+            background: #2a7272;
         }
 
         .hamburger.active span:nth-child(1) {
@@ -353,10 +391,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(180deg, #f0f2f5 0%, #ffffff 100%);
+            background: #0a2a2a;
             position: relative;
             overflow: hidden;
             padding-top: 80px;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.55;
         }
 
         .hero::before {
@@ -366,8 +415,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at 20% 50%, rgba(61, 139, 139, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 80%, rgba(91, 147, 196, 0.06) 0%, transparent 50%);
+            background: linear-gradient(180deg, rgba(10, 42, 42, 0.4) 0%, rgba(10, 42, 42, 0.6) 60%, rgba(255, 255, 255, 1) 100%);
             pointer-events: none;
             z-index: 1;
         }
@@ -380,7 +428,7 @@
             right: 0;
             bottom: 0;
             background-image:
-                radial-gradient(circle at 1px 1px, rgba(61, 139, 139, 0.05) 1px, transparent 1px);
+                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
             z-index: 1;
@@ -395,37 +443,11 @@
             padding: 0 2rem;
         }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: rgba(91, 147, 196, 0.1);
-            border: 1px solid rgba(91, 147, 196, 0.2);
-            border-radius: 50px;
-            padding: 0.75rem 1.5rem;
-            margin-bottom: 1.5rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero-badge-dot {
-            width: 8px;
-            height: 8px;
-            background: #3dab7c;
-            border-radius: 50%;
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        .hero-badge span {
-            color: #2a7272;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
         .hero h1 {
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             line-height: 1.1;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #1e2d4a, #2a7272, #3d8b8b);
+            background: linear-gradient(135deg, #ffffff, #e0f0f0, #b8dada);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -433,7 +455,7 @@
         }
 
         .hero h1 .highlight {
-            background: linear-gradient(135deg, #c4614e, #d4836e, #c4614e);
+            background: linear-gradient(135deg, #e8826e, #f0a08a, #e8826e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -441,7 +463,7 @@
 
         .hero-subtitle {
             font-size: clamp(1rem, 2.5vw, 1.35rem);
-            color: #3d8b8b;
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 2.5rem;
             max-width: 700px;
             margin-left: auto;
@@ -484,9 +506,9 @@
 
         .btn-secondary {
             background: transparent;
-            color: #2a7272;
+            color: #ffffff;
             padding: 1rem 2rem;
-            border: 2px solid #3d8b8b;
+            border: 2px solid rgba(255, 255, 255, 0.5);
             border-radius: 10px;
             font-size: 1.05rem;
             font-weight: 600;
@@ -513,22 +535,23 @@
 
         .stat-item {
             padding: 1.5rem;
-            background: rgba(91, 147, 196, 0.08);
-            border: 1px solid rgba(91, 147, 196, 0.15);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 12px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .stat-item:hover {
-            background: rgba(91, 147, 196, 0.12);
-            border-color: rgba(91, 147, 196, 0.25);
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-4px);
         }
 
         .stat-value {
             font-size: 2.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #2a7272, #3d8b8b);
+            background: linear-gradient(135deg, #ffffff, #b8dada);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -536,31 +559,31 @@
         }
 
         .stat-item:nth-child(1) .stat-value {
-            background: linear-gradient(135deg, #c4614e, #d4836e);
+            background: linear-gradient(135deg, #e8826e, #f0a08a);
             -webkit-background-clip: text;
             background-clip: text;
         }
 
         .stat-item:nth-child(2) .stat-value {
-            background: linear-gradient(135deg, #2a7272, #3d8b8b);
+            background: linear-gradient(135deg, #7dd4d4, #a0e8e8);
             -webkit-background-clip: text;
             background-clip: text;
         }
 
         .stat-item:nth-child(3) .stat-value {
-            background: linear-gradient(135deg, #5b6baa, #7b8dd4);
+            background: linear-gradient(135deg, #8b9be0, #aab8f0);
             -webkit-background-clip: text;
             background-clip: text;
         }
 
         .stat-item:nth-child(4) .stat-value {
-            background: linear-gradient(135deg, #3dab7c, #5cc49a);
+            background: linear-gradient(135deg, #5cc49a, #7dddb5);
             -webkit-background-clip: text;
             background-clip: text;
         }
 
         .stat-label {
-            color: #1e2d4a;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.95rem;
             font-weight: 500;
         }
@@ -1080,6 +1103,19 @@
                 display: block;
                 padding: 0.75rem 0;
                 font-size: 1rem;
+                color: #2a7272 !important;
+            }
+
+            .nav-links a:hover {
+                color: #5b93c4 !important;
+            }
+
+            .dropdown-trigger {
+                color: #2a7272 !important;
+            }
+
+            .dropdown-trigger:hover {
+                color: #5b93c4 !important;
             }
 
             .nav-links a.active::after {
@@ -1114,6 +1150,19 @@
 
             .hero {
                 padding-top: 60px;
+                min-height: 100svh;
+            }
+
+            .hero-video-bg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: auto;
+                height: 100%;
+                min-width: 100%;
+                min-height: 100%;
+                transform: translate(-50%, -50%);
+                object-fit: cover;
             }
 
             .hero-ctas {
@@ -1223,12 +1272,10 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <video class="hero-video-bg" autoplay muted loop playsinline poster="Cambio_Image.png">
+            <source src="Cambio_video.mp4" type="video/mp4">
+        </video>
         <div class="hero-content">
-            <div class="hero-badge">
-                <div class="hero-badge-dot"></div>
-                <span>Cell & Gene Therapy Design Platform</span>
-            </div>
-
             <h1>Design Next-Generation <span class="highlight">CAR Constructs</span></h1>
 
             <p class="hero-subtitle">
@@ -1439,6 +1486,18 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // Ensure video plays on mobile
+        const heroVideo = document.querySelector('.hero-video-bg');
+        if (heroVideo) {
+            heroVideo.play().catch(() => {
+                // If autoplay fails, try playing on first user interaction
+                document.addEventListener('touchstart', function playVideo() {
+                    heroVideo.play();
+                    document.removeEventListener('touchstart', playVideo);
+                }, { once: true });
+            });
+        }
 
         // Scroll reveal animations
         const observerOptions = {

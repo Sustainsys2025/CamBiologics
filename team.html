@@ -507,17 +507,16 @@
         }
 
         .members-grid {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
-            max-width: 1100px;
-            margin: 3rem auto 0;
+            max-width: 1300px;
+            margin: 4rem auto 0;
         }
 
         .member-card {
             display: flex;
-            flex-direction: row;
-            align-items: center;
+            flex-direction: column;
             background: linear-gradient(135deg, rgba(250, 250, 248, 0.95) 0%, rgba(245, 241, 237, 0.95) 100%);
             border-radius: 20px;
             overflow: hidden;
@@ -526,18 +525,14 @@
             border: 1px solid rgba(184, 115, 51, 0.15);
         }
 
-        .member-card:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
         .member-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-10px);
             box-shadow: 0 15px 50px rgba(26, 58, 82, 0.15);
         }
 
         .member-image {
-            width: 280px;
-            min-width: 280px;
+            width: 100%;
+            min-width: unset;
             height: 300px;
             background: linear-gradient(180deg, var(--soft-cream) 0%, var(--ivory) 100%);
             position: relative;
@@ -564,15 +559,11 @@
         }
 
         .member-info {
-            padding: 2.5rem 3rem;
+            padding: 2rem 2rem;
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-        }
-
-        .member-card:nth-child(even) .member-info {
-            text-align: right;
+            justify-content: flex-start;
         }
 
         .member-bio {
@@ -710,16 +701,10 @@
         }
 
         @media (max-width: 1024px) {
-            .member-card,
-            .member-card:nth-child(even) {
-                flex-direction: column;
-            }
-            .member-card:nth-child(even) .member-info {
-                text-align: left;
+            .members-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             .member-image {
-                width: 100%;
-                min-width: unset;
                 height: 280px;
             }
             .advisory-grid {
@@ -760,21 +745,11 @@
             }
 
             .members-grid {
+                grid-template-columns: 1fr;
                 gap: 2rem;
             }
 
-            .member-card,
-            .member-card:nth-child(even) {
-                flex-direction: column;
-            }
-
-            .member-card:nth-child(even) .member-info {
-                text-align: left;
-            }
-
             .member-image {
-                width: 100%;
-                min-width: unset;
                 height: 240px;
             }
 
@@ -918,19 +893,6 @@
                     </div>
                 </div>
 
-                <!-- Satyawan S. -->
-                <div class="member-card reveal" style="animation-delay: 0.3s">
-                    <div class="member-image">
-                        <img src="team-photos/satya_photo.png" alt="Satyawan S.">
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Satyawan S.</h3>
-                        <p class="member-title">Chief Technology Officer</p>
-                        <p class="member-bio">
-                            Specialist in GenAI architecture, RAG systems, and LLM integrations with deep experience across financial services, healthcare, and biosciences. Satya brings over a decade of enterprise delivery expertise to CamBioLogics, bridging advanced AI capabilities and real-world business outcomes. His hands-on work in data engineering, agentic workflows, and AI-driven platforms underpins the company's technology vision.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

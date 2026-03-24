@@ -1,0 +1,22 @@
+# Demo / Local server files
+server.py
+ollama_backend.py
+demo/
+SETUP_GUIDE.md
+TUNNEL_SETUP.md
+
+# Virtual environment
+.venv/
+
+# OS files
+.DS_Store
+
+# Cloudflare tunnel
+.cloudflared/
+
+# Python
+__pycache__/
+*.pyc
+
+# CARchitect app (served locally only)
+carchitect-app.html

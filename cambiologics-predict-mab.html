@@ -175,6 +175,31 @@
             display: none;
         }
 
+        .nav-links a.car-demo-btn {
+            background: linear-gradient(145deg, #d4af37 0%, #b8860b 50%, #a67c00 100%);
+            color: white !important;
+            -webkit-text-fill-color: white;
+            padding: 0.6rem 1.8rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .nav-links a.car-demo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45), 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-links a.car-demo-btn::after {
+            display: none;
+        }
+
         .dropdown {
             position: relative;
         }
@@ -543,9 +568,35 @@
 
         @media (max-width: 768px) {
             nav {
-                padding: 1rem 2rem;
+                padding: 0.8rem 1rem;
                 flex-direction: column;
-                gap: 1.2rem;
+                gap: 0.6rem;
+            }
+
+            .nav-links {
+                gap: 0.6rem 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            .nav-links a.login-btn {
+                padding: 0.35rem 0.9rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-links a.car-demo-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-brand img {
+                height: 48px;
+            }
+
+            .nav-tagline {
+                font-size: 0.45rem;
             }
 
             .hero {
@@ -588,9 +639,12 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="cambiologics-about-us.html">About Us</a></li>
             <li class="dropdown">
-                <a href="cambiologics-platforms.html" class="active">Platforms ▾</a>
+                <a href="cambiologics-services.html" class="active">Services ▾</a>
                 <div class="dropdown-content">
-                    <a href="auth/dashboard.html" class="dropdown-flagship">
+                    <div class="dropdown-divider-label">Our Offerings</div>
+                    <a href="cambiologics-services.html#consulting">Consulting Services</a>
+                    <div class="dropdown-divider-label" style="margin-top:0.25rem">Platforms</div>
+                    <a href="https://carchitect.sustainsys.co.uk/demo/login" class="dropdown-flagship">
                         <div>
                             <span class="flagship-name">CARchitect</span>
                             <span class="flagship-desc">AI-powered CAR construct design platform</span>
@@ -600,7 +654,6 @@
                             <span class="flagship-badge-outline">AI-Powered</span>
                         </div>
                     </a>
-                    <div class="dropdown-divider-label">Other Platforms</div>
                     <a href="#" class="active">PREDICT-mAb</a>
                     <a href="cambiologics-cellcipher.html">CellCipher</a>
                     <a href="cambiologics-genspy.html">GenSpy</a>
@@ -609,6 +662,7 @@
             <li><a href="team.html">Team</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="industry-updates.html" class="login-btn">Industry Updates</a></li>
+            <li><a href="https://carchitect.sustainsys.co.uk/demo/login" class="car-demo-btn" target="_blank" rel="noopener noreferrer">CAR Demo</a></li>
         </ul>
     </nav>
 
@@ -629,37 +683,101 @@
         
         <div class="hero-visual">
             <svg style="width: 100%; height: 100%;" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                <!-- Large antibody Y-shape -->
-                <path d="M 250 100 L 250 180 M 250 180 L 180 300 M 250 180 L 320 300" 
-                      stroke="var(--rich-blue)" stroke-width="8" fill="none" stroke-linecap="round"/>
-                <circle cx="250" cy="100" r="25" fill="var(--teal-accent)" opacity="0.8"/>
-                <circle cx="180" cy="300" r="25" fill="var(--copper)" opacity="0.8"/>
-                <circle cx="320" cy="300" r="25" fill="var(--copper)" opacity="0.8"/>
-                <circle cx="250" cy="180" r="18" fill="var(--gold)" opacity="0.7"/>
-                
-                <!-- AI neural network overlay -->
-                <circle cx="120" cy="150" r="12" fill="var(--teal-accent)" opacity="0.6"/>
-                <circle cx="380" cy="150" r="12" fill="var(--teal-accent)" opacity="0.6"/>
-                <circle cx="120" cy="250" r="10" fill="var(--gold)" opacity="0.6"/>
-                <circle cx="380" cy="250" r="10" fill="var(--gold)" opacity="0.6"/>
-                
-                <line x1="120" y1="150" x2="180" y2="300" stroke="var(--teal-accent)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
-                <line x1="380" y1="150" x2="320" y2="300" stroke="var(--teal-accent)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
-                
-                <!-- Data points -->
-                <circle cx="250" cy="350" r="8" fill="var(--copper)" opacity="0.7"/>
-                <circle cx="200" cy="380" r="6" fill="var(--gold)" opacity="0.7"/>
-                <circle cx="300" cy="380" r="6" fill="var(--gold)" opacity="0.7"/>
-                
-                <!-- Prediction arrows -->
-                <path d="M 100 100 L 180 140" stroke="var(--gold)" stroke-width="3" opacity="0.5" marker-end="url(#arrowhead)"/>
-                <path d="M 400 100 L 320 140" stroke="var(--gold)" stroke-width="3" opacity="0.5" marker-end="url(#arrowhead)"/>
-                
                 <defs>
-                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                        <polygon points="0 0, 10 3, 0 6" fill="var(--gold)" opacity="0.5"/>
-                    </marker>
+                    <linearGradient id="abGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#2a7272" stop-opacity="0.9"/>
+                        <stop offset="100%" stop-color="#3d8b8b" stop-opacity="0.7"/>
+                    </linearGradient>
+                    <linearGradient id="abGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#c4614e" stop-opacity="0.85"/>
+                        <stop offset="100%" stop-color="#d4836e" stop-opacity="0.6"/>
+                    </linearGradient>
+                    <filter id="glow1"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    <filter id="softShadow"><feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#2a7272" flood-opacity="0.15"/></filter>
+                    <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#3d8b8b" stop-opacity="0.2"/>
+                        <stop offset="100%" stop-color="#3d8b8b" stop-opacity="0"/>
+                    </radialGradient>
                 </defs>
+
+                <!-- Background glow orbs -->
+                <circle cx="250" cy="200" r="180" fill="url(#orbGlow)">
+                    <animate attributeName="r" values="170;190;170" dur="6s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="150" cy="350" r="100" fill="url(#orbGlow)" opacity="0.5"/>
+                <circle cx="380" cy="120" r="80" fill="url(#orbGlow)" opacity="0.4"/>
+
+                <!-- Antibody Y-structure — Fc region (stem) -->
+                <path d="M 240 280 C 240 250, 260 250, 260 280 L 260 370 C 260 385, 240 385, 240 370 Z" fill="url(#abGrad1)" filter="url(#softShadow)" opacity="0.9"/>
+                <!-- Hinge region -->
+                <ellipse cx="250" cy="265" rx="22" ry="12" fill="#3d8b8b" opacity="0.7"/>
+                <!-- Left Fab arm -->
+                <path d="M 238 265 C 220 240, 170 220, 140 180 C 125 160, 130 135, 150 125 C 170 115, 190 125, 195 145 C 200 160, 205 190, 232 240" fill="url(#abGrad2)" filter="url(#softShadow)" opacity="0.85"/>
+                <!-- Right Fab arm -->
+                <path d="M 262 265 C 280 240, 330 220, 360 180 C 375 160, 370 135, 350 125 C 330 115, 310 125, 305 145 C 300 160, 295 190, 268 240" fill="url(#abGrad2)" filter="url(#softShadow)" opacity="0.85"/>
+                <!-- Antigen binding sites (CDRs) — glowing tips -->
+                <circle cx="152" cy="128" r="14" fill="#c4614e" opacity="0.9" filter="url(#glow1)">
+                    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="348" cy="128" r="14" fill="#c4614e" opacity="0.9" filter="url(#glow1)">
+                    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+                </circle>
+                <!-- CDR label dots -->
+                <circle cx="152" cy="128" r="5" fill="#fff" opacity="0.8"/>
+                <circle cx="348" cy="128" r="5" fill="#fff" opacity="0.8"/>
+
+                <!-- AI data streams — left side -->
+                <g opacity="0.5" stroke="#3d8b8b" stroke-width="1.5" fill="none">
+                    <path d="M 60 90 Q 90 110, 140 125" stroke-dasharray="4,4">
+                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M 40 160 Q 80 155, 135 140" stroke-dasharray="4,4">
+                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2.5s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M 50 220 Q 100 210, 160 190" stroke-dasharray="4,4">
+                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="3s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+                <!-- AI data streams — right side -->
+                <g opacity="0.5" stroke="#3d8b8b" stroke-width="1.5" fill="none">
+                    <path d="M 440 90 Q 410 110, 360 125" stroke-dasharray="4,4">
+                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M 460 160 Q 420 155, 365 140" stroke-dasharray="4,4">
+                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2.5s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M 450 220 Q 400 210, 340 190" stroke-dasharray="4,4">
+                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="3s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+
+                <!-- Data source nodes -->
+                <g filter="url(#softShadow)">
+                    <circle cx="55" cy="88" r="8" fill="#2a7272" opacity="0.7"/>
+                    <circle cx="35" cy="158" r="6" fill="#3d8b8b" opacity="0.6"/>
+                    <circle cx="45" cy="218" r="7" fill="#2a7272" opacity="0.6"/>
+                    <circle cx="445" cy="88" r="8" fill="#2a7272" opacity="0.7"/>
+                    <circle cx="465" cy="158" r="6" fill="#3d8b8b" opacity="0.6"/>
+                    <circle cx="455" cy="218" r="7" fill="#2a7272" opacity="0.6"/>
+                </g>
+
+                <!-- Optimization score bar -->
+                <rect x="190" cy="410" y="410" width="120" height="8" rx="4" fill="#e8e4df" opacity="0.6"/>
+                <rect x="190" cy="410" y="410" width="95" height="8" rx="4" fill="url(#abGrad1)" opacity="0.8">
+                    <animate attributeName="width" values="60;95;60" dur="4s" repeatCount="indefinite"/>
+                </rect>
+                <text x="250" y="438" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#3d8b8b" font-weight="600" opacity="0.7">BINDING AFFINITY SCORE</text>
+
+                <!-- Floating molecule dots -->
+                <circle cx="90" cy="320" r="4" fill="#d4836e" opacity="0.4">
+                    <animate attributeName="cy" values="320;310;320" dur="5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="410" cy="300" r="3" fill="#3d8b8b" opacity="0.4">
+                    <animate attributeName="cy" values="300;290;300" dur="4s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="320" cy="420" r="3.5" fill="#c4614e" opacity="0.3">
+                    <animate attributeName="cy" values="420;412;420" dur="6s" repeatCount="indefinite"/>
+                </circle>
             </svg>
         </div>
     </section>

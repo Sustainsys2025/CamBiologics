@@ -330,6 +330,52 @@
             border-bottom: none;
         }
 
+        /* Nested submenu for Platforms under Services */
+        .dropdown-item-has-children {
+            position: relative;
+        }
+
+        .dropdown-item-has-children > a::after {
+            content: '›';
+            margin-left: auto;
+            font-size: 1.2rem;
+            color: #94a3b8;
+            transition: color 0.2s;
+        }
+
+        .dropdown-item-has-children:hover > a::after {
+            color: #5b93c4;
+        }
+
+        .dropdown-submenu {
+            position: absolute;
+            left: 100%;
+            top: -1px;
+            min-width: 240px;
+            padding-left: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .dropdown-submenu-inner {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid rgba(91, 147, 196, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .dropdown-item-has-children:hover .dropdown-submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
         /* Login/Register Button */
         .nav-cta {
             background: linear-gradient(135deg, #c4614e, #d4836e);
@@ -347,6 +393,24 @@
         .nav-cta:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 16px rgba(196, 97, 78, 0.3);
+        }
+
+        .nav-cta.car-demo-btn {
+            background: linear-gradient(145deg, #d4af37 0%, #b8860b 50%, #a67c00 100%) !important;
+            color: white !important;
+            padding: 0.65rem 1.6rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-cta.car-demo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45), 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         /* Hamburger Menu Button */
@@ -1251,30 +1315,40 @@
                 <li><a href="cambiologics-about-us.html">About Us</a></li>
                 <li class="dropdown">
                     <span class="dropdown-trigger">
-                        Platforms
+                        Services
                         <span class="dropdown-arrow"></span>
                     </span>
                     <div class="dropdown-menu">
                       <div class="dropdown-menu-inner">
-                        <div class="dropdown-item dropdown-item-flagship" onclick="window.location.href='auth/dashboard.html'">
-                            <div class="flagship-content">
-                                <span class="flagship-name">CARchitect</span>
-                                <span class="flagship-desc">AI-powered CAR construct design platform</span>
+                        <div class="dropdown-item" onclick="window.location.href='cambiologics-services.html'">
+                            <a href="cambiologics-services.html">Consulting</a>
+                        </div>
+                        <div class="dropdown-item dropdown-item-has-children">
+                            <a href="cambiologics-platforms.html">Platforms</a>
+                            <div class="dropdown-submenu">
+                              <div class="dropdown-submenu-inner">
+                                <div class="dropdown-item dropdown-item-flagship" onclick="window.location.href='auth/dashboard.html'">
+                                    <div class="flagship-content">
+                                        <span class="flagship-name">CARchitect</span>
+                                        <span class="flagship-desc">AI-powered CAR construct design</span>
+                                    </div>
+                                    <div class="flagship-badges">
+                                        <span class="flagship-badge">Flagship</span>
+                                        <span class="flagship-badge-outline">AI-Powered</span>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider-label">Other Platforms</div>
+                                <div class="dropdown-item">
+                                    <a href="cambiologics-predict-mab.html">PREDICT-mAb</a>
+                                </div>
+                                <div class="dropdown-item">
+                                    <a href="cambiologics-cellcipher.html">CellCipher</a>
+                                </div>
+                                <div class="dropdown-item">
+                                    <a href="cambiologics-genspy.html">GenSpy</a>
+                                </div>
+                              </div>
                             </div>
-                            <div class="flagship-badges">
-                                <span class="flagship-badge">Flagship</span>
-                                <span class="flagship-badge-outline">AI-Powered</span>
-                            </div>
-                        </div>
-                        <div class="dropdown-divider-label">Other Platforms</div>
-                        <div class="dropdown-item">
-                            <a href="cambiologics-predict-mab.html">PREDICT-mAb</a>
-                        </div>
-                        <div class="dropdown-item">
-                            <a href="cambiologics-cellcipher.html">CellCipher</a>
-                        </div>
-                        <div class="dropdown-item">
-                            <a href="cambiologics-genspy.html">GenSpy</a>
                         </div>
                       </div>
                     </div>
@@ -1282,7 +1356,7 @@
                 <li><a href="team.html">Team</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
                 <li><a href="industry-updates.html" class="nav-cta">Industry Updates</a></li>
-                <li><a href="https://carchitect.sustainsys.co.uk/demo/login" class="nav-cta" style="background: linear-gradient(135deg, #d4af37, #b87333); color: #fff; margin-left: 0.5rem; font-weight: 600; border: 2px solid rgba(255,255,255,0.3);" target="_blank" rel="noopener noreferrer">CAR Demo</a></li>
+                <li><a href="https://carchitect.sustainsys.co.uk/demo/login" class="nav-cta car-demo-btn" target="_blank" rel="noopener noreferrer">CAR Demo</a></li>
             </ul>
         </div>
     </nav>

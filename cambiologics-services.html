@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - CamBioLogics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #1e2d4a;
+            --rich-blue: #2a7272;
+            --teal-accent: #3d8b8b;
+            --copper: #c4614e;
+            --gold: #d4836e;
+            --soft-cream: #f8f9fa;
+            --ivory: #ffffff;
+            --midnight: #1e2d4a;
+            --sage: #8b9d83;
+            --gradient-primary: linear-gradient(135deg, #2a7272 0%, #3d8b8b 50%, #5aadad 100%);
+            --gradient-accent: linear-gradient(135deg, #c4614e 0%, #d4836e 50%, #c4614e 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--rich-blue);
+            background: var(--ivory);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .molecular-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--rich-blue) 3px, transparent 3px),
+                radial-gradient(circle at 80% 80%, var(--teal-accent) 2px, transparent 2px),
+                radial-gradient(circle at 40% 20%, var(--copper) 2px, transparent 2px);
+            background-size: 120px 80px, 180px 120px, 100px 70px;
+            animation: molecularFloat 80s linear infinite;
+        }
+
+        @keyframes molecularFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-30px, -30px) rotate(360deg); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 248, 0.97);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(26, 58, 82, 0.1);
+            animation: slideDown 0.8s ease-out;
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-brand img {
+            height: 68px;
+            width: auto;
+            mix-blend-mode: multiply;
+        }
+
+        .nav-tagline {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #3d8b8b;
+            margin-top: 2px;
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+            align-self: center;
+        }
+
+        .nav-tagline span {
+            color: #c4614e;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-blue);
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.login-btn {
+            background: var(--gradient-accent);
+            color: white !important;
+            -webkit-text-fill-color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 10px rgba(184, 115, 51, 0.25);
+        }
+
+        .nav-links a.login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 18px rgba(184, 115, 51, 0.4);
+        }
+
+        .nav-links a.login-btn::after {
+            display: none;
+        }
+
+        .nav-links a.car-demo-btn {
+            background: linear-gradient(145deg, #d4af37 0%, #b8860b 50%, #a67c00 100%);
+            color: white !important;
+            -webkit-text-fill-color: white;
+            padding: 0.6rem 1.8rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .nav-links a.car-demo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45), 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-links a.car-demo-btn::after {
+            display: none;
+        }
+
+        .nav-links a.active {
+            color: var(--copper);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-login-btn {
+            background: var(--gradient-accent);
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(184, 115, 51, 0.3);
+        }
+
+        .nav-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(184, 115, 51, 0.45);
+        }
+
+        .nav-login-btn::after {
+            display: none !important;
+        }
+
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            right: -20px;
+            height: 0.5rem;
+            background: transparent;
+        }
+
+        .dropdown-old {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            background: rgba(240, 236, 230, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 320px;
+            box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 0;
+            padding-top: 0.5rem;
+            margin-top: 0;
+            animation: fadeInUp 0.4s ease;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--rich-blue);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, transparent 100%);
+            padding-left: 2.5rem;
+        }
+
+        .dropdown-flagship {
+            background: linear-gradient(135deg, rgba(26, 58, 82, 0.06), rgba(44, 95, 111, 0.08));
+            padding: 1rem 2rem !important;
+            border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+            position: relative;
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .dropdown-flagship::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #c4614e, #d4836e);
+        }
+        .dropdown-flagship:hover {
+            background: linear-gradient(135deg, rgba(184, 115, 51, 0.1), rgba(212, 175, 55, 0.08)) !important;
+            padding-left: 2rem !important;
+        }
+        .dropdown-flagship .flagship-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .dropdown-flagship .flagship-desc {
+            font-size: 0.75rem;
+            color: #64748b;
+            display: block;
+            margin-top: 0.15rem;
+        }
+        .dropdown-flagship .flagship-badges {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.3rem;
+            margin-left: 1rem;
+        }
+        .flagship-badge {
+            background: linear-gradient(135deg, #c4614e, #d4836e, #c4614e);
+            background-size: 200% 100%;
+            animation: flagshipShimmer 3s ease infinite;
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(184, 115, 51, 0.3);
+        }
+        .flagship-badge-outline {
+            border: 1px solid rgba(44, 95, 111, 0.4);
+            color: #3d8b8b;
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+        }
+        @keyframes flagshipShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .dropdown-divider-label {
+            padding: 0.5rem 2rem 0.25rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .hero {
+            margin-top: 100px;
+            padding: 4rem 4rem 2rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            animation: fadeIn 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--rich-blue);
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+            text-align: left;
+        }
+
+        .hero-description strong {
+            color: var(--copper);
+            font-weight: 600;
+        }
+
+        .ai-capabilities-strip {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .ai-cap-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.3rem;
+            background: linear-gradient(135deg, rgba(42, 114, 114, 0.08) 0%, rgba(61, 139, 139, 0.04) 100%);
+            border: 1px solid rgba(42, 114, 114, 0.2);
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--rich-blue);
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+        }
+
+        .ai-cap-tag:hover {
+            background: linear-gradient(135deg, rgba(42, 114, 114, 0.15) 0%, rgba(61, 139, 139, 0.08) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(42, 114, 114, 0.15);
+        }
+
+        .ai-cap-tag .cap-icon {
+            font-size: 1.1rem;
+        }
+
+        .accent-shape {
+            position: absolute;
+            right: 10%;
+            top: 20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(184, 115, 51, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            animation: pulse-accent 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse-accent {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 0.5; }
+        }
+
+        .services-section {
+            padding: 5rem 4rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(135deg, transparent 0%, rgba(184, 115, 51, 0.04) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .content-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 1s ease-out;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--copper);
+            margin-bottom: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 24px;
+            padding: 3.5rem 3rem;
+            box-shadow: 0 12px 45px rgba(26, 58, 82, 0.12);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: -100%;
+            right: -100%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(184, 115, 51, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 70px rgba(26, 58, 82, 0.2);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover::after {
+            bottom: -20%;
+            right: -20%;
+        }
+
+        .service-icon {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 4px 10px rgba(26, 58, 82, 0.15));
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-description {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--teal-accent);
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, rgba(184, 115, 51, 0.15) 0%, rgba(184, 115, 51, 0.05) 100%);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--copper);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            margin-right: 0.6rem;
+            border: 1px solid rgba(184, 115, 51, 0.25);
+            letter-spacing: 0.5px;
+        }
+
+        .learn-more {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .learn-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 58, 82, 0.3);
+        }
+
+        .differentiators-section {
+            padding: 7rem 4rem;
+            background: linear-gradient(180deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .differentiators-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(135deg, transparent 0%, rgba(184, 115, 51, 0.04) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .differentiators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .differentiator-item {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 30px rgba(26, 58, 82, 0.1);
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .differentiator-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-accent);
+        }
+
+        .differentiator-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(26, 58, 82, 0.15);
+        }
+
+        .differentiator-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .differentiator-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1rem;
+        }
+
+        .differentiator-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--teal-accent);
+            opacity: 0.9;
+        }
+
+        .engagement-section {
+            padding: 7rem 4rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .engagement-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(135deg, transparent 0%, rgba(184, 115, 51, 0.04) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .engagement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .engagement-card {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--ivory) 100%);
+            border-radius: 24px;
+            padding: 3.5rem 3rem;
+            box-shadow: 0 12px 45px rgba(26, 58, 82, 0.12);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(184, 115, 51, 0.15);
+        }
+
+        .engagement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .engagement-card::after {
+            content: '';
+            position: absolute;
+            bottom: -100%;
+            right: -100%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(42, 114, 114, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+        }
+
+        .engagement-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 70px rgba(26, 58, 82, 0.2);
+        }
+
+        .engagement-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .engagement-card:hover::after {
+            bottom: -20%;
+            right: -20%;
+        }
+
+        .engagement-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rich-blue);
+            margin-bottom: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .engagement-duration {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, rgba(42, 114, 114, 0.15) 0%, rgba(42, 114, 114, 0.05) 100%);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--teal-accent);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(42, 114, 114, 0.25);
+            letter-spacing: 0.5px;
+        }
+
+        .engagement-description {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--teal-accent);
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer {
+            background: var(--midnight);
+            color: var(--soft-cream);
+            padding: 4rem 4rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-accent);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--soft-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--copper);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1rem;
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+
+            .nav-brand img {
+                height: 48px;
+            }
+
+            .nav-tagline {
+                font-size: 0.45rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 0.6rem 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.85rem;
+                padding: 0;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            .nav-links a.login-btn {
+                padding: 0.35rem 0.9rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-links a.car-demo-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-description {
+                text-align: center;
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+
+            .services-section,
+            .engagement-section,
+            .differentiators-section {
+                padding: 3.5rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.3rem;
+            }
+
+            .services-grid,
+            .engagement-grid,
+            .differentiators-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                gap: 2rem;
+            }
+
+            .service-card {
+                padding: 2.5rem 2rem;
+            }
+
+            footer {
+                padding: 3rem 2rem;
+            }
+
+            .accent-shape {
+                width: 250px;
+                height: 250px;
+            }
+
+            .ai-capabilities-strip {
+                gap: 0.5rem;
+                justify-content: center;
+            }
+
+            .ai-cap-tag {
+                font-size: 0.75rem;
+                padding: 0.35rem 0.8rem;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="molecular-bg"></div>
+
+    <nav>
+        <a href="index.html" class="nav-brand">
+            <img src="New_Logo_Cambiologics_1Mar.png" alt="CamBioLogics">
+            <span class="nav-tagline">Engineering <span>Intelligence</span> into Cell & Gene Therapy</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cambiologics-about-us.html">About Us</a></li>
+            <li class="dropdown">
+                <a href="#" class="active">Services ▾</a>
+                <div class="dropdown-content">
+                    <div class="dropdown-divider-label">Our Offerings</div>
+                    <a href="#consulting">Consulting Services</a>
+                    <a href="#platforms">AI Platforms</a>
+                </div>
+            </li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="industry-updates.html" class="login-btn">Industry Updates</a></li>
+            <li><a href="https://carchitect.sustainsys.co.uk/demo/login" class="car-demo-btn" target="_blank" rel="noopener noreferrer">CAR Demo</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="accent-shape"></div>
+        <div class="hero-content">
+            <h1>SERVICES</h1>
+            <div class="hero-description">
+                <p>
+                    CamBioLogics combines <strong>deep domain expertise in cell and gene therapy</strong> with <strong>cutting-edge AI/ML capabilities</strong> to help biotech and pharma organisations accelerate their biologics pipelines. From strategic consulting to proprietary AI platforms, we deliver <strong>end-to-end solutions</strong> that bridge computational intelligence with bench science.
+                </p>
+                <p style="margin-top: 1rem;">
+                    Our AI engine leverages <strong>large language models fine-tuned on biomedical corpora</strong>, <strong>graph neural networks for molecular property prediction</strong>, and <strong>deep learning architectures for protein structure analysis</strong>. We deploy these capabilities through privacy-first, on-premise infrastructure — your proprietary data never leaves your environment. Whether you need AI-guided CAR construct design, predictive antibody developability scoring, cellular response modelling, or genomic variant interpretation, our platforms translate complex biological data into actionable insights at a pace traditional workflows cannot match.
+                </p>
+            </div>
+            <div class="ai-capabilities-strip">
+                <span class="ai-cap-tag"><span class="cap-icon">🧠</span> LLM-Powered Biomedical Reasoning</span>
+                <span class="ai-cap-tag"><span class="cap-icon">🔬</span> Protein Structure Prediction</span>
+                <span class="ai-cap-tag"><span class="cap-icon">🧬</span> Genomic Variant Analysis</span>
+                <span class="ai-cap-tag"><span class="cap-icon">📊</span> Predictive Developability Scoring</span>
+                <span class="ai-cap-tag"><span class="cap-icon">🔒</span> On-Premise / Local-First AI</span>
+                <span class="ai-cap-tag"><span class="cap-icon">⚡</span> Real-Time Design Iteration</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="consulting">
+        <div class="content-container">
+            <h2 class="section-title">Consulting Services</h2>
+            <p class="section-subtitle">Expert Strategic & Technical Guidance</p>
+
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 20 45 L 35 35 L 50 55 L 70 30 L 75 45"
+                              stroke="var(--rich-blue)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="15" y="20" width="60" height="55" rx="8"
+                              stroke="var(--teal-accent)" stroke-width="2.5" fill="none" opacity="0.7"/>
+                        <circle cx="80" cy="25" r="4" fill="var(--copper)"/>
+                        <circle cx="25" cy="70" r="3" fill="var(--gold)"/>
+                        <circle cx="65" cy="75" r="3" fill="var(--gold)"/>
+                    </svg>
+                    <h3 class="service-title">AI Strategy for Biologics</h3>
+                    <p class="service-description">
+                        Help biotech and pharma companies develop comprehensive AI roadmaps for their biologics pipelines. We assess organisational readiness, identify high-impact use cases, and build implementation plans tailored to your specific challenges and goals.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Strategy</span>
+                        <span class="tech-badge">AI/ML</span>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="45" cy="30" r="15" fill="none" stroke="var(--rich-blue)" stroke-width="2.5"/>
+                        <rect x="28" y="50" width="34" height="28" rx="6"
+                              fill="none" stroke="var(--teal-accent)" stroke-width="2.5"/>
+                        <line x1="35" y1="50" x2="35" y2="78" stroke="var(--copper)" stroke-width="2" opacity="0.7"/>
+                        <line x1="45" y1="50" x2="45" y2="78" stroke="var(--copper)" stroke-width="2" opacity="0.7"/>
+                        <line x1="55" y1="50" x2="55" y2="78" stroke="var(--copper)" stroke-width="2" opacity="0.7"/>
+                        <circle cx="45" cy="62" r="6" fill="var(--gold)"/>
+                        <path d="M 45 15 L 52 28 L 45 35 L 38 28 Z" fill="var(--teal-accent)" opacity="0.6"/>
+                    </svg>
+                    <h3 class="service-title">CAR-T/NK Design Consulting</h3>
+                    <p class="service-description">
+                        Expert guidance on CAR construct design, optimal component selection, and immunogenicity assessment. We leverage our CARchitect platform and deep domain expertise to optimise therapeutic constructs for efficacy and manufacturability.
+                    </p>
+                    <div>
+                        <span class="tech-badge">CAR Engineering</span>
+                        <span class="tech-badge">Design Optimisation</span>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 25 25 Q 45 35 65 25 M 25 50 Q 45 60 65 50 M 25 75 Q 45 85 65 75"
+                              stroke="var(--rich-blue)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <circle cx="30" cy="28" r="5" fill="var(--teal-accent)"/>
+                        <circle cx="60" cy="28" r="5" fill="var(--teal-accent)"/>
+                        <circle cx="30" cy="53" r="5" fill="var(--copper)"/>
+                        <circle cx="60" cy="53" r="5" fill="var(--copper)"/>
+                        <circle cx="30" cy="78" r="5" fill="var(--gold)"/>
+                        <circle cx="60" cy="78" r="5" fill="var(--gold)"/>
+                        <line x1="35" y1="28" x2="55" y2="28" stroke="var(--teal-accent)" stroke-width="1.5" opacity="0.5"/>
+                    </svg>
+                    <h3 class="service-title">Computational Antibody Engineering</h3>
+                    <p class="service-description">
+                        In silico antibody optimisation, humanisation, and developability assessment. We reduce wet-lab iterations through advanced predictive modelling, helping you engineer therapeutic antibodies faster and more efficiently.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Bioinformatics</span>
+                        <span class="tech-badge">Antibody Design</span>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="15" y="20" width="20" height="55" rx="4"
+                              fill="none" stroke="var(--rich-blue)" stroke-width="2.5"/>
+                        <rect x="37" y="35" width="20" height="40" rx="4"
+                              fill="none" stroke="var(--teal-accent)" stroke-width="2.5"/>
+                        <rect x="59" y="15" width="20" height="60" rx="4"
+                              fill="none" stroke="var(--copper)" stroke-width="2.5"/>
+                        <circle cx="25" cy="28" r="3" fill="var(--gold)"/>
+                        <circle cx="47" cy="50" r="3" fill="var(--gold)"/>
+                        <circle cx="69" cy="30" r="3" fill="var(--gold)"/>
+                        <line x1="10" y1="80" x2="80" y2="80" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
+                    </svg>
+                    <h3 class="service-title">Data Science & ML Implementation</h3>
+                    <p class="service-description">
+                        Build custom machine learning pipelines tailored to your organisation's needs. From drug discovery and biomarker identification to patient stratification, we help you deploy production-ready ML solutions across your operations.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Data Science</span>
+                        <span class="tech-badge">ML Deployment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="platforms">
+        <div class="content-container">
+            <h2 class="section-title">AI Platforms</h2>
+            <p class="section-subtitle">Proprietary Technology for Precision Therapeutics</p>
+
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="18" y="25" width="54" height="50" rx="10"
+                              fill="none" stroke="var(--rich-blue)" stroke-width="3"/>
+                        <circle cx="45" cy="32" r="8" fill="var(--teal-accent)"/>
+                        <path d="M 45 40 L 45 65 M 35 50 L 55 50"
+                              stroke="var(--copper)" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="30" cy="50" r="4" fill="var(--gold)"/>
+                        <circle cx="60" cy="50" r="4" fill="var(--gold)"/>
+                        <rect x="15" y="80" width="60" height="3" rx="1.5" fill="var(--teal-accent)" opacity="0.7"/>
+                    </svg>
+                    <h3 class="service-title">CARchitect</h3>
+                    <p class="service-description">
+                        Our flagship AI-powered CAR construct designer with validated component library. Accelerate CAR-T/NK development with rapid, intelligent design iteration. Includes interactive design interface and performance predictions. <strong>Now available with live demo.</strong>
+                    </p>
+                    <div>
+                        <span class="tech-badge">Flagship</span>
+                        <span class="tech-badge">AI-Powered</span>
+                    </div>
+                    <a href="https://carchitect.sustainsys.co.uk/demo/login" class="learn-more">Explore Demo →</a>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 20 45 L 30 30 L 45 50 L 60 35 L 70 45"
+                              stroke="var(--rich-blue)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="20" cy="45" r="5" fill="var(--teal-accent)"/>
+                        <circle cx="30" cy="30" r="5" fill="var(--teal-accent)"/>
+                        <circle cx="45" cy="50" r="5" fill="var(--copper)"/>
+                        <circle cx="60" cy="35" r="5" fill="var(--teal-accent)"/>
+                        <circle cx="70" cy="45" r="5" fill="var(--copper)"/>
+                        <rect x="15" y="65" width="60" height="3" rx="1.5"
+                              fill="var(--gradient-primary)" opacity="0.6"/>
+                    </svg>
+                    <h3 class="service-title">PREDICT-mAb</h3>
+                    <p class="service-description">
+                        AI-driven monoclonal antibody optimisation platform. Advanced machine learning predicts antibody behavior, optimises therapeutic candidates, and accelerates discovery timelines. Reduce wet-lab iterations with computational precision.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Antibody Engineering</span>
+                        <span class="tech-badge">Optimisation</span>
+                    </div>
+                    <a href="cambiologics-predict-mab.html" class="learn-more">Learn More →</a>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="45" cy="45" r="30" fill="none" stroke="var(--rich-blue)" stroke-width="2.5"/>
+                        <circle cx="45" cy="45" r="18" fill="none" stroke="var(--teal-accent)" stroke-width="2"/>
+                        <circle cx="35" cy="35" r="3" fill="var(--teal-accent)"/>
+                        <circle cx="55" cy="35" r="3" fill="var(--teal-accent)"/>
+                        <circle cx="35" cy="55" r="3" fill="var(--copper)"/>
+                        <circle cx="55" cy="55" r="3" fill="var(--copper)"/>
+                        <circle cx="45" cy="45" r="4" fill="var(--gold)"/>
+                        <line x1="35" y1="35" x2="55" y2="55" stroke="var(--teal-accent)" stroke-width="1.5" opacity="0.5"/>
+                        <line x1="55" y1="35" x2="35" y2="55" stroke="var(--teal-accent)" stroke-width="1.5" opacity="0.5"/>
+                    </svg>
+                    <h3 class="service-title">CellCipher</h3>
+                    <p class="service-description">
+                        Cellular response prediction engine powered by deep learning. Analyse complex cell behavior patterns to enable precision medicine and personalised treatment approaches for challenging therapeutic areas.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Cell Therapy</span>
+                        <span class="tech-badge">Deep Learning</span>
+                    </div>
+                    <a href="cambiologics-cellcipher.html" class="learn-more">Learn More →</a>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 28 28 L 62 28 L 62 62 L 28 62 Z"
+                              stroke="var(--rich-blue)" stroke-width="2.5" fill="none"/>
+                        <circle cx="30" cy="32" r="3" fill="var(--teal-accent)"/>
+                        <circle cx="45" cy="32" r="3" fill="var(--teal-accent)"/>
+                        <circle cx="60" cy="32" r="3" fill="var(--teal-accent)"/>
+                        <circle cx="30" cy="45" r="3" fill="var(--copper)"/>
+                        <circle cx="60" cy="45" r="3" fill="var(--copper)"/>
+                        <circle cx="30" cy="58" r="3" fill="var(--gold)"/>
+                        <circle cx="45" cy="58" r="3" fill="var(--gold)"/>
+                        <circle cx="60" cy="58" r="3" fill="var(--gold)"/>
+                        <path d="M 30 35 Q 45 45 60 35" stroke="var(--teal-accent)" stroke-width="1.5" fill="none" opacity="0.6"/>
+                    </svg>
+                    <h3 class="service-title">GenSpy</h3>
+                    <p class="service-description">
+                        Genetic variant analysis and interpretation platform. AI-powered genomic analysis reveals hidden genetic causes of rare diseases, bringing answers and hope to undiagnosed patients through sophisticated computational methods.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Genomics</span>
+                        <span class="tech-badge">Diagnostics</span>
+                    </div>
+                    <a href="cambiologics-genspy.html" class="learn-more">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="differentiators-section">
+        <div class="content-container">
+            <h2 class="section-title">Why CamBioLogics</h2>
+            <p class="section-subtitle">Our Distinctive Advantages</p>
+
+            <div class="differentiators-grid">
+                <div class="differentiator-item reveal">
+                    <div class="differentiator-icon">🧬</div>
+                    <h3 class="differentiator-title">Domain Expertise</h3>
+                    <p class="differentiator-text">
+                        Deep understanding of cell and gene therapy built by experienced biologists and computational scientists. Not generic AI—tailored to the unique challenges of biologics development.
+                    </p>
+                </div>
+
+                <div class="differentiator-item reveal">
+                    <div class="differentiator-icon">🔒</div>
+                    <h3 class="differentiator-title">Local-First AI</h3>
+                    <p class="differentiator-text">
+                        Privacy-respecting, on-premise AI solutions. Your proprietary research data never leaves your infrastructure. Full control over sensitive computational biology workflows.
+                    </p>
+                </div>
+
+                <div class="differentiator-item reveal">
+                    <div class="differentiator-icon">🔗</div>
+                    <h3 class="differentiator-title">End-to-End Solutions</h3>
+                    <p class="differentiator-text">
+                        From strategic consulting and roadmap development to deployed AI platforms and ongoing technical support. One partner across your entire innovation journey.
+                    </p>
+                </div>
+
+                <div class="differentiator-item reveal">
+                    <div class="differentiator-icon">📊</div>
+                    <h3 class="differentiator-title">Research-Grade</h3>
+                    <p class="differentiator-text">
+                        All tools built on peer-reviewed science and validated against FDA-approved therapy data. Rigorous validation ensures confidence in computational predictions and recommendations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="engagement-section">
+        <div class="content-container">
+            <h2 class="section-title">Engagement Models</h2>
+            <p class="section-subtitle">Flexible Partnerships Built to Scale</p>
+
+            <div class="engagement-grid">
+                <div class="engagement-card reveal">
+                    <h3 class="engagement-title">Discovery Workshop</h3>
+                    <span class="engagement-duration">2-4 Weeks</span>
+                    <p class="engagement-description">
+                        Assess your pipeline, identify AI opportunities, and deliver a prioritised roadmap. Perfect for organisations new to AI-driven approaches, wanting to understand what's possible and where to invest first.
+                    </p>
+                </div>
+
+                <div class="engagement-card reveal">
+                    <h3 class="engagement-title">Project-Based</h3>
+                    <span class="engagement-duration">3-6 Months</span>
+                    <p class="engagement-description">
+                        Dedicated team for specific deliverables—CAR design iterations, antibody optimisation, custom platform development. Ideal for focused initiatives with clear objectives and timelines.
+                    </p>
+                </div>
+
+                <div class="engagement-card reveal">
+                    <h3 class="engagement-title">Retainer Partnership</h3>
+                    <span class="engagement-duration">Ongoing</span>
+                    <p class="engagement-description">
+                        Ongoing strategic and technical support, priority platform access, and quarterly reviews. Build sustained computational capability within your organisation with our team as an extended partner.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-tagline">Together, we're not just advancing science—we're transforming lives.</div>
+            <div class="footer-links">
+                <a href="mailto:CamBiologics@cantab.net">CamBiologics@cantab.net</a>
+                <span>|</span>
+                <span>Cambridge, UK</span>
+                <span>|</span>
+                <a href="http://CamBiologics.com">CamBiologics.com</a>
+            </div>
+            <div style="margin-top: 2.5rem; font-size: 0.95rem; opacity: 0.8;">
+                © 2025 CamBioLogics. Advancing biotechnology through AI.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 120) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const accentShape = document.querySelector('.accent-shape');
+            if (accentShape) {
+                accentShape.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

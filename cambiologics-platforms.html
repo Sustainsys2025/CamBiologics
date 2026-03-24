@@ -175,6 +175,31 @@
             display: none;
         }
 
+        .nav-links a.car-demo-btn {
+            background: linear-gradient(145deg, #d4af37 0%, #b8860b 50%, #a67c00 100%);
+            color: white !important;
+            -webkit-text-fill-color: white;
+            padding: 0.6rem 1.8rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .nav-links a.car-demo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45), 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-links a.car-demo-btn::after {
+            display: none;
+        }
+
         .nav-links a.active {
             color: var(--copper);
         }
@@ -628,9 +653,9 @@
 
         @media (max-width: 768px) {
             nav {
-                padding: 1rem 2rem;
+                padding: 0.8rem 1rem;
                 flex-direction: column;
-                gap: 1.2rem;
+                gap: 0.6rem;
             }
 
             .logo {
@@ -638,10 +663,32 @@
             }
 
             .nav-links {
-                gap: 1.5rem;
+                gap: 0.6rem 1rem;
                 flex-wrap: wrap;
                 justify-content: center;
-                font-size: 0.95rem;
+                font-size: 0.85rem;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            .nav-links a.login-btn {
+                padding: 0.35rem 0.9rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-links a.car-demo-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-brand img {
+                height: 48px;
+            }
+
+            .nav-tagline {
+                font-size: 0.45rem;
             }
 
             .hero {
@@ -698,9 +745,12 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="cambiologics-about-us.html">About Us</a></li>
             <li class="dropdown">
-                <a href="#" class="active">Platforms ▾</a>
+                <a href="cambiologics-services.html" class="active">Services ▾</a>
                 <div class="dropdown-content">
-                    <a href="auth/dashboard.html" class="dropdown-flagship">
+                    <div class="dropdown-divider-label">Our Offerings</div>
+                    <a href="cambiologics-services.html#consulting">Consulting Services</a>
+                    <div class="dropdown-divider-label" style="margin-top:0.25rem">Platforms</div>
+                    <a href="https://carchitect.sustainsys.co.uk/demo/login" class="dropdown-flagship">
                         <div>
                             <span class="flagship-name">CARchitect</span>
                             <span class="flagship-desc">AI-powered CAR construct design platform</span>
@@ -710,7 +760,6 @@
                             <span class="flagship-badge-outline">AI-Powered</span>
                         </div>
                     </a>
-                    <div class="dropdown-divider-label">Other Platforms</div>
                     <a href="cambiologics-predict-mab.html">PREDICT-mAb</a>
                     <a href="cambiologics-cellcipher.html">CellCipher</a>
                     <a href="cambiologics-genspy.html">GenSpy</a>
@@ -719,6 +768,7 @@
             <li><a href="team.html">Team</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="industry-updates.html" class="login-btn">Industry Updates</a></li>
+            <li><a href="https://carchitect.sustainsys.co.uk/demo/login" class="car-demo-btn" target="_blank" rel="noopener noreferrer">CAR Demo</a></li>
         </ul>
     </nav>
 

@@ -175,6 +175,31 @@
             display: none;
         }
 
+        .nav-links a.car-demo-btn {
+            background: linear-gradient(145deg, #d4af37 0%, #b8860b 50%, #a67c00 100%);
+            color: white !important;
+            -webkit-text-fill-color: white;
+            padding: 0.6rem 1.8rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .nav-links a.car-demo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45), 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-links a.car-demo-btn::after {
+            display: none;
+        }
+
         .dropdown {
             position: relative;
         }
@@ -543,9 +568,35 @@
 
         @media (max-width: 768px) {
             nav {
-                padding: 1rem 2rem;
+                padding: 0.8rem 1rem;
                 flex-direction: column;
-                gap: 1.2rem;
+                gap: 0.6rem;
+            }
+
+            .nav-links {
+                gap: 0.6rem 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            .nav-links a.login-btn {
+                padding: 0.35rem 0.9rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-links a.car-demo-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-brand img {
+                height: 48px;
+            }
+
+            .nav-tagline {
+                font-size: 0.45rem;
             }
 
             .hero {
@@ -588,9 +639,12 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="cambiologics-about-us.html">About Us</a></li>
             <li class="dropdown">
-                <a href="cambiologics-platforms.html" class="active">Platforms ▾</a>
+                <a href="cambiologics-services.html" class="active">Services ▾</a>
                 <div class="dropdown-content">
-                    <a href="auth/dashboard.html" class="dropdown-flagship">
+                    <div class="dropdown-divider-label">Our Offerings</div>
+                    <a href="cambiologics-services.html#consulting">Consulting Services</a>
+                    <div class="dropdown-divider-label" style="margin-top:0.25rem">Platforms</div>
+                    <a href="https://carchitect.sustainsys.co.uk/demo/login" class="dropdown-flagship">
                         <div>
                             <span class="flagship-name">CARchitect</span>
                             <span class="flagship-desc">AI-powered CAR construct design platform</span>
@@ -600,7 +654,6 @@
                             <span class="flagship-badge-outline">AI-Powered</span>
                         </div>
                     </a>
-                    <div class="dropdown-divider-label">Other Platforms</div>
                     <a href="cambiologics-predict-mab.html">PREDICT-mAb</a>
                     <a href="#" class="active">CellCipher</a>
                     <a href="cambiologics-genspy.html">GenSpy</a>
@@ -609,6 +662,7 @@
             <li><a href="#team">Team</a></li>
             <li><a href="#contact">Contact Us</a></li>
             <li><a href="industry-updates.html" class="login-btn">Industry Updates</a></li>
+            <li><a href="https://carchitect.sustainsys.co.uk/demo/login" class="car-demo-btn" target="_blank" rel="noopener noreferrer">CAR Demo</a></li>
         </ul>
     </nav>
 
@@ -629,39 +683,169 @@
         
         <div class="hero-visual">
             <svg style="width: 100%; height: 100%;" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                <!-- Large cell -->
-                <circle cx="250" cy="250" r="150" fill="none" stroke="var(--rich-blue)" stroke-width="6" opacity="0.7"/>
-                <circle cx="250" cy="250" r="100" fill="none" stroke="var(--teal-accent)" stroke-width="4" opacity="0.6"/>
-                
-                <!-- Internal cellular network -->
-                <circle cx="200" cy="200" r="15" fill="var(--teal-accent)" opacity="0.7"/>
-                <circle cx="300" cy="200" r="15" fill="var(--teal-accent)" opacity="0.7"/>
-                <circle cx="250" cy="270" r="15" fill="var(--copper)" opacity="0.7"/>
-                <circle cx="200" cy="300" r="12" fill="var(--gold)" opacity="0.7"/>
-                <circle cx="300" cy="300" r="12" fill="var(--gold)" opacity="0.7"/>
-                
-                <!-- Connections -->
-                <line x1="200" y1="200" x2="300" y2="200" stroke="var(--teal-accent)" stroke-width="3" opacity="0.5"/>
-                <line x1="200" y1="200" x2="250" y2="270" stroke="var(--teal-accent)" stroke-width="3" opacity="0.5"/>
-                <line x1="300" y1="200" x2="250" y2="270" stroke="var(--teal-accent)" stroke-width="3" opacity="0.5"/>
-                <line x1="250" y1="270" x2="200" y2="300" stroke="var(--copper)" stroke-width="2.5" opacity="0.5"/>
-                <line x1="250" y1="270" x2="300" y2="300" stroke="var(--copper)" stroke-width="2.5" opacity="0.5"/>
-                
-                <!-- External data nodes -->
-                <circle cx="100" cy="150" r="20" fill="var(--gold)" opacity="0.5"/>
-                <circle cx="400" cy="150" r="20" fill="var(--gold)" opacity="0.5"/>
-                <circle cx="100" cy="350" r="20" fill="var(--gold)" opacity="0.5"/>
-                <circle cx="400" cy="350" r="20" fill="var(--gold)" opacity="0.5"/>
-                
-                <!-- Data flow lines -->
-                <path d="M 100 150 Q 150 180 200 200" stroke="var(--gold)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
-                <path d="M 400 150 Q 350 180 300 200" stroke="var(--gold)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
-                <path d="M 100 350 Q 150 320 200 300" stroke="var(--gold)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
-                <path d="M 400 350 Q 350 320 300 300" stroke="var(--gold)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5"/>
-                
-                <!-- Central nucleus -->
-                <circle cx="250" cy="250" r="30" fill="var(--copper)" opacity="0.3"/>
-                <circle cx="250" cy="250" r="15" fill="var(--rich-blue)" opacity="0.5"/>
+                <defs>
+                    <!-- Cell membrane gradient -->
+                    <radialGradient id="cellMembraneGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#3d7a8a" stop-opacity="0.05"/>
+                        <stop offset="70%" stop-color="#2c5f6f" stop-opacity="0.12"/>
+                        <stop offset="100%" stop-color="#1a3a52" stop-opacity="0.25"/>
+                    </radialGradient>
+                    <radialGradient id="nucleusGrad" cx="45%" cy="40%" r="50%">
+                        <stop offset="0%" stop-color="#c4614e" stop-opacity="0.35"/>
+                        <stop offset="60%" stop-color="#b87333" stop-opacity="0.2"/>
+                        <stop offset="100%" stop-color="#1a3a52" stop-opacity="0.4"/>
+                    </radialGradient>
+                    <radialGradient id="organelleGrad1" cx="40%" cy="35%" r="55%">
+                        <stop offset="0%" stop-color="#3d7a8a" stop-opacity="0.6"/>
+                        <stop offset="100%" stop-color="#2c5f6f" stop-opacity="0.3"/>
+                    </radialGradient>
+                    <radialGradient id="organelleGrad2" cx="40%" cy="35%" r="55%">
+                        <stop offset="0%" stop-color="#d4af37" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#b87333" stop-opacity="0.25"/>
+                    </radialGradient>
+                    <linearGradient id="signalPathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#d4af37" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#c4614e" stop-opacity="0.3"/>
+                    </linearGradient>
+                    <filter id="cellGlow">
+                        <feGaussianBlur stdDeviation="6" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <filter id="softGlow">
+                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+
+                <!-- Background glow orbs -->
+                <circle cx="130" cy="120" r="45" fill="#3d7a8a" opacity="0.06">
+                    <animate attributeName="r" values="45;52;45" dur="6s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="390" cy="380" r="35" fill="#d4af37" opacity="0.06">
+                    <animate attributeName="r" values="35;42;35" dur="5s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- Cell outer membrane - phospholipid bilayer effect -->
+                <ellipse cx="250" cy="255" rx="175" ry="165" fill="url(#cellMembraneGrad)" stroke="none"/>
+                <ellipse cx="250" cy="255" rx="175" ry="165" fill="none" stroke="#2c5f6f" stroke-width="4" opacity="0.5"/>
+                <ellipse cx="250" cy="255" rx="170" ry="160" fill="none" stroke="#3d7a8a" stroke-width="1.5" opacity="0.3" stroke-dasharray="3,6"/>
+                <ellipse cx="250" cy="255" rx="180" ry="170" fill="none" stroke="#1a3a52" stroke-width="1" opacity="0.2" stroke-dasharray="2,8"/>
+
+                <!-- Membrane surface receptors -->
+                <g opacity="0.65">
+                    <rect x="118" y="130" width="4" height="18" rx="2" fill="#3d7a8a" transform="rotate(-30, 120, 139)"/>
+                    <circle cx="118" cy="124" r="5" fill="#3d7a8a" opacity="0.7" transform="rotate(-30, 120, 139)"/>
+                    <rect x="92" y="195" width="4" height="18" rx="2" fill="#2c5f6f" transform="rotate(-55, 94, 204)"/>
+                    <circle cx="92" cy="189" r="5" fill="#2c5f6f" opacity="0.7" transform="rotate(-55, 94, 204)"/>
+                    <rect x="370" y="130" width="4" height="18" rx="2" fill="#3d7a8a" transform="rotate(30, 372, 139)"/>
+                    <circle cx="374" cy="124" r="5" fill="#3d7a8a" opacity="0.7" transform="rotate(30, 372, 139)"/>
+                    <rect x="398" y="200" width="4" height="18" rx="2" fill="#2c5f6f" transform="rotate(55, 400, 209)"/>
+                    <circle cx="402" cy="194" r="5" fill="#2c5f6f" opacity="0.7" transform="rotate(55, 400, 209)"/>
+                    <rect x="155" y="385" width="4" height="18" rx="2" fill="#3d7a8a" transform="rotate(25, 157, 394)"/>
+                    <circle cx="153" cy="396" r="5" fill="#3d7a8a" opacity="0.7"/>
+                    <rect x="335" y="385" width="4" height="18" rx="2" fill="#2c5f6f" transform="rotate(-25, 337, 394)"/>
+                    <circle cx="339" cy="396" r="5" fill="#2c5f6f" opacity="0.7"/>
+                </g>
+
+                <!-- Endoplasmic reticulum network -->
+                <g opacity="0.3" filter="url(#softGlow)">
+                    <path d="M 170 200 Q 190 180 210 195 T 250 185 T 290 200 T 320 190" stroke="#3d7a8a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 160 225 Q 185 210 210 220 T 260 215 T 300 225 T 330 215" stroke="#3d7a8a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 175 250 Q 200 238 225 248 T 275 242 T 310 252" stroke="#3d7a8a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </g>
+
+                <!-- Mitochondria -->
+                <g transform="translate(155, 310) rotate(-20)" filter="url(#softGlow)">
+                    <ellipse cx="0" cy="0" rx="32" ry="16" fill="url(#organelleGrad2)" stroke="#b87333" stroke-width="1.5" opacity="0.7"/>
+                    <path d="M -20 -6 Q -10 6 0 -6 T 20 -6" stroke="#b87333" stroke-width="1" fill="none" opacity="0.5"/>
+                    <path d="M -15 4 Q -5 -5 5 4 T 15 4" stroke="#b87333" stroke-width="1" fill="none" opacity="0.4"/>
+                </g>
+                <g transform="translate(340, 295) rotate(15)" filter="url(#softGlow)">
+                    <ellipse cx="0" cy="0" rx="28" ry="14" fill="url(#organelleGrad2)" stroke="#b87333" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M -16 -4 Q -8 5 0 -4 T 16 -4" stroke="#b87333" stroke-width="1" fill="none" opacity="0.5"/>
+                </g>
+
+                <!-- Nucleus -->
+                <ellipse cx="250" cy="260" rx="62" ry="55" fill="url(#nucleusGrad)" stroke="#c4614e" stroke-width="2.5" opacity="0.75"/>
+                <ellipse cx="250" cy="260" rx="58" ry="51" fill="none" stroke="#c4614e" stroke-width="0.8" opacity="0.3" stroke-dasharray="4,4"/>
+
+                <!-- Chromatin / DNA inside nucleus -->
+                <g opacity="0.5">
+                    <path d="M 225 245 Q 235 235 245 245 T 265 245 T 275 250" stroke="#1a3a52" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <path d="M 230 265 Q 242 258 255 265 T 272 262" stroke="#1a3a52" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                    <circle cx="240" cy="255" r="3" fill="#d4af37" opacity="0.6"/>
+                    <circle cx="260" cy="248" r="2.5" fill="#d4af37" opacity="0.5"/>
+                </g>
+
+                <!-- Nucleolus -->
+                <circle cx="255" cy="262" r="12" fill="#c4614e" opacity="0.2"/>
+                <circle cx="255" cy="262" r="7" fill="#1a3a52" opacity="0.3"/>
+
+                <!-- Signaling cascades — animated phosphorylation paths -->
+                <g filter="url(#softGlow)">
+                    <!-- Receptor 1 → nucleus signal -->
+                    <path d="M 120 139 Q 160 170 190 210 Q 210 240 235 255" stroke="url(#signalPathGrad)" stroke-width="2" fill="none" stroke-dasharray="6,4" opacity="0.7">
+                        <animate attributeName="stroke-dashoffset" values="0;-20" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    <!-- Receptor 2 → nucleus signal -->
+                    <path d="M 374 139 Q 340 175 310 215 Q 290 240 268 255" stroke="url(#signalPathGrad)" stroke-width="2" fill="none" stroke-dasharray="6,4" opacity="0.6">
+                        <animate attributeName="stroke-dashoffset" values="0;-20" dur="2.5s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+
+                <!-- Phosphorylation event markers along pathways -->
+                <circle cx="170" cy="190" r="5" fill="#d4af37" opacity="0.8" filter="url(#softGlow)">
+                    <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.8s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="205" cy="225" r="4" fill="#d4af37" opacity="0.7" filter="url(#softGlow)">
+                    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.2s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="330" cy="195" r="4.5" fill="#d4af37" opacity="0.7" filter="url(#softGlow)">
+                    <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="298" cy="230" r="3.5" fill="#d4af37" opacity="0.6" filter="url(#softGlow)">
+                    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="1.6s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- Vesicles / transport -->
+                <circle cx="190" cy="170" r="8" fill="url(#organelleGrad1)" stroke="#2c5f6f" stroke-width="1" opacity="0.5">
+                    <animate attributeName="cy" values="170;165;170" dur="4s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="310" cy="170" r="7" fill="url(#organelleGrad1)" stroke="#2c5f6f" stroke-width="1" opacity="0.45">
+                    <animate attributeName="cy" values="170;175;170" dur="3.5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="250" cy="345" r="6" fill="url(#organelleGrad1)" stroke="#2c5f6f" stroke-width="1" opacity="0.4">
+                    <animate attributeName="cx" values="250;255;250" dur="5s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- AI analysis overlay — scanning ring -->
+                <circle cx="250" cy="255" r="190" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.15" stroke-dasharray="8,12">
+                    <animateTransform attributeName="transform" type="rotate" values="0 250 255;360 250 255" dur="30s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="250" cy="255" r="195" fill="none" stroke="#3d7a8a" stroke-width="0.8" opacity="0.1" stroke-dasharray="4,16">
+                    <animateTransform attributeName="transform" type="rotate" values="360 250 255;0 250 255" dur="25s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- Data readout bar (bottom) -->
+                <rect x="130" y="445" width="240" height="6" rx="3" fill="#1a3a52" opacity="0.15"/>
+                <rect x="130" y="445" width="0" height="6" rx="3" fill="#3d7a8a" opacity="0.5">
+                    <animate attributeName="width" values="0;180;0" dur="5s" repeatCount="indefinite"/>
+                </rect>
+                <text x="250" y="465" text-anchor="middle" fill="#2c5f6f" font-size="9" font-family="sans-serif" opacity="0.4">CELLULAR RESPONSE ANALYSIS</text>
+
+                <!-- Floating molecule particles -->
+                <circle cx="100" cy="100" r="3" fill="#3d7a8a" opacity="0.3">
+                    <animate attributeName="cy" values="100;90;100" dur="4s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="410" cy="130" r="2.5" fill="#d4af37" opacity="0.25">
+                    <animate attributeName="cy" values="130;120;130" dur="3.5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="80" cy="350" r="2" fill="#c4614e" opacity="0.2">
+                    <animate attributeName="cy" values="350;342;350" dur="5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="430" cy="400" r="2.5" fill="#3d7a8a" opacity="0.2">
+                    <animate attributeName="cy" values="400;392;400" dur="4.5s" repeatCount="indefinite"/>
+                </circle>
             </svg>
         </div>
     </section>

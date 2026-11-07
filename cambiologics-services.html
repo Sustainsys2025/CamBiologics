@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - CamBioLogics</title>
+    <title>Services — Consulting, AI Platforms &amp; Hospital/Laboratory Management | CamBioLogics</title>
+    <meta name="description" content="CamBioLogics services: AI strategy and CAR-T/NK design consulting, proprietary AI platforms (CARchitect, PREDICT-mAb, CellCipher, GenSpy), and hospital & laboratory management services launching Q1 2027 in the UK and India.">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -626,6 +627,93 @@
             box-shadow: 0 8px 20px rgba(26, 58, 82, 0.3);
         }
 
+        /* Hospital & Laboratory Management Services (launching 2027) */
+        .hospital-lab-section {
+            scroll-margin-top: 110px;
+            padding: 7rem 4rem;
+            background: linear-gradient(180deg, var(--ivory) 0%, var(--soft-cream) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hospital-lab-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(42, 114, 114, 0.05) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .launch-badge {
+            display: block;
+            width: max-content;
+            margin: 0 auto 1.5rem;
+            padding: 0.55rem 1.4rem;
+            background: linear-gradient(135deg, rgba(42, 114, 114, 0.15) 0%, rgba(42, 114, 114, 0.05) 100%);
+            border: 1px solid rgba(42, 114, 114, 0.3);
+            border-radius: 25px;
+            color: var(--teal-accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hospital-lab-intro {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--rich-blue);
+            opacity: 0.9;
+        }
+
+        .hospital-lab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .hospital-lab-grid .service-card {
+            padding: 3rem 2.5rem;
+        }
+
+        .hospital-lab-grid .service-icon {
+            width: 72px;
+            height: 72px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hospital-lab-grid .service-title {
+            font-size: 1.6rem;
+        }
+
+        .hospital-lab-footer {
+            max-width: 860px;
+            margin: 3.5rem auto 0;
+            text-align: center;
+        }
+
+        .hospital-lab-footer p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--rich-blue);
+            opacity: 0.85;
+            margin-bottom: 2rem;
+        }
+
+        .hospital-lab-footer .learn-more {
+            margin-top: 0;
+            padding: 1rem 2.6rem;
+            font-size: 1.1rem;
+        }
+
         .differentiators-section {
             padding: 7rem 4rem;
             background: linear-gradient(180deg, var(--ivory) 0%, var(--soft-cream) 100%);
@@ -919,8 +1007,18 @@
 
             .services-section,
             .engagement-section,
+            .hospital-lab-section,
             .differentiators-section {
                 padding: 3.5rem 1.5rem;
+            }
+
+            .hospital-lab-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .hospital-lab-intro {
+                font-size: 1.1rem;
             }
 
             .section-title {
@@ -990,6 +1088,7 @@
                     <div class="dropdown-divider-label">Our Offerings</div>
                     <a href="#consulting">Consulting Services</a>
                     <a href="#platforms">AI Platforms</a>
+                    <a href="#hospital-lab">Hospital &amp; Lab Management <span style="font-size:0.75em; opacity:0.75;">(2027)</span></a>
                 </div>
             </li>
             <li><a href="team.html">Team</a></li>
@@ -1009,6 +1108,9 @@
                 </p>
                 <p style="margin-top: 1rem;">
                     Our AI engine leverages <strong>large language models fine-tuned on biomedical corpora</strong>, <strong>graph neural networks for molecular property prediction</strong>, and <strong>deep learning architectures for protein structure analysis</strong>. We deploy these capabilities through privacy-first, on-premise infrastructure — your proprietary data never leaves your environment. Whether you need AI-guided CAR construct design, predictive antibody developability scoring, cellular response modelling, or genomic variant interpretation, our platforms translate complex biological data into actionable insights at a pace traditional workflows cannot match.
+                </p>
+                <p style="margin-top: 1rem;">
+                    From 2027 we will also offer <strong><a href="#hospital-lab" style="color: inherit;">hospital and laboratory management services</a></strong> for clinical and research organisations in the UK and India.
                 </p>
             </div>
             <div class="ai-capabilities-strip">
@@ -1215,6 +1317,125 @@
                     </div>
                     <a href="cambiologics-genspy.html" class="learn-more">Learn More →</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hospital-lab-section" id="hospital-lab">
+        <div class="content-container">
+            <span class="launch-badge">Launching Q1 2027</span>
+            <h2 class="section-title">Hospital &amp; Laboratory Management Services</h2>
+            <p class="section-subtitle">Operational Excellence for Clinical &amp; Research Organisations</p>
+
+            <p class="hospital-lab-intro">
+                From 2027, CamBioLogics is extending its expertise into <strong>hospital and laboratory management services</strong> for clinical and research organisations in the <strong>UK and India</strong>. We bring the same rigour that underpins our AI platforms to the operating, documentation and governance frameworks that laboratories and clinical units depend on every day.
+            </p>
+
+            <div class="hospital-lab-grid">
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 35 15 L 55 15 L 55 38 L 68 65 Q 72 75 62 75 L 28 75 Q 18 75 22 65 L 35 38 Z"
+                              fill="none" stroke="var(--rich-blue)" stroke-width="2.5" stroke-linejoin="round"/>
+                        <line x1="30" y1="15" x2="60" y2="15" stroke="var(--teal-accent)" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M 27 60 L 63 60" stroke="var(--teal-accent)" stroke-width="2" opacity="0.6"/>
+                        <circle cx="38" cy="66" r="3" fill="var(--copper)"/>
+                        <circle cx="50" cy="68" r="2.5" fill="var(--gold)"/>
+                        <circle cx="56" cy="64" r="2" fill="var(--copper)"/>
+                    </svg>
+                    <h3 class="service-title">Laboratory Operations Set-up</h3>
+                    <p class="service-description">
+                        Laboratory operations set-up and process design, including SOP development and quality-management documentation, so new and expanding facilities run reliably from day one.
+                    </p>
+                    <div>
+                        <span class="tech-badge">SOPs</span>
+                        <span class="tech-badge">Quality Management</span>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 45 12 L 72 24 L 72 46 Q 72 68 45 78 Q 18 68 18 46 L 18 24 Z"
+                              fill="none" stroke="var(--rich-blue)" stroke-width="2.5" stroke-linejoin="round"/>
+                        <path d="M 33 45 L 42 54 L 58 36" fill="none" stroke="var(--teal-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="72" cy="24" r="3.5" fill="var(--copper)"/>
+                        <circle cx="18" cy="24" r="3.5" fill="var(--gold)"/>
+                    </svg>
+                    <h3 class="service-title">Clinical Governance &amp; Audit</h3>
+                    <p class="service-description">
+                        Clinical-governance and audit frameworks aligned to UK and international standards, giving leadership, regulators and partners clear evidence of safe, accountable practice.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Governance</span>
+                        <span class="tech-badge">Audit Readiness</span>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="45" cy="24" rx="26" ry="9" fill="none" stroke="var(--rich-blue)" stroke-width="2.5"/>
+                        <path d="M 19 24 L 19 46 Q 19 55 45 55 Q 71 55 71 46 L 71 24" fill="none" stroke="var(--rich-blue)" stroke-width="2.5"/>
+                        <path d="M 19 46 L 19 64 Q 19 73 45 73 Q 71 73 71 64 L 71 46" fill="none" stroke="var(--teal-accent)" stroke-width="2.5" opacity="0.7"/>
+                        <circle cx="30" cy="42" r="3" fill="var(--copper)"/>
+                        <circle cx="30" cy="60" r="3" fill="var(--gold)"/>
+                    </svg>
+                    <h3 class="service-title">Clinical &amp; Laboratory Data Governance</h3>
+                    <p class="service-description">
+                        Data dictionaries and data-governance frameworks for clinical and laboratory data — defining what is captured, who owns it, how it is protected and how it stays consistent across systems.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Data Dictionaries</span>
+                        <span class="tech-badge">Data Governance</span>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="14" y="18" width="62" height="54" rx="6" fill="none" stroke="var(--rich-blue)" stroke-width="2.5"/>
+                        <line x1="14" y1="32" x2="76" y2="32" stroke="var(--rich-blue)" stroke-width="2" opacity="0.6"/>
+                        <rect x="24" y="52" width="8" height="12" rx="2" fill="var(--teal-accent)"/>
+                        <rect x="38" y="44" width="8" height="20" rx="2" fill="var(--copper)"/>
+                        <rect x="52" y="48" width="8" height="16" rx="2" fill="var(--gold)"/>
+                        <circle cx="24" cy="25" r="2.5" fill="var(--teal-accent)"/>
+                        <circle cx="32" cy="25" r="2.5" fill="var(--copper)"/>
+                    </svg>
+                    <h3 class="service-title">Quarterly Operations Reporting</h3>
+                    <p class="service-description">
+                        Quarterly operations reporting and continuous-improvement reviews that turn day-to-day activity into measurable performance, risk and capacity insight for decision-makers.
+                    </p>
+                    <div>
+                        <span class="tech-badge">Reporting</span>
+                        <span class="tech-badge">Continuous Improvement</span>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <svg class="service-icon" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="45" cy="45" r="12" fill="none" stroke="var(--rich-blue)" stroke-width="2.5"/>
+                        <circle cx="45" cy="45" r="4" fill="var(--gold)"/>
+                        <circle cx="20" cy="22" r="6" fill="none" stroke="var(--teal-accent)" stroke-width="2.5"/>
+                        <circle cx="70" cy="22" r="6" fill="none" stroke="var(--teal-accent)" stroke-width="2.5"/>
+                        <circle cx="45" cy="76" r="6" fill="none" stroke="var(--copper)" stroke-width="2.5"/>
+                        <line x1="25" y1="26" x2="37" y2="37" stroke="var(--teal-accent)" stroke-width="2" opacity="0.7"/>
+                        <line x1="65" y1="26" x2="53" y2="37" stroke="var(--teal-accent)" stroke-width="2" opacity="0.7"/>
+                        <line x1="45" y1="57" x2="45" y2="70" stroke="var(--copper)" stroke-width="2" opacity="0.7"/>
+                    </svg>
+                    <h3 class="service-title">AI Platform Integration</h3>
+                    <p class="service-description">
+                        Integration with our AI platforms for CAR design, antibody prediction and cell analytics, connecting laboratory operations with CARchitect, PREDICT-mAb and CellCipher where it adds value.
+                    </p>
+                    <div>
+                        <span class="tech-badge">CARchitect</span>
+                        <span class="tech-badge">PREDICT-mAb</span>
+                        <span class="tech-badge">CellCipher</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hospital-lab-footer reveal">
+                <p>
+                    The service is delivered through our <strong>Cambridge headquarters</strong> and our <strong>India research centre</strong>, supported by our technology partner <strong>Sustainsys Consulting Ltd</strong>, who designed, built and operates the CamBioLogics web platform and application under a managed service.
+                </p>
+                <a href="contact.html" class="learn-more">Register Your Interest →</a>
             </div>
         </div>
     </section>
